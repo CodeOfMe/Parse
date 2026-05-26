@@ -41,7 +41,10 @@
 
 ```bash
 # 安装依赖
-pip install torch transformers numpy tqdm
+pip install torch transformers modelscope numpy tqdm
+
+# 下载基座模型
+modelscope download --model Qwen/Qwen3.5-0.8B --local_dir models/qwen/Qwen3___5-0___8B
 
 # 验证安装
 python -c "import torch; print(f'PyTorch: {torch.__version__}')"

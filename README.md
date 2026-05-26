@@ -64,21 +64,52 @@ PARSE/
 └── EXPERIMENT.md           # Experiment guide
 ```
 
+## 🔧 Setup
+
+### 1. Install dependencies
+
+```bash
+pip install torch transformers modelscope numpy tqdm
+```
+
+### 2. Download base model (Qwen3.5-0.8B)
+
+```bash
+modelscope download --model Qwen/Qwen3.5-0.8B --local_dir models/qwen/Qwen3___5-0___8B
+```
+
+### 3. (Optional) Install llama.cpp for GGUF export
+
+```bash
+git clone https://github.com/ggml-org/llama.cpp.git
+cd llama.cpp && mkdir build && cd build && cmake .. && make -j
+```
+
+### 4. (Optional) Install MoXing for GGUF serving
+
+```bash
+git clone https://github.com/cycleuser/MoXing.git /path/to/MoXing
+```
+
 ## 🚀 Quick Start
 
 ```bash
-# Run experiments on CUDA device
+# Full PARSE pipeline (CUDA / ROCm)
 python run_experiment.py --device cuda --strategy parse --sparsity 0.5
 
-# Run on Apple Silicon
+# Use a pre-defined preservation profile
+python run_experiment.py --profile P1 --device auto
+
+# Apple Silicon (MPS)
 python run_experiment.py --device mps --strategy parse --sparsity 0.5
 
-# Custom preservation profile
+# Custom preservation profile + GGUF export
 python run_experiment.py \
     --languages zh en \
     --disciplines math logic \
     --scenarios fc math_reasoning \
-    --device cuda
+    --device cuda \
+    --export-gguf
 ```
 
 ## 📚 References

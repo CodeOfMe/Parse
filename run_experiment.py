@@ -210,7 +210,8 @@ Profiles (P1-P12):
 
     if not model_path.exists():
         print(f"\n[error] Model path not found: {model_path}")
-        print("  Download with: huggingface-cli download Qwen/Qwen3.5-0.8B --local-dir models/qwen/Qwen3___5-0___8B")
+        print("  Download with ModelScope:")
+        print("    modelscope download --model Qwen/Qwen3.5-0.8B --local_dir models/qwen/Qwen3___5-0___8B")
         sys.exit(1)
 
     # ── Load model ──
