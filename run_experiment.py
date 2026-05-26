@@ -1,187 +1,254 @@
 #!/usr/bin/env python3
 """
-Qwen3.5-0.8B 能力修剪实验入口脚本
+PARSE Experiment Entry Point
 
-支持设备: CUDA, ROCm (AMD), MPS (Apple Silicon), CPU
-输出: 结构化 JSON/CSV 结果，用于论文撰写和可视化
+Orchestrates the complete 4-stage capability-preserving compression pipeline:
+  1. Diagnostic Probing   — CIT computation across Language × Discipline × Scenario
+  2. Architecture Sculpting — layer selection based on preservation profile
+  3. Transplantation       — FFN removal + NoFFN insertion + DCR attachment
+  4. Dual-Flywheel Recovery — synthetic + self-refining training with GRPO
 
-使用方法:
-    # NVIDIA GPU (CUDA)
-    python run_experiment.py --device cuda --strategy hybrid --sparsity 0.5
+Supports: CUDA, ROCm (AMD), MPS (Apple Silicon), CPU
 
-    # AMD GPU (ROCm)
-    python run_experiment.py --device rocm --strategy hybrid --sparsity 0.5
-
-    # Apple Silicon (MPS)
-    python run_experiment.py --device mps --strategy hybrid --sparsity 0.5
-
-    # 快速测试 (CPU)
-    python run_experiment.py --device cpu --strategy layerdrop --sparsity 0.3
+Usage:
+    python run_experiment.py --strategy parse --sparsity 0.5 --device cuda
+    python run_experiment.py --profile P1 --device auto
+    python run_experiment.py --languages zh en --disciplines math logic \\
+        --scenarios fc math_reasoning --export-gguf
 """
+
 import sys
 import os
-import torch
-import argparse
 from pathlib import Path
 from datetime import datetime
+import argparse
 
-# 添加当前目录到路径
-sys.path.insert(0, str(Path(__file__).parent))
+import torch
 
+# Ensure the project root is on sys.path
+PROJECT_ROOT = Path(__file__).parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from code.parse.config import (
+    PreservationProfile, get_profile, PROFILES,
+    LANGUAGES, DISCIPLINES, SCENARIOS,
+)
 from capability_pruning import ExperimentConfig, ExperimentRunner
 
 
+# ── Device Detection ──────────────────────────────────────────────────
+
 def setup_device(device: str) -> str:
-    """自动检测并设置设备"""
+    """Auto-detect or validate device selection."""
     if device == "auto":
         if torch.cuda.is_available():
-            # 检查是否是 ROCm 环境
-            if hasattr(torch.version, 'hip') and torch.version.hip is not None:
-                print("✅ 检测到 ROCm 环境，自动使用 CUDA (HIP) 接口")
+            if hasattr(torch.version, "hip") and torch.version.hip is not None:
+                print("[device] ROCm (HIP) detected")
+            else:
+                print("[device] CUDA detected")
             return "cuda"
         elif torch.backends.mps.is_available():
+            print("[device] Apple Silicon (MPS) detected")
             return "mps"
         else:
+            print("[device] CPU only")
             return "cpu"
-    elif device == "rocm":
-        print("✅ 指定使用 ROCm，映射到 CUDA (HIP) 接口...")
-        return "cuda"
-    elif device == "vulkan":
-        print("⚠️ 警告: PyTorch 原生不支持 Vulkan 后端进行剪枝训练。")
-        print("   建议方案: 在本机完成剪枝并保存模型，然后在 Vulkan 设备上使用 llama.cpp 进行推理测试。")
-        print("   当前回退到 CPU 模式...")
-        return "cpu"
-    return device
 
+    if device == "rocm":
+        print("[device] ROCm → CUDA (HIP)")
+        return "cuda"
+
+    valid = {"cuda", "mps", "cpu", "rocm"}
+    if device not in valid:
+        print(f"[device] Unknown '{device}', falling back to CPU")
+        return "cpu"
+
+    if device == "cuda" and not torch.cuda.is_available():
+        print("[device] CUDA not available, falling back to CPU")
+        return "cpu"
+
+    return device if device != "rocm" else "cuda"
+
+
+# ── Model Loading ─────────────────────────────────────────────────────
 
 def load_model_and_tokenizer(model_path: str, device: str):
-    """加载模型和 Tokenizer"""
+    """Load a HuggingFace Qwen model and tokenizer."""
     from transformers import AutoTokenizer, AutoModelForCausalLM
-    
-    print(f"加载模型: {model_path}")
-    print(f"设备: {device}")
-    
-    # 设置精度
-    if device == "cuda":
-        dtype = torch.float16
-    elif device == "mps":
-        dtype = torch.float16
-    else:
-        dtype = torch.bfloat16
-    
+
+    print(f"[model] Loading from {model_path}")
+    print(f"[model] Device: {device}")
+
+    dtype = torch.float16 if device in ("cuda", "mps") else torch.float32
+
     tokenizer = AutoTokenizer.from_pretrained(
-        model_path, 
-        trust_remote_code=True, 
-        local_files_only=True
+        model_path,
+        trust_remote_code=True,
+        local_files_only=True,
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    
+
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
         trust_remote_code=True,
-        torch_dtype=dtype if device != "cpu" else "auto",
+        torch_dtype=dtype if device != "cpu" else torch.float32,
         device_map=device if device != "cpu" else "cpu",
         local_files_only=True,
     )
-    if device == "cpu":
-        model = model.float()
     model.eval()
-    
+
     return model, tokenizer
 
 
+# ── Main ──────────────────────────────────────────────────────────────
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Qwen3.5-0.8B 能力修剪实验",
+        description="PARSE: Capability-Preserving Model Compression",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-示例:
-  # 混合策略 (推荐)
-  python run_experiment.py --strategy hybrid --sparsity 0.5 --device auto
+Examples:
+  # Full PARSE pipeline
+  python run_experiment.py --strategy parse --sparsity 0.5 --device cuda
 
-  # Wanda 剪枝
-  python run_experiment.py --strategy wanda --sparsity 0.3 --device cuda
+  # Pre-defined profile
+  python run_experiment.py --profile P1 --device auto
 
-  # 仅保留中英文
-  python run_experiment.py --languages zh en --device mps
-        """
+  # Custom preservation profile + GGUF export
+  python run_experiment.py \\
+      --languages zh en --disciplines math logic \\
+      --scenarios fc math_reasoning --export-gguf
+
+  # Benchmark baselines
+  python run_experiment.py --strategy wanda --sparsity 0.5 --device cuda
+
+Profiles (P1-P12):
+  P1  = zh/en + math/logic + fc/math_reasoning  (Chinese+English STEM+Agent)
+  P2  = zh/en/ja + math/physics + all             (East Asian + STEM)
+  P3  = en + math + all                           (English math specialist)
+  P4  = zh + all + all                            (Chinese full-capability)
+  P5  = all + math/logic/physics + fc             (Multilingual STEM agent)
+  P6  = zh/en + all + fc/code                     (Bilingual developer agent)
+  P7  = all + math + math_reasoning               (Multilingual math solver)
+  P8  = zh/en/ja/fr + all + translation           (Quad-lingual translator)
+  P9  = all + all + fc                            (Universal function caller)
+  P10 = zh/en + all + all                         (Bilingual full-capability)
+  P11 = all + math/logic + all                    (Universal STEM preservation)
+  P12 = zh/en + math/logic/physics + fc/code/math_reasoning  (Full targeted)
+        """,
     )
-    
-    # 实验配置
-    parser.add_argument("--model_path", type=str, default="models/qwen/Qwen3___5-0___8B",
-                        help="模型路径 (默认: models/qwen/Qwen3___5-0___8B)")
-    parser.add_argument("--strategy", type=str, default="hybrid", 
-                        choices=["wanda", "layerdrop", "magnitude", "hybrid"],
-                        help="修剪策略 (默认: hybrid)")
-    parser.add_argument("--sparsity", type=float, default=0.5,
-                        help="目标稀疏度 0.0-1.0 (默认: 0.5)")
-    parser.add_argument("--languages", type=str, nargs="+", default=["zh", "en"],
-                        help="保留的语种 (默认: zh en)")
-    parser.add_argument("--domains", type=str, nargs="+", default=["stem", "logic"],
-                        help="保留的领域 (默认: stem logic)")
-    parser.add_argument("--scenarios", type=str, nargs="+", default=["function_calling", "math"],
-                        help="保留的场景 (默认: function_calling math)")
-    parser.add_argument("--output_dir", type=str, default="results/experiments",
-                        help="输出目录 (默认: results/experiments)")
+
+    # Model & device
+    parser.add_argument("--model_path", type=str,
+                        default="models/qwen/Qwen3___5-0___8B",
+                        help="Path to HuggingFace model checkpoint")
     parser.add_argument("--device", type=str, default="auto",
                         choices=["auto", "cuda", "rocm", "mps", "cpu"],
-                        help="运行设备 (默认: auto)")
+                        help="Compute device")
+
+    # Strategy & profile
+    parser.add_argument("--strategy", type=str, default="parse",
+                        choices=["parse", "wanda", "layerdrop", "magnitude", "hybrid"],
+                        help="Compression strategy (parse = full PARSE pipeline)")
+    parser.add_argument("--profile", type=str, default=None,
+                        choices=list(PROFILES.keys()),
+                        help="Pre-defined preservation profile (P1-P12)")
+    parser.add_argument("--sparsity", type=float, default=0.5,
+                        help="Target sparsity ratio (default: 0.5)")
+
+    # Preservation axes
+    parser.add_argument("--languages", type=str, nargs="+", default=None,
+                        help=f"Languages to preserve ({', '.join(LANGUAGES)})")
+    parser.add_argument("--disciplines", type=str, nargs="+", default=None,
+                        help=f"Disciplines to preserve ({', '.join(DISCIPLINES)})")
+    parser.add_argument("--scenarios", type=str, nargs="+", default=None,
+                        help=f"Scenarios to preserve ({', '.join(SCENARIOS)})")
+
+    # CIT
+    parser.add_argument("--cit_alpha", type=float, default=0.6,
+                        help="CIT α weight (activation vs gradient)")
+
+    # Flywheel
+    parser.add_argument("--flywheel_rounds", type=int, default=3,
+                        help="Number of dual-flywheel recovery rounds")
+    parser.add_argument("--no_grpo", action="store_true",
+                        help="Disable GRPO optimization (use simple refinement)")
+
+    # Output
+    parser.add_argument("--output_dir", type=str, default="results/experiments",
+                        help="Output directory for results")
     parser.add_argument("--save_model", action="store_true",
-                        help="保存修剪后的模型")
-    
+                        help="Save compressed model checkpoint")
+    parser.add_argument("--export_gguf", action="store_true",
+                        help="Export compressed model to GGUF for llama.cpp/MoXing")
+    parser.add_argument("--gguf_quant", type=str, default="Q4_K_M",
+                        choices=["F16", "Q8_0", "Q4_K_M", "Q5_K_M", "Q2_K"],
+                        help="GGUF quantization level")
+
     args = parser.parse_args()
-    
-    # 自动检测设备
+
+    # ── Resolve profile ──
+    if args.profile:
+        profile = get_profile(args.profile)
+        print(f"[profile] {args.profile}: {profile.description}")
+        languages = profile.languages
+        disciplines = profile.disciplines
+        scenarios = profile.scenarios
+    else:
+        languages = args.languages or ["zh", "en"]
+        disciplines = args.disciplines or ["math", "logic"]
+        scenarios = args.scenarios or ["fc", "math_reasoning"]
+
+    # ── Setup device ──
     device = setup_device(args.device)
-    print(f"使用设备: {device}")
-    
-    # 解析模型路径
+
+    # ── Validate model path ──
     model_path = Path(args.model_path)
     if not model_path.is_absolute():
-        model_path = Path(__file__).parent / model_path
-    
+        model_path = PROJECT_ROOT / model_path
+
     if not model_path.exists():
-        print(f"错误: 模型路径不存在: {model_path}")
-        print("请确保模型已下载，或指定正确的路径")
-        return
-    
-    # 加载模型
+        print(f"\n[error] Model path not found: {model_path}")
+        print("  Download with: huggingface-cli download Qwen/Qwen3.5-0.8B --local-dir models/qwen/Qwen3___5-0___8B")
+        sys.exit(1)
+
+    # ── Load model ──
     model, tokenizer = load_model_and_tokenizer(str(model_path), device)
-    
-    # 创建配置
+
+    # ── Build experiment config ──
     config = ExperimentConfig(
         base_model_path=str(model_path),
         device=device,
         strategy=args.strategy,
         target_sparsity=args.sparsity,
-        preserve_languages=args.languages,
-        preserve_domains=args.domains,
-        preserve_scenarios=args.scenarios,
+        preserve_languages=languages,
+        preserve_domains=disciplines,
+        preserve_scenarios=scenarios,
         output_dir=args.output_dir,
         save_pruned_model=args.save_model,
+        cit_alpha=args.cit_alpha,
+        flywheel_rounds=args.flywheel_rounds,
+        enable_grpo=not args.no_grpo,
+        export_gguf=args.export_gguf,
+        gguf_quantization=args.gguf_quant,
     )
-    
-    # 运行实验
+
+    # ── Run experiment ──
     runner = ExperimentRunner(model, tokenizer, config)
     results = runner.run_full_experiment()
-    
-    # 清理内存
+
+    # ── Cleanup ──
     del model
     if device == "cuda":
         torch.cuda.empty_cache()
     elif device == "mps":
         torch.mps.empty_cache()
-    
-    print(f"\n✅ 实验完成!")
-    print(f"📁 结果已保存至: {runner.output_dir}")
-    print(f"📊 查看结果:")
-    print(f"   - experiment_results.json (完整数据)")
-    print(f"   - layer_importance.csv (层重要性矩阵)")
-    print(f"   - evaluation_results.csv (评估结果)")
-    print(f"   - model_statistics.csv (模型统计)")
-    print(f"   - experiment_metadata.csv (实验元数据)")
 
-
-if __name__ == "__main__":
-    main()
+    print(f"\n{'='*60}")
+    print(f"Experiment complete")
+    print(f"  Strategy: {config.strategy}")
+    print(f"  Profile:  L={languages} D={disciplines} S={scenarios}")
+    print(f"  Sparsity: {config.target_sparsity}")
+    print(f"  CRR:      {results.get('evaluation', {}).get('avg_crr', 'N/A')}")
+    print(f"{'='*60}")

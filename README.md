@@ -36,7 +36,25 @@ PARSE/
 ├── literature_review.md    # Literature review (English) — 55 references
 ├── 文献综述.md              # Literature review (Chinese) — 55 references
 ├── code/                   # Implementation framework
-│   └── parse/              # Core architecture + trainer
+│   ├── __init__.py
+│   └── parse/              # Core PARSE package
+│       ├── __init__.py      # Public API
+│       ├── config.py        # PARSEConfig + 12 preservation profiles (P1-P12)
+│       ├── export.py        # GGUF export (llama.cpp + MoXing)
+│       ├── core/
+│       │   ├── __init__.py
+│       │   ├── cit.py       # Capability Importance Tensor computation
+│       │   ├── model.py     # HuggingFace model loader + builder
+│       │   └── transplant.py # FFN removal + NoFFN insertion + DCR
+│       ├── data/
+│       │   ├── __init__.py
+│       │   └── calibration.py # Calibration prompts per axis (8+6+5 categories)
+│       ├── trainer/
+│       │   ├── __init__.py
+│       │   └── flywheel.py  # Dual-flywheel recovery with GRPO
+│       └── eval/
+│           ├── __init__.py
+│           └── metrics.py   # PPL, CRR, CCI, GSM8K, BFCL
 ├── md/                     # Reference papers (Markdown)
 ├── pdf/                    # Reference papers (PDF)
 ├── figures/                # Publication-quality SVG/PDF figures
