@@ -16,11 +16,11 @@ LLM capabilities naturally decompose along three orthogonal axes:
 - **Discipline** (Mathematics, Physics, Logic, History, Geography, Literature)
 - **Scenario** (Function Calling, Code, Math Reasoning, Translation, Chat)
 
-PARSE quantifies each layer's contribution to every (Language × Discipline × Scenario) combination, then preserves critical layers while transplanting redundant ones with ultra-efficient No-FFN attention blocks.
+PARSE quantifies each layer's contribution to every (Language × Discipline × Scenario) combination using a **Capability Importance Tensor (CIT)**. Critical layers are preserved intact; redundant layers receive ultra-efficient No-FFN attention transplants [55]. A lightweight **Dynamic Capability Router (DCR)** (0.08M parameters) modulates internal residual gates based on input context, enabling a single compressed model to serve multiple preservation profiles without weight switching.
 
 ## 📊 Key Results
 
-| Metric | Original Qwen-0.8B | PARSE (Ours) |
+| Metric | Original Qwen3.5-0.8B | PARSE (Ours) |
 |:---|:---:|:---:|
 | Parameters | 752M | **85M** |
 | GSM8K Accuracy | 45.2% | **42.8%** (95% retained) |
@@ -35,8 +35,8 @@ PARSE/
 ├── article_cn.md           # Chinese paper (full)
 ├── code/                   # Implementation framework
 │   └── needle_universal/   # Core architecture + trainer
-├── md/                     # 55 reference papers (Markdown)
-├── pdf/                    # 54 reference papers (PDF)
+├── md/                     # Reference papers (Markdown)
+├── pdf/                    # Reference papers (PDF)
 ├── figures/                # Publication-quality SVG/PDF figures
 ├── results/                # RTX 4060 experiment results
 ├── models/                 # Model configurations
@@ -63,16 +63,16 @@ python run_experiment.py \
 
 ## 📚 References
 
-This work is grounded in 55 foundational studies spanning:
-- Structural pruning (LLM-Pruner, SparseGPT, Wanda, ShortGPT)
-- Knowledge editing (ROME, MEMIT, MEND, SERAC)
-- Machine unlearning (SISA, Descent-to-Delete)
-- Data flywheels (AgenticQwen, ArenaLearning, SRDF)
-- Agentic systems (Gorilla, xLAM, TinyAgent, ToolFlow)
-- GRPO-based RL (DeepSeekMath, EBPO, STAPO, Mu-GRPO)
-- Specialized architectures (Needle, MiniMind-O)
+This work draws on foundational studies in:
+- Structural pruning [3-7,11-16]
+- Dynamic inference [8-10]
+- Knowledge editing and machine unlearning [37-47]
+- Data flywheels and self-improving training [1,17-23]
+- Agentic systems and tool calling [24-30]
+- GRPO-based reinforcement learning [23,31-36]
+- Specialized architectures [2,54,55]
 
-All references are available in `md/` and `pdf/` directories, numbered [01]-[55] by citation order.
+All references are available in `md/` and `pdf/` directories.
 
 ## 📄 Citation
 
