@@ -1,134 +1,109 @@
 """
-UNneedle: Universal Neo-Needle Architecture
-融合 Qwen3.5 剪枝权重与专精场景插件的统一架构。
+Model builder for PARSE: wraps HuggingFace Qwen model with CIT support and
+DCR routing. Orchestrates the full "diagnose → sculpt → transplant" pipeline.
 
-创新集成：
-1. 动态能力路由 (Dynamic Capability Routing) - 基于 AgenticQwen [1]
-2. 纯注意力专精层 (No-FFN Specialized Layers) - 基于 Needle [2]
-3. 中间层 Bridge 表征传递 - 基于 MiniMind-O [3]
-4. 正交权重更新约束 - 基于 Muon 优化器原理
+The model is loaded from a standard HuggingFace checkpoint and modified in-place
+using the CIT-guided layer selection and FFN transplantation modules.
 """
+
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import math
-from typing import Optional, Tuple, Dict, List
-from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional, Dict, Any, List
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-@dataclass
-class UNneedleConfig:
-    # 基础维度 (继承自 Qwen3.5 压缩版)
-    vocab_size: int = 32000
-    hidden_size: int = 512
-    num_heads: int = 8
-    num_kv_heads: int = 4
-    num_layers: int = 12
-    
-    # 专精能力配置
-    # 支持的场景分类: ['math', 'code', 'logic', 'fc', 'vision', 'multilingual']
-    scenario_dims: Dict[str, int] = None
-    enable_routing: bool = True
-    bridge_layer_idx: int = 5
-    
-    def __post_init__(self):
-        if self.scenario_dims is None:
-            self.scenario_dims = {'math': 0, 'code': 1, 'logic': 2, 'fc': 3, 'multilingual': 4}
+from .transplant import TransplantFFN, CapabilityRouter
+from .cit import ComputeCIT
 
-class CapabilityRouter(nn.Module):
-    """
-    能力感知路由器
-    通过前置探针识别输入属于哪种场景/语种/学科
-    """
-    def __init__(self, hidden_size: int, num_scenarios: int):
-        super().__init__()
-        self.classifier = nn.Sequential(
-            nn.Linear(hidden_size, hidden_size // 4),
-            nn.ReLU(),
-            nn.Linear(hidden_size // 4, num_scenarios)
-        )
-    
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x: (B, T, D) -> 取均值做分类
-        logits = self.classifier(x.mean(dim=1))
-        return F.softmax(logits, dim=-1) # (B, num_scenarios)
 
-class FusedAttention(nn.Module):
+def build_parse_model(
+    model_path: str,
+    device: str = "cuda",
+    torch_dtype: torch.dtype = torch.float16,
+    enable_dcr: bool = True,
+) -> Dict[str, Any]:
     """
-    融合注意力层
-    结合了通用预训练权重 (Pruned) 和 场景专精权重 (Specialized)
-    """
-    def __init__(self, config: UNneedleConfig, layer_idx: int):
-        super().__init__()
-        self.hidden_size = config.hidden_size
-        self.num_heads = config.num_heads
-        self.head_dim = config.hidden_size // config.num_heads
-        
-        # 1. 通用权重 (从 Qwen3.5 剪枝并蒸馏而来)
-        self.q_proj = nn.Linear(config.hidden_size, config.hidden_size, bias=False)
-        self.k_proj = nn.Linear(config.hidden_size, config.num_kv_heads * self.head_dim, bias=False)
-        self.v_proj = nn.Linear(config.hidden_size, config.num_kv_heads * self.head_dim, bias=False)
-        self.o_proj = nn.Linear(config.hidden_size, config.hidden_size, bias=False)
-        
-        # 2. 场景专精插件 (Needle 风格: 无 FFN, 极轻量)
-        self.specialized_attn = nn.Parameter(torch.zeros(len(config.scenario_dims), config.hidden_size))
-        
-        # 3. 门控残差
-        self.gate = nn.Parameter(torch.zeros(1))
-        
-    def forward(self, x, routing_weights: torch.Tensor, mask=None, rope=None):
-        # 执行标准注意力 (使用通用权重)
-        # ... (此处省略标准计算过程)
-        attn_out = self.o_proj(x) # 简化表示
-        
-        # 应用动态路由
-        # 根据 CapabilityRouter 的结果，动态调节这一层对不同场景的响应
-        # routing_weights: (B, num_scenarios)
-        scenario_bias = torch.matmul(routing_weights, self.specialized_attn) # (B, D)
-        
-        return x + torch.sigmoid(self.gate) * (attn_out + scenario_bias.unsqueeze(1))
+    Load a Qwen model from HuggingFace and prepare it for PARSE experimentation.
 
-class UNneedleModel(nn.Module):
-    """
-    UNneedle 统一模型
-    """
-    def __init__(self, config: UNneedleConfig):
-        super().__init__()
-        self.config = config
-        self.embed = nn.Embedding(config.vocab_size, config.hidden_size)
-        self.router = CapabilityRouter(config.hidden_size, len(config.scenario_dims))
-        
-        self.layers = nn.ModuleList([
-            FusedAttention(config, i) for i in range(config.num_layers)
-        ])
-        
-        self.norm = nn.LayerNorm(config.hidden_size)
-        self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
-        
-    def forward(self, input_ids: torch.Tensor, labels=None):
-        x = self.embed(input_ids)
-        
-        # 步骤 1: 路由判定 (使用中间层表征或前置探针)
-        routing_weights = self.router(x)
-        
-        # 步骤 2: 执行带路由的注意力计算
-        for i, layer in enumerate(self.layers):
-            x = layer(x, routing_weights)
-            
-        x = self.norm(x)
-        logits = self.lm_head(x)
-        
-        loss = None
-        if labels is not None:
-            loss = F.cross_entropy(logits.view(-1, self.config.vocab_size), labels.view(-1))
-            
-        return {"logits": logits, "loss": loss, "routing": routing_weights}
+    Returns a dict containing:
+        - model: the loaded HuggingFace model
+        - tokenizer: the tokenizer
+        - transplant: TransplantFFN instance (for FFN surgery)
+        - cit_computer: ComputeCIT instance (for importance computation)
+        - n_layers: detected number of layers
+        - hidden_size: detected hidden dimension
 
-def create_model():
-    config = UNneedleConfig()
-    model = UNneedleModel(config)
-    total_params = sum(p.numel() for p in model.parameters())
-    print(f"UNneedle 构建成功! 总参数量: {total_params/1e6:.1f}M")
-    return model
+    Parameters
+    ----------
+    model_path : str
+        Path to HuggingFace model checkpoint.
+    device : str
+        "cuda", "mps", or "cpu".
+    torch_dtype : torch.dtype
+        Precision for model weights.
+    enable_dcr : bool
+        Whether to enable Dynamic Capability Router.
+    """
+    model_path = Path(model_path)
 
-if __name__ == "__main__":
-    create_model()
+    # Load tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(
+        str(model_path),
+        trust_remote_code=True,
+        local_files_only=True,
+    )
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    # Load model
+    model = AutoModelForCausalLM.from_pretrained(
+        str(model_path),
+        trust_remote_code=True,
+        torch_dtype=torch_dtype if device != "cpu" else torch.float32,
+        device_map=device if device != "cpu" else "cpu",
+        local_files_only=True,
+    )
+    if device == "cpu":
+        model = model.float()
+    model.eval()
+
+    # Detect architecture
+    n_layers, hidden_size = _detect_model_dims(model)
+
+    # Create tool instances
+    transplantation = TransplantFFN(model, device=device, enable_dcr=enable_dcr)
+    cit_computer = ComputeCIT(
+        model, tokenizer,
+        device=device,
+        alpha=0.6,
+        n_layers=n_layers,
+    )
+
+    return {
+        "model": model,
+        "tokenizer": tokenizer,
+        "transplant": transplantation,
+        "cit_computer": cit_computer,
+        "n_layers": n_layers,
+        "hidden_size": hidden_size,
+        "device": device,
+    }
+
+
+def _detect_model_dims(model) -> tuple:
+    """Detect architecture dimensions from a loaded model."""
+    # Try standard Qwen/LLaMA path
+    for attr in ["model.layers", "transformer.h", "model.decoder.layers"]:
+        parts = attr.split(".")
+        obj = model
+        try:
+            for p in parts:
+                obj = getattr(obj, p)
+            n_layers = len(obj)
+            # Get hidden_size from first layer's input projection
+            for name, param in obj[0].named_parameters():
+                if "weight" in name and len(param.shape) == 2:
+                    return n_layers, param.shape[1]
+        except (AttributeError, TypeError):
+            continue
+
+    return 24, 1024  # Qwen3.5-0.8B defaults

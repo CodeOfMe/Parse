@@ -2,15 +2,18 @@
 """
 Qwen3.5-0.8B 能力修剪实验入口脚本
 
-支持设备: CUDA, MPS (Apple Silicon), CPU
+支持设备: CUDA, ROCm (AMD), MPS (Apple Silicon), CPU
 输出: 结构化 JSON/CSV 结果，用于论文撰写和可视化
 
 使用方法:
-    # Apple M4 (MPS)
-    python run_experiment.py --device mps --strategy hybrid --sparsity 0.5
-
     # NVIDIA GPU (CUDA)
     python run_experiment.py --device cuda --strategy hybrid --sparsity 0.5
+
+    # AMD GPU (ROCm)
+    python run_experiment.py --device rocm --strategy hybrid --sparsity 0.5
+
+    # Apple Silicon (MPS)
+    python run_experiment.py --device mps --strategy hybrid --sparsity 0.5
 
     # 快速测试 (CPU)
     python run_experiment.py --device cpu --strategy layerdrop --sparsity 0.3
@@ -122,7 +125,7 @@ def main():
     parser.add_argument("--output_dir", type=str, default="results/experiments",
                         help="输出目录 (默认: results/experiments)")
     parser.add_argument("--device", type=str, default="auto",
-                        choices=["auto", "cuda", "mps", "cpu"],
+                        choices=["auto", "cuda", "rocm", "mps", "cpu"],
                         help="运行设备 (默认: auto)")
     parser.add_argument("--save_model", action="store_true",
                         help="保存修剪后的模型")
