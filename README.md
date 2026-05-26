@@ -1,6 +1,6 @@
 # PARSE: Principled Architecture Retention through Scenario-Embedded Pruning
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-Coming_Soon-red)]()
 
 > **Scalpel, Not Sledgehammer** — Fine-grained, capability-preserving compression of Large Language Models along Language × Discipline × Scenario axes.
@@ -87,4 +87,4 @@ All references are available in `md/` and `pdf/` directories, numbered [01]-[55]
 
 ## 📜 License
 
-MIT License. See [LICENSE](LICENSE) for details.
+GNU General Public License v3.0. See [LICENSE](LICENSE) for details.
