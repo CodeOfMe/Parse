@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" font-family="Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa"/>
+      <stop offset="100%" style="stop-color:#f0f0f0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="800" height="650" fill="url(#bg)"/>
+  
+  <!-- 标题 -->
+  <text x="400" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a1a2e">
+    Figure 4. Multi-dimensional Capability Profile
+  </text>
+  <text x="400" y="65" text-anchor="middle" font-size="13" fill="#666">
+    Radar comparison: Original vs. Forged (Medium strategy)
+  </text>
+  
+  <!-- 雷达图中心 -->
+  <g transform="translate(320, 340)" filter="url(#shadow)">
+    <!-- 网格 -->
+    <polygon points="0,-200 173,-100 173,100 0,200 -173,100 -173,-100" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+    <polygon points="0,-160 139,-80 139,80 0,160 -139,80 -139,-80" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+    <polygon points="0,-120 104,-60 104,60 0,120 -104,60 -104,-60" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+    <polygon points="0,-80 69,-40 69,40 0,80 -69,40 -69,-40" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+    <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+    
+    <!-- 轴线 -->
+    <line x1="0" y1="0" x2="0" y2="-200" stroke="#ccc" stroke-width="1"/>
+    <line x1="0" y1="0" x2="173" y2="-100" stroke="#ccc" stroke-width="1"/>
+    <line x1="0" y1="0" x2="173" y2="100" stroke="#ccc" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="200" stroke="#ccc" stroke-width="1"/>
+    <line x1="0" y1="0" x2="-173" y2="100" stroke="#ccc" stroke-width="1"/>
+    <line x1="0" y1="0" x2="-173" y2="-100" stroke="#ccc" stroke-width="1"/>
+    
+    <!-- 原始模型（蓝色） -->
+    <polygon points="0,-200 173,-100 173,100 0,200 -173,100 -173,-100" 
+             fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="2.5"/>
+    
+    <!-- 遗忘模型（红色） -->
+    <!-- History: 0%, Geography: 0%, Literature: 0%, Math: 75%, Physics: 100%, Code: 100% -->
+    <polygon points="0,0 0,-100 0,100 0,150 -173,100 -173,-100" 
+             fill="#ef4444" fill-opacity="0.15" stroke="#ef4444" stroke-width="2.5"/>
+    
+    <!-- 数据点 - 原始 -->
+    <circle cx="0" cy="-200" r="5" fill="#3b82f6"/>
+    <circle cx="173" cy="-100" r="5" fill="#3b82f6"/>
+    <circle cx="173" cy="100" r="5" fill="#3b82f6"/>
+    <circle cx="0" cy="200" r="5" fill="#3b82f6"/>
+    <circle cx="-173" cy="100" r="5" fill="#3b82f6"/>
+    <circle cx="-173" cy="-100" r="5" fill="#3b82f6"/>
+    
+    <!-- 数据点 - 遗忘 -->
+    <circle cx="0" cy="0" r="5" fill="#ef4444"/>
+    <circle cx="0" cy="-100" r="5" fill="#ef4444"/>
+    <circle cx="0" cy="100" r="5" fill="#ef4444"/>
+    <circle cx="0" cy="150" r="5" fill="#ef4444"/>
+    <circle cx="-173" cy="100" r="5" fill="#ef4444"/>
+    <circle cx="-173" cy="-100" r="5" fill="#ef4444"/>
+    
+    <!-- 标签 -->
+    <text x="0" y="-215" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">History</text>
+    <text x="190" y="-105" text-anchor="start" font-size="13" font-weight="bold" fill="#333">Geography</text>
+    <text x="190" y="110" text-anchor="start" font-size="13" font-weight="bold" fill="#333">Literature</text>
+    <text x="0" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">Math</text>
+    <text x="-190" y="110" text-anchor="end" font-size="13" font-weight="bold" fill="#333">Physics</text>
+    <text x="-190" y="-105" text-anchor="end" font-size="13" font-weight="bold" fill="#333">Code</text>
+  </g>
+  
+  <!-- 图例 -->
+  <g transform="translate(580, 200)">
+    <rect x="0" y="0" width="24" height="16" rx="3" fill="#3b82f6" fill-opacity="0.6" stroke="#3b82f6" stroke-width="2"/>
+    <text x="35" y="13" font-size="14" font-weight="bold" fill="#333">Original Model</text>
+    
+    <rect x="0" y="30" width="24" height="16" rx="3" fill="#ef4444" fill-opacity="0.6" stroke="#ef4444" stroke-width="2"/>
+    <text x="35" y="43" font-size="14" font-weight="bold" fill="#333">Forged Model</text>
+    
+    <!-- 详细数据 -->
+    <g transform="translate(0, 80)">
+      <text x="0" y="0" font-size="13" font-weight="bold" fill="#333">Capability Scores</text>
+      <text x="0" y="25" font-size="12" fill="#666">History: 100% → 0%</text>
+      <text x="0" y="45" font-size="12" fill="#666">Geography: 100% → 0%</text>
+      <text x="0" y="65" font-size="12" fill="#666">Literature: 100% → 0%</text>
+      <text x="0" y="85" font-size="12" fill="#666">Math: 100% → 75%</text>
+      <text x="0" y="105" font-size="12" fill="#666">Physics: 100% → 100%</text>
+      <text x="0" y="125" font-size="12" fill="#666">Code: 100% → 100%</text>
+      
+      <line x1="0" y1="140" x2="180" y2="140" stroke="#e5e5e5" stroke-width="1"/>
+      
+      <text x="0" y="165" font-size="12" fill="#333">
+        <tspan font-weight="bold">STEM Retention:</tspan> 75%
+      </text>
+      <text x="0" y="185" font-size="12" fill="#333">
+        <tspan font-weight="bold">Humanities Forget:</tspan> 100%
+      </text>
+      <text x="0" y="205" font-size="12" fill="#333">
+        <tspan font-weight="bold">Speed Gain:</tspan> +10.7%
+      </text>
+    </g>
+  </g>
+  
+  <!-- 底部说明 -->
+  <text x="400" y="590" text-anchor="middle" font-size="12" fill="#666">
+    <tspan font-weight="bold">Strategy:</tspan> Parameter zeroing (26% of memory parameters) · 
+    <tspan font-weight="bold">Model:</tspan> Qwen3.5-0.8B
+  </text>
+  <text x="400" y="610" text-anchor="middle" font-size="12" fill="#666">
+    Score = keyword match accuracy in generated responses · Higher is better for all dimensions
+  </text>
+  
+  <text x="400" y="635" text-anchor="middle" font-size="11" fill="#999">
+    Generated: 2026-05-16
+  </text>
+</svg>

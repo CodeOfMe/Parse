@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 710 480" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa"/>
+      <stop offset="100%" style="stop-color:#f0f0f0"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="710" height="480" fill="url(#bg)"/>
+  <text x="355" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">Capability Dimension: Gradient Distribution by Layer Depth</text>
+  <rect x="120" y="337.17729268076886" width="60" height="42.82270731923112" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="363.0" text-anchor="middle" font-size="9" fill="white">14.3%</text>
+  <rect x="120" y="271.204920893878" width="60" height="65.97237178689082" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="309.17729268076886" text-anchor="middle" font-size="9" fill="white">22.0%</text>
+  <rect x="120" y="80.00000299999996" width="60" height="191.20491789387805" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="180.204920893878" text-anchor="middle" font-size="9" fill="white">63.7%</text>
+  <text x="150" y="395" text-anchor="middle" font-size="11" fill="#333">数学推理</text>
+  <rect x="210" y="334.77623936798244" width="60" height="45.22376063201756" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="362.0" text-anchor="middle" font-size="9" fill="white">15.1%</text>
+  <rect x="210" y="265.55710544764077" width="60" height="69.21913392034165" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="304.77623936798244" text-anchor="middle" font-size="9" fill="white">23.1%</text>
+  <rect x="210" y="80.00000299999996" width="60" height="185.5571024476408" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="177.55710544764077" text-anchor="middle" font-size="9" fill="white">61.9%</text>
+  <text x="240" y="395" text-anchor="middle" font-size="11" fill="#333">逻辑推理</text>
+  <rect x="300" y="332.035767473305" width="60" height="47.96423252669504" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="361.0" text-anchor="middle" font-size="9" fill="white">16.0%</text>
+  <rect x="300" y="265.78001676855627" width="60" height="66.25575070474869" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="303.035767473305" text-anchor="middle" font-size="9" fill="white">22.1%</text>
+  <rect x="300" y="80.00000299999991" width="60" height="185.78001376855636" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="177.78001676855627" text-anchor="middle" font-size="9" fill="white">61.9%</text>
+  <text x="330" y="395" text-anchor="middle" font-size="11" fill="#333">物理</text>
+  <rect x="390" y="330.755827863778" width="60" height="49.24417213622202" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="360.0" text-anchor="middle" font-size="9" fill="white">16.4%</text>
+  <rect x="390" y="264.89499307350565" width="60" height="65.86083479027234" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="302.755827863778" text-anchor="middle" font-size="9" fill="white">22.0%</text>
+  <rect x="390" y="80.00000299999996" width="60" height="184.89499007350568" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="176.89499307350565" text-anchor="middle" font-size="9" fill="white">61.6%</text>
+  <text x="420" y="395" text-anchor="middle" font-size="11" fill="#333">历史</text>
+  <rect x="480" y="330.9758436593394" width="60" height="49.02415634066062" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="360.0" text-anchor="middle" font-size="9" fill="white">16.3%</text>
+  <rect x="480" y="263.0815195985558" width="60" height="67.89432406078357" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="301.9758436593394" text-anchor="middle" font-size="9" fill="white">22.6%</text>
+  <rect x="480" y="80.00000299999999" width="60" height="183.08151659855582" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="176.08151959855581" text-anchor="middle" font-size="9" fill="white">61.0%</text>
+  <text x="510" y="395" text-anchor="middle" font-size="11" fill="#333">地理</text>
+  <rect x="570" y="328.82880369941654" width="60" height="51.171196300583475" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="600" y="359.0" text-anchor="middle" font-size="9" fill="white">17.1%</text>
+  <rect x="570" y="260.33300247744415" width="60" height="68.4958012219724" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="600" y="298.82880369941654" text-anchor="middle" font-size="9" fill="white">22.8%</text>
+  <rect x="570" y="80.00000299999996" width="60" height="180.3329994774442" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="600" y="174.33300247744415" text-anchor="middle" font-size="9" fill="white">60.1%</text>
+  <text x="600" y="395" text-anchor="middle" font-size="11" fill="#333">文学</text>
+  <text x="680" y="100" font-size="12" font-weight="bold" fill="#333">维度</text>
+</svg>

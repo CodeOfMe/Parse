@@ -1,0 +1,2647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1800" font-family="Arial, sans-serif">
+  <defs>
+    <!-- 背景渐变 -->
+    <linearGradient id="bg_dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#050510"/>
+      <stop offset="50%" style="stop-color:#0f0f20"/>
+      <stop offset="100%" style="stop-color:#050510"/>
+    </linearGradient>
+    
+    <!-- 组件渐变 -->
+    <linearGradient id="comp_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a5568;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#2d3748;stop-opacity:0.7"/>
+    </linearGradient>
+    
+    <!-- 发光滤镜 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="glow_strong" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComponentTransfer in="blur">
+        <feFuncA type="linear" slope="1.5"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- 3D投影滤镜 -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+
+    <linearGradient id="grad_attention" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(139,92,246);stop-opacity:0.85"/>
+      <stop offset="50%" style="stop-color:rgb(179,132,255);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(139,92,246);stop-opacity:0.85"/>
+    </linearGradient>
+
+    <linearGradient id="grad_ffn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(16,185,129);stop-opacity:0.85"/>
+      <stop offset="50%" style="stop-color:rgb(56,225,169);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(16,185,129);stop-opacity:0.85"/>
+    </linearGradient>
+
+    <linearGradient id="grad_norm" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(245,158,11);stop-opacity:0.85"/>
+      <stop offset="50%" style="stop-color:rgb(255,198,51);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(245,158,11);stop-opacity:0.85"/>
+    </linearGradient>
+
+    <linearGradient id="grad_residual" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(99,102,241);stop-opacity:0.85"/>
+      <stop offset="50%" style="stop-color:rgb(139,142,255);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(99,102,241);stop-opacity:0.85"/>
+    </linearGradient>
+
+    <linearGradient id="grad_language" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(239,68,68);stop-opacity:0.85"/>
+      <stop offset="50%" style="stop-color:rgb(255,108,108);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(239,68,68);stop-opacity:0.85"/>
+    </linearGradient>
+
+    <linearGradient id="grad_capability" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(6,182,212);stop-opacity:0.85"/>
+      <stop offset="50%" style="stop-color:rgb(46,222,252);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(6,182,212);stop-opacity:0.85"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="url(#bg_dark)"/>
+  <circle cx="543.8" cy="878.5" r="0.4" fill="white" opacity="0.20"/>
+  <circle cx="144.7" cy="19.9" r="0.6" fill="white" opacity="0.14"/>
+  <circle cx="622.1" cy="1338.2" r="0.3" fill="white" opacity="0.29"/>
+  <circle cx="270.0" cy="1431.1" r="1.0" fill="white" opacity="0.16"/>
+  <circle cx="1696.2" cy="1291.1" r="0.4" fill="white" opacity="0.22"/>
+  <circle cx="1400.9" cy="1661.3" r="0.5" fill="white" opacity="0.18"/>
+  <circle cx="1550.2" cy="1732.8" r="0.4" fill="white" opacity="0.13"/>
+  <circle cx="1502.4" cy="570.6" r="0.6" fill="white" opacity="0.36"/>
+  <circle cx="1491.6" cy="1189.3" r="1.1" fill="white" opacity="0.32"/>
+  <circle cx="1620.5" cy="1157.9" r="0.8" fill="white" opacity="0.12"/>
+  <circle cx="1819.2" cy="1641.2" r="0.6" fill="white" opacity="0.29"/>
+  <circle cx="33.8" cy="899.9" r="0.9" fill="white" opacity="0.19"/>
+  <circle cx="829.0" cy="1503.8" r="0.4" fill="white" opacity="0.24"/>
+  <circle cx="172.7" cy="692.0" r="1.1" fill="white" opacity="0.28"/>
+  <circle cx="58.0" cy="1545.6" r="0.9" fill="white" opacity="0.26"/>
+  <circle cx="576.9" cy="541.5" r="0.5" fill="white" opacity="0.29"/>
+  <circle cx="99.5" cy="1700.7" r="0.4" fill="white" opacity="0.29"/>
+  <circle cx="1151.8" cy="652.1" r="0.6" fill="white" opacity="0.23"/>
+  <circle cx="658.7" cy="1748.9" r="0.9" fill="white" opacity="0.26"/>
+  <circle cx="1326.5" cy="888.8" r="0.4" fill="white" opacity="0.11"/>
+  <circle cx="1940.1" cy="1519.8" r="0.4" fill="white" opacity="0.28"/>
+  <circle cx="1570.2" cy="1609.7" r="0.4" fill="white" opacity="0.14"/>
+  <circle cx="784.4" cy="1085.0" r="0.4" fill="white" opacity="0.31"/>
+  <circle cx="1509.4" cy="804.2" r="1.1" fill="white" opacity="0.22"/>
+  <circle cx="1666.8" cy="687.9" r="0.7" fill="white" opacity="0.21"/>
+  <circle cx="1419.7" cy="1589.3" r="0.4" fill="white" opacity="0.28"/>
+  <circle cx="1671.1" cy="1245.6" r="0.5" fill="white" opacity="0.21"/>
+  <circle cx="1772.4" cy="388.4" r="1.2" fill="white" opacity="0.22"/>
+  <circle cx="1040.6" cy="1274.6" r="0.9" fill="white" opacity="0.28"/>
+  <circle cx="1735.1" cy="1152.7" r="1.1" fill="white" opacity="0.30"/>
+  <circle cx="1175.7" cy="102.1" r="1.1" fill="white" opacity="0.17"/>
+  <circle cx="451.1" cy="88.6" r="0.9" fill="white" opacity="0.21"/>
+  <circle cx="1305.1" cy="1464.2" r="1.1" fill="white" opacity="0.34"/>
+  <circle cx="1677.0" cy="685.8" r="0.3" fill="white" opacity="0.33"/>
+  <circle cx="1990.2" cy="833.3" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="770.5" cy="1497.7" r="0.4" fill="white" opacity="0.21"/>
+  <circle cx="1391.7" cy="147.1" r="0.8" fill="white" opacity="0.22"/>
+  <circle cx="440.4" cy="731.3" r="1.0" fill="white" opacity="0.30"/>
+  <circle cx="1182.9" cy="1396.8" r="0.7" fill="white" opacity="0.27"/>
+  <circle cx="198.8" cy="1188.0" r="0.9" fill="white" opacity="0.29"/>
+  <circle cx="1596.2" cy="1772.7" r="1.0" fill="white" opacity="0.39"/>
+  <circle cx="1308.6" cy="500.0" r="1.1" fill="white" opacity="0.30"/>
+  <circle cx="1254.0" cy="262.5" r="0.8" fill="white" opacity="0.20"/>
+  <circle cx="1152.7" cy="1662.5" r="0.6" fill="white" opacity="0.11"/>
+  <circle cx="244.0" cy="969.4" r="1.1" fill="white" opacity="0.11"/>
+  <circle cx="823.6" cy="610.1" r="0.7" fill="white" opacity="0.29"/>
+  <circle cx="1005.5" cy="488.7" r="1.1" fill="white" opacity="0.34"/>
+  <circle cx="1794.8" cy="226.5" r="0.8" fill="white" opacity="0.17"/>
+  <circle cx="193.2" cy="1668.7" r="0.9" fill="white" opacity="0.24"/>
+  <circle cx="1532.1" cy="1527.5" r="0.7" fill="white" opacity="0.13"/>
+  <circle cx="1803.0" cy="912.5" r="0.7" fill="white" opacity="0.16"/>
+  <circle cx="1040.3" cy="1561.9" r="1.1" fill="white" opacity="0.14"/>
+  <circle cx="238.8" cy="1784.7" r="0.8" fill="white" opacity="0.29"/>
+  <circle cx="1389.6" cy="742.8" r="0.7" fill="white" opacity="0.36"/>
+  <circle cx="1247.4" cy="41.2" r="0.3" fill="white" opacity="0.35"/>
+  <circle cx="1187.2" cy="1342.2" r="0.7" fill="white" opacity="0.31"/>
+  <circle cx="694.3" cy="658.9" r="0.6" fill="white" opacity="0.19"/>
+  <circle cx="1897.1" cy="1577.0" r="0.8" fill="white" opacity="0.11"/>
+  <circle cx="1852.6" cy="1456.5" r="0.9" fill="white" opacity="0.39"/>
+  <circle cx="1510.1" cy="1092.7" r="0.6" fill="white" opacity="0.29"/>
+  <circle cx="844.1" cy="313.6" r="0.4" fill="white" opacity="0.13"/>
+  <circle cx="1367.9" cy="675.4" r="1.2" fill="white" opacity="0.37"/>
+  <circle cx="569.1" cy="182.9" r="1.0" fill="white" opacity="0.35"/>
+  <circle cx="737.5" cy="1372.4" r="1.1" fill="white" opacity="0.23"/>
+  <circle cx="885.8" cy="1111.1" r="1.1" fill="white" opacity="0.31"/>
+  <circle cx="1975.7" cy="258.6" r="0.4" fill="white" opacity="0.14"/>
+  <circle cx="1880.6" cy="535.4" r="0.4" fill="white" opacity="0.15"/>
+  <circle cx="44.2" cy="958.7" r="0.9" fill="white" opacity="0.19"/>
+  <circle cx="38.7" cy="68.6" r="0.9" fill="white" opacity="0.10"/>
+  <circle cx="477.2" cy="807.1" r="0.7" fill="white" opacity="0.38"/>
+  <circle cx="1865.1" cy="902.7" r="0.9" fill="white" opacity="0.21"/>
+  <circle cx="1285.8" cy="101.9" r="0.5" fill="white" opacity="0.35"/>
+  <circle cx="916.9" cy="889.0" r="1.0" fill="white" opacity="0.30"/>
+  <circle cx="341.8" cy="838.0" r="1.1" fill="white" opacity="0.20"/>
+  <circle cx="1904.2" cy="349.5" r="0.7" fill="white" opacity="0.16"/>
+  <circle cx="564.9" cy="395.7" r="0.9" fill="white" opacity="0.32"/>
+  <circle cx="1752.7" cy="250.3" r="1.2" fill="white" opacity="0.31"/>
+  <circle cx="540.2" cy="1211.5" r="0.9" fill="white" opacity="0.21"/>
+  <circle cx="547.9" cy="154.2" r="0.5" fill="white" opacity="0.36"/>
+  <circle cx="744.6" cy="1175.1" r="0.7" fill="white" opacity="0.17"/>
+  <circle cx="862.3" cy="403.6" r="0.7" fill="white" opacity="0.16"/>
+  <circle cx="260.3" cy="1429.9" r="0.6" fill="white" opacity="0.31"/>
+  <circle cx="1852.8" cy="1647.4" r="1.1" fill="white" opacity="0.25"/>
+  <circle cx="1032.1" cy="31.8" r="0.9" fill="white" opacity="0.25"/>
+  <circle cx="683.0" cy="1536.6" r="1.0" fill="white" opacity="0.34"/>
+  <circle cx="681.6" cy="919.8" r="1.0" fill="white" opacity="0.37"/>
+  <circle cx="974.3" cy="1290.0" r="0.8" fill="white" opacity="0.17"/>
+  <circle cx="1745.0" cy="971.7" r="0.5" fill="white" opacity="0.27"/>
+  <circle cx="1717.2" cy="287.9" r="0.4" fill="white" opacity="0.29"/>
+  <circle cx="275.2" cy="1374.4" r="0.8" fill="white" opacity="0.24"/>
+  <circle cx="905.6" cy="1753.0" r="0.6" fill="white" opacity="0.27"/>
+  <circle cx="864.3" cy="1725.4" r="0.6" fill="white" opacity="0.10"/>
+  <circle cx="888.8" cy="979.3" r="1.0" fill="white" opacity="0.29"/>
+  <circle cx="1774.5" cy="437.7" r="0.9" fill="white" opacity="0.35"/>
+  <circle cx="1776.7" cy="1449.1" r="0.9" fill="white" opacity="0.23"/>
+  <circle cx="1846.2" cy="1337.3" r="0.7" fill="white" opacity="0.38"/>
+  <circle cx="1763.8" cy="1746.1" r="1.2" fill="white" opacity="0.38"/>
+  <circle cx="832.4" cy="724.0" r="1.2" fill="white" opacity="0.11"/>
+  <circle cx="1894.1" cy="1485.4" r="0.5" fill="white" opacity="0.29"/>
+  <circle cx="759.8" cy="1342.9" r="1.1" fill="white" opacity="0.33"/>
+  <circle cx="1681.6" cy="510.9" r="0.8" fill="white" opacity="0.24"/>
+  <circle cx="1877.4" cy="385.6" r="0.9" fill="white" opacity="0.30"/>
+  <circle cx="698.5" cy="1682.4" r="1.1" fill="white" opacity="0.18"/>
+  <circle cx="648.5" cy="1152.0" r="0.4" fill="white" opacity="0.19"/>
+  <circle cx="231.7" cy="1274.1" r="0.7" fill="white" opacity="0.13"/>
+  <circle cx="1675.0" cy="976.5" r="0.9" fill="white" opacity="0.17"/>
+  <circle cx="1362.0" cy="606.0" r="1.2" fill="white" opacity="0.12"/>
+  <circle cx="93.4" cy="701.0" r="0.4" fill="white" opacity="0.14"/>
+  <circle cx="1513.6" cy="986.6" r="0.9" fill="white" opacity="0.15"/>
+  <circle cx="1281.8" cy="1387.5" r="0.4" fill="white" opacity="0.15"/>
+  <circle cx="917.6" cy="587.7" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="937.8" cy="702.7" r="0.5" fill="white" opacity="0.16"/>
+  <circle cx="546.3" cy="22.8" r="0.4" fill="white" opacity="0.28"/>
+  <circle cx="1011.3" cy="895.6" r="0.8" fill="white" opacity="0.27"/>
+  <circle cx="1999.4" cy="938.4" r="1.0" fill="white" opacity="0.19"/>
+  <circle cx="1611.3" cy="961.9" r="1.1" fill="white" opacity="0.39"/>
+  <circle cx="394.4" cy="1605.6" r="0.9" fill="white" opacity="0.37"/>
+  <circle cx="94.8" cy="1511.4" r="1.0" fill="white" opacity="0.36"/>
+  <circle cx="567.1" cy="583.9" r="0.9" fill="white" opacity="0.21"/>
+  <circle cx="1092.5" cy="1502.7" r="0.6" fill="white" opacity="0.40"/>
+  <circle cx="1781.9" cy="1321.9" r="1.1" fill="white" opacity="0.11"/>
+  <circle cx="1245.3" cy="1631.2" r="0.6" fill="white" opacity="0.28"/>
+  <circle cx="195.7" cy="1367.6" r="0.5" fill="white" opacity="0.39"/>
+  <circle cx="1219.9" cy="91.5" r="0.8" fill="white" opacity="0.14"/>
+  <circle cx="649.1" cy="1204.5" r="0.4" fill="white" opacity="0.35"/>
+  <circle cx="1377.4" cy="1213.6" r="0.6" fill="white" opacity="0.13"/>
+  <circle cx="1064.8" cy="1203.8" r="1.2" fill="white" opacity="0.30"/>
+  <circle cx="1493.2" cy="833.3" r="0.5" fill="white" opacity="0.26"/>
+  <circle cx="1865.9" cy="994.0" r="0.3" fill="white" opacity="0.29"/>
+  <circle cx="1711.7" cy="875.8" r="0.9" fill="white" opacity="0.15"/>
+  <circle cx="1349.1" cy="965.2" r="1.0" fill="white" opacity="0.25"/>
+  <circle cx="891.5" cy="796.0" r="1.1" fill="white" opacity="0.40"/>
+  <circle cx="1048.9" cy="439.8" r="1.0" fill="white" opacity="0.18"/>
+  <circle cx="1777.6" cy="184.9" r="0.7" fill="white" opacity="0.37"/>
+  <circle cx="70.2" cy="1497.7" r="0.8" fill="white" opacity="0.31"/>
+  <circle cx="125.8" cy="1328.3" r="1.2" fill="white" opacity="0.11"/>
+  <circle cx="467.3" cy="1487.5" r="1.0" fill="white" opacity="0.28"/>
+  <circle cx="1876.9" cy="1029.8" r="0.5" fill="white" opacity="0.34"/>
+  <circle cx="586.9" cy="402.4" r="0.5" fill="white" opacity="0.15"/>
+  <circle cx="401.4" cy="1416.2" r="0.7" fill="white" opacity="0.10"/>
+  <circle cx="1892.6" cy="279.2" r="0.5" fill="white" opacity="0.25"/>
+  <circle cx="712.1" cy="1666.2" r="1.0" fill="white" opacity="0.36"/>
+  <circle cx="958.6" cy="121.4" r="0.5" fill="white" opacity="0.15"/>
+  <circle cx="88.7" cy="756.1" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="78.2" cy="392.1" r="1.2" fill="white" opacity="0.20"/>
+  <circle cx="1410.9" cy="722.9" r="0.6" fill="white" opacity="0.22"/>
+  <circle cx="929.4" cy="747.7" r="1.1" fill="white" opacity="0.13"/>
+  <circle cx="1664.0" cy="1287.3" r="1.1" fill="white" opacity="0.34"/>
+  <circle cx="1729.4" cy="150.4" r="0.6" fill="white" opacity="0.28"/>
+  <circle cx="1731.1" cy="18.8" r="0.6" fill="white" opacity="0.16"/>
+  <circle cx="547.0" cy="1412.9" r="0.9" fill="white" opacity="0.39"/>
+  <circle cx="1158.2" cy="98.1" r="0.5" fill="white" opacity="0.21"/>
+  <circle cx="205.5" cy="1409.9" r="1.2" fill="white" opacity="0.37"/>
+  <circle cx="27.8" cy="1473.4" r="1.2" fill="white" opacity="0.17"/>
+  <circle cx="481.3" cy="352.8" r="0.7" fill="white" opacity="0.36"/>
+  <circle cx="1651.9" cy="217.1" r="0.4" fill="white" opacity="0.34"/>
+  <circle cx="1738.6" cy="1424.5" r="0.6" fill="white" opacity="0.25"/>
+  <circle cx="1695.5" cy="1766.2" r="0.7" fill="white" opacity="0.28"/>
+  <circle cx="1619.0" cy="1700.9" r="0.4" fill="white" opacity="0.14"/>
+  <circle cx="675.4" cy="364.0" r="1.1" fill="white" opacity="0.16"/>
+  <circle cx="756.0" cy="505.7" r="1.0" fill="white" opacity="0.30"/>
+  <circle cx="745.8" cy="446.8" r="1.0" fill="white" opacity="0.13"/>
+  <circle cx="1790.3" cy="230.8" r="1.1" fill="white" opacity="0.10"/>
+  <circle cx="1777.7" cy="636.7" r="0.3" fill="white" opacity="0.38"/>
+  <circle cx="1137.2" cy="639.3" r="0.4" fill="white" opacity="0.34"/>
+  <circle cx="986.7" cy="253.7" r="0.5" fill="white" opacity="0.28"/>
+  <circle cx="1087.5" cy="842.5" r="1.1" fill="white" opacity="0.24"/>
+  <circle cx="181.8" cy="832.6" r="1.1" fill="white" opacity="0.12"/>
+  <circle cx="490.0" cy="802.2" r="0.4" fill="white" opacity="0.31"/>
+  <circle cx="1377.0" cy="1118.5" r="0.5" fill="white" opacity="0.39"/>
+  <circle cx="1640.2" cy="357.1" r="0.7" fill="white" opacity="0.23"/>
+  <circle cx="283.9" cy="87.8" r="0.4" fill="white" opacity="0.16"/>
+  <circle cx="1941.1" cy="1453.6" r="0.4" fill="white" opacity="0.12"/>
+  <circle cx="426.5" cy="940.4" r="0.5" fill="white" opacity="0.39"/>
+  <circle cx="1840.6" cy="1306.3" r="0.4" fill="white" opacity="0.23"/>
+  <circle cx="629.4" cy="322.7" r="0.6" fill="white" opacity="0.22"/>
+  <circle cx="345.7" cy="583.9" r="0.5" fill="white" opacity="0.28"/>
+  <circle cx="1138.9" cy="196.9" r="0.5" fill="white" opacity="0.21"/>
+  <circle cx="40.6" cy="452.6" r="0.5" fill="white" opacity="0.21"/>
+  <circle cx="1905.4" cy="127.4" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="565.2" cy="1338.1" r="0.7" fill="white" opacity="0.11"/>
+  <circle cx="1838.6" cy="785.4" r="0.9" fill="white" opacity="0.32"/>
+  <circle cx="243.3" cy="1498.1" r="1.0" fill="white" opacity="0.25"/>
+  <circle cx="1397.0" cy="632.4" r="0.9" fill="white" opacity="0.24"/>
+  <circle cx="1055.4" cy="135.4" r="1.2" fill="white" opacity="0.23"/>
+  <circle cx="1776.0" cy="1085.7" r="0.4" fill="white" opacity="0.39"/>
+  <circle cx="1573.7" cy="1664.7" r="0.7" fill="white" opacity="0.24"/>
+  <circle cx="1339.2" cy="967.5" r="0.6" fill="white" opacity="0.30"/>
+  <circle cx="618.5" cy="121.4" r="0.4" fill="white" opacity="0.35"/>
+  <circle cx="345.7" cy="1546.8" r="1.1" fill="white" opacity="0.29"/>
+  <circle cx="72.0" cy="1519.0" r="0.4" fill="white" opacity="0.28"/>
+  <circle cx="1901.6" cy="1383.5" r="0.4" fill="white" opacity="0.14"/>
+  <circle cx="1928.3" cy="942.8" r="1.0" fill="white" opacity="0.37"/>
+  <circle cx="1189.8" cy="420.1" r="0.9" fill="white" opacity="0.23"/>
+  <circle cx="1587.9" cy="821.1" r="0.6" fill="white" opacity="0.29"/>
+  <circle cx="1227.8" cy="896.3" r="1.0" fill="white" opacity="0.35"/>
+  <circle cx="962.7" cy="1774.2" r="0.7" fill="white" opacity="0.31"/>
+  <circle cx="1146.2" cy="1152.4" r="1.0" fill="white" opacity="0.28"/>
+  <circle cx="348.8" cy="28.3" r="0.5" fill="white" opacity="0.14"/>
+  <circle cx="1113.6" cy="313.7" r="0.3" fill="white" opacity="0.34"/>
+  <circle cx="1665.8" cy="519.9" r="1.2" fill="white" opacity="0.12"/>
+  <circle cx="1501.4" cy="1313.8" r="1.1" fill="white" opacity="0.37"/>
+  <circle cx="453.6" cy="1509.6" r="1.1" fill="white" opacity="0.17"/>
+  <circle cx="817.4" cy="694.8" r="0.6" fill="white" opacity="0.15"/>
+  <circle cx="1781.7" cy="742.8" r="0.4" fill="white" opacity="0.13"/>
+  <circle cx="318.9" cy="1533.6" r="1.0" fill="white" opacity="0.36"/>
+  <circle cx="1083.7" cy="1695.9" r="0.8" fill="white" opacity="0.20"/>
+  <circle cx="1030.3" cy="656.1" r="0.5" fill="white" opacity="0.25"/>
+  <circle cx="1209.0" cy="45.6" r="1.0" fill="white" opacity="0.12"/>
+  <circle cx="1061.6" cy="181.4" r="0.7" fill="white" opacity="0.27"/>
+  <circle cx="1364.2" cy="1310.4" r="1.2" fill="white" opacity="0.36"/>
+  <circle cx="555.4" cy="97.4" r="0.8" fill="white" opacity="0.18"/>
+  <circle cx="249.2" cy="480.7" r="0.5" fill="white" opacity="0.34"/>
+  <circle cx="1048.6" cy="1438.7" r="0.7" fill="white" opacity="0.35"/>
+  <circle cx="750.8" cy="1477.2" r="0.5" fill="white" opacity="0.23"/>
+  <circle cx="935.0" cy="1128.7" r="0.9" fill="white" opacity="0.29"/>
+  <circle cx="517.2" cy="104.2" r="0.9" fill="white" opacity="0.37"/>
+  <circle cx="1326.6" cy="588.2" r="1.0" fill="white" opacity="0.20"/>
+  <circle cx="1481.8" cy="1614.9" r="0.5" fill="white" opacity="0.13"/>
+  <circle cx="1156.9" cy="1524.5" r="0.7" fill="white" opacity="0.30"/>
+  <circle cx="916.7" cy="1061.1" r="0.7" fill="white" opacity="0.23"/>
+  <circle cx="734.1" cy="278.8" r="0.4" fill="white" opacity="0.17"/>
+  <circle cx="826.4" cy="648.0" r="0.3" fill="white" opacity="0.26"/>
+  <circle cx="73.5" cy="1701.7" r="0.5" fill="white" opacity="0.18"/>
+  <circle cx="1636.0" cy="580.6" r="0.6" fill="white" opacity="0.24"/>
+  <circle cx="978.5" cy="1634.3" r="0.5" fill="white" opacity="0.29"/>
+  <circle cx="100.4" cy="873.0" r="1.0" fill="white" opacity="0.28"/>
+  <circle cx="49.0" cy="444.6" r="0.6" fill="white" opacity="0.40"/>
+  <circle cx="1638.6" cy="1545.2" r="0.5" fill="white" opacity="0.25"/>
+  <circle cx="594.8" cy="937.3" r="0.9" fill="white" opacity="0.12"/>
+  <circle cx="1969.6" cy="866.6" r="1.1" fill="white" opacity="0.30"/>
+  <circle cx="609.9" cy="856.8" r="0.7" fill="white" opacity="0.11"/>
+  <circle cx="322.2" cy="545.9" r="0.9" fill="white" opacity="0.25"/>
+  <circle cx="361.5" cy="957.8" r="1.1" fill="white" opacity="0.20"/>
+  <circle cx="1078.4" cy="1259.9" r="1.1" fill="white" opacity="0.16"/>
+  <circle cx="855.3" cy="1567.7" r="0.4" fill="white" opacity="0.33"/>
+  <circle cx="470.7" cy="261.0" r="0.8" fill="white" opacity="0.16"/>
+  <circle cx="1968.2" cy="1657.9" r="1.2" fill="white" opacity="0.20"/>
+  <circle cx="1069.4" cy="1346.9" r="1.1" fill="white" opacity="0.37"/>
+  <circle cx="1470.7" cy="853.1" r="1.2" fill="white" opacity="0.33"/>
+  <circle cx="184.8" cy="222.3" r="0.8" fill="white" opacity="0.29"/>
+  <circle cx="3.4" cy="1236.4" r="0.4" fill="white" opacity="0.39"/>
+  <circle cx="861.8" cy="1217.5" r="1.1" fill="white" opacity="0.36"/>
+  <circle cx="1548.7" cy="1749.4" r="0.5" fill="white" opacity="0.28"/>
+  <circle cx="427.7" cy="930.9" r="0.3" fill="white" opacity="0.36"/>
+  <circle cx="876.4" cy="1442.6" r="0.5" fill="white" opacity="0.37"/>
+  <circle cx="739.6" cy="1103.9" r="1.0" fill="white" opacity="0.18"/>
+  <circle cx="210.7" cy="1505.5" r="0.3" fill="white" opacity="0.16"/>
+  <circle cx="295.2" cy="371.4" r="0.9" fill="white" opacity="0.37"/>
+  <circle cx="137.8" cy="902.1" r="0.3" fill="white" opacity="0.20"/>
+  <circle cx="214.5" cy="1541.0" r="0.6" fill="white" opacity="0.19"/>
+  <circle cx="1771.3" cy="1344.6" r="0.8" fill="white" opacity="0.33"/>
+  <circle cx="477.7" cy="370.4" r="0.8" fill="white" opacity="0.13"/>
+  <circle cx="571.6" cy="290.6" r="1.1" fill="white" opacity="0.25"/>
+  <circle cx="101.2" cy="562.2" r="0.3" fill="white" opacity="0.19"/>
+  <circle cx="696.5" cy="100.2" r="0.6" fill="white" opacity="0.39"/>
+  <circle cx="1107.3" cy="923.2" r="1.0" fill="white" opacity="0.30"/>
+  <circle cx="1525.3" cy="1247.6" r="0.5" fill="white" opacity="0.20"/>
+  <circle cx="330.5" cy="543.2" r="0.4" fill="white" opacity="0.26"/>
+  <circle cx="170.3" cy="545.8" r="0.3" fill="white" opacity="0.40"/>
+  <circle cx="883.2" cy="1783.5" r="0.4" fill="white" opacity="0.29"/>
+  <circle cx="1076.4" cy="593.7" r="0.9" fill="white" opacity="0.32"/>
+  <circle cx="12.9" cy="1188.8" r="0.3" fill="white" opacity="0.35"/>
+  <circle cx="1002.2" cy="158.2" r="0.9" fill="white" opacity="0.18"/>
+  <circle cx="1413.6" cy="158.0" r="0.4" fill="white" opacity="0.26"/>
+  <circle cx="76.3" cy="1542.0" r="0.7" fill="white" opacity="0.35"/>
+  <circle cx="872.1" cy="611.5" r="0.6" fill="white" opacity="0.14"/>
+  <circle cx="1227.9" cy="1202.6" r="0.3" fill="white" opacity="0.38"/>
+  <circle cx="1934.0" cy="1681.1" r="0.4" fill="white" opacity="0.15"/>
+  <circle cx="366.7" cy="263.1" r="0.9" fill="white" opacity="0.11"/>
+  <circle cx="1862.0" cy="439.8" r="0.5" fill="white" opacity="0.12"/>
+  <circle cx="194.4" cy="1165.0" r="0.5" fill="white" opacity="0.22"/>
+  <circle cx="1207.3" cy="1525.2" r="0.5" fill="white" opacity="0.25"/>
+  <circle cx="1052.8" cy="809.4" r="0.4" fill="white" opacity="0.11"/>
+  <circle cx="198.1" cy="709.4" r="0.4" fill="white" opacity="0.16"/>
+  <circle cx="1009.1" cy="870.5" r="0.7" fill="white" opacity="0.29"/>
+  <circle cx="1523.1" cy="265.3" r="0.6" fill="white" opacity="0.38"/>
+  <circle cx="1619.5" cy="709.6" r="1.1" fill="white" opacity="0.32"/>
+  <circle cx="197.2" cy="537.6" r="0.5" fill="white" opacity="0.26"/>
+  <circle cx="1318.5" cy="1091.1" r="1.0" fill="white" opacity="0.33"/>
+  <circle cx="382.6" cy="647.1" r="0.6" fill="white" opacity="0.23"/>
+  <circle cx="1384.0" cy="1067.3" r="0.5" fill="white" opacity="0.34"/>
+  <circle cx="1442.2" cy="1626.2" r="0.5" fill="white" opacity="0.39"/>
+  <circle cx="235.3" cy="594.4" r="1.1" fill="white" opacity="0.15"/>
+  <circle cx="568.0" cy="203.2" r="0.3" fill="white" opacity="0.20"/>
+  <circle cx="620.0" cy="960.9" r="0.7" fill="white" opacity="0.39"/>
+  <circle cx="285.2" cy="1261.8" r="0.6" fill="white" opacity="0.24"/>
+  <circle cx="719.1" cy="445.9" r="0.9" fill="white" opacity="0.25"/>
+  <circle cx="133.5" cy="609.5" r="0.7" fill="white" opacity="0.31"/>
+  <circle cx="1574.5" cy="1581.0" r="0.6" fill="white" opacity="0.16"/>
+  <circle cx="169.2" cy="1024.7" r="0.6" fill="white" opacity="0.19"/>
+  <circle cx="917.5" cy="726.5" r="0.5" fill="white" opacity="0.16"/>
+  <circle cx="948.0" cy="172.7" r="0.8" fill="white" opacity="0.34"/>
+  <circle cx="1801.7" cy="59.0" r="0.6" fill="white" opacity="0.18"/>
+  <circle cx="88.5" cy="1150.4" r="0.6" fill="white" opacity="0.16"/>
+  <circle cx="1641.8" cy="115.9" r="0.8" fill="white" opacity="0.36"/>
+  <circle cx="649.2" cy="1586.8" r="0.3" fill="white" opacity="0.22"/>
+  <circle cx="98.9" cy="363.9" r="0.9" fill="white" opacity="0.32"/>
+  <circle cx="11.8" cy="157.0" r="1.0" fill="white" opacity="0.30"/>
+  <circle cx="474.2" cy="555.8" r="0.7" fill="white" opacity="0.35"/>
+
+  <text x="1000" y="45" text-anchor="middle" font-size="32" font-weight="bold" fill="white">
+    Qwen3.5-0.8B Transformer Architecture
+  </text>
+  <text x="1000" y="75" text-anchor="middle" font-size="16" fill="#94a3b8">
+    24 Transformer Layers · Detailed Component Structure · Gradient-based Sensitivity Analysis
+  </text>
+
+  <!-- Layer 0 -->
+  <g id="layer_0" transform="translate(0.0, 0.0) scale(1.0, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="200.0" y="100.0" width="1200.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="160.0" y="120.0" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L0</text>
+
+    <!-- attention component -->
+    <rect x="210.0" y="115.0" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="401.0" y="131.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="210.0" y="145.0" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="401.0" y="161.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="210.0" y="175.0" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="401.0" y="191.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="210.0" y="205.0" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="794.0" y="221.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="215.0" y="120.0" width="45.049844848724746" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="260.0498448487248" y="120.0" width="41.6763234194858" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="301.7261682682106" y="120.0" width="51.88347887162563" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="353.6096471398362" y="120.0" width="46.08959154912808" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="399.69923868896433" y="120.0" width="45.61186604426319" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="445.3111047332275" y="120.0" width="45.91252787190465" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="491.2236326051322" y="120.0" width="46.355945642516474" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="537.5795782476487" y="120.0" width="50.42042175235145" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="215.0" y="180.0" width="52.18402419915023" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="267.18402419915026" y="180.0" width="55.36541300607176" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="322.54943720522203" y="180.0" width="60.402391821469905" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="382.95182902669194" y="180.0" width="67.11709621212083" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="450.06892523881277" y="180.0" width="65.97309439691337" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="516.0420196357261" y="180.0" width="71.95798036427392" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 1 -->
+  <g id="layer_1" transform="translate(3.125, 0.41666666666666663) scale(0.9916666666666667, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="203.125" y="160.41666666666666" width="1190.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="163.125" y="180.41666666666666" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L1</text>
+
+    <!-- attention component -->
+    <rect x="213.125" y="175.41666666666666" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="404.125" y="191.41666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="213.125" y="205.41666666666666" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="404.125" y="221.41666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="213.125" y="235.41666666666666" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="404.125" y="251.41666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="213.125" y="265.41666666666663" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="797.125" y="281.41666666666663" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="218.125" y="180.41666666666666" width="43.24200388691168" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="261.3670038869117" y="180.41666666666666" width="43.173993720038844" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="304.5409976069505" y="180.41666666666666" width="50.26281842803637" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="354.8038160349869" y="180.41666666666666" width="46.34300238586863" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="401.14681842085554" y="180.41666666666666" width="47.306286763042266" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="448.45310518389783" y="180.41666666666666" width="47.81376188174574" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="496.26686706564357" y="180.41666666666666" width="46.00284795201257" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="542.2697150176562" y="180.41666666666666" width="48.85528498234391" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="218.125" y="240.41666666666666" width="56.44984608386755" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="274.57484608386756" y="240.41666666666666" width="56.19190594491348" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="330.766752028781" y="240.41666666666666" width="61.94284118594315" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="392.7095932147242" y="240.41666666666666" width="67.20672917010027" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="459.91632238482447" y="240.41666666666666" width="63.61121265643437" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="523.5275350412588" y="240.41666666666666" width="67.59746495874118" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 2 -->
+  <g id="layer_2" transform="translate(6.25, 0.8333333333333333) scale(0.9833333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="206.25" y="220.83333333333334" width="1180.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="166.25" y="240.83333333333334" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L2</text>
+
+    <!-- attention component -->
+    <rect x="216.25" y="235.83333333333334" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="407.25" y="251.83333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="216.25" y="265.83333333333337" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="407.25" y="281.83333333333337" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="216.25" y="295.83333333333337" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="407.25" y="311.83333333333337" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="216.25" y="325.83333333333337" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="800.25" y="341.83333333333337" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="221.25" y="240.83333333333334" width="45.30298432007673" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="266.55298432007675" y="240.83333333333334" width="47.13403627966086" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="313.6870205997376" y="240.83333333333334" width="47.882193514841816" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="361.5692141145794" y="240.83333333333334" width="46.05768283018195" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="407.6268969447613" y="240.83333333333334" width="46.26520995533629" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="453.8921069000976" y="240.83333333333334" width="47.734007821466044" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="501.6261147215636" y="240.83333333333334" width="46.32445822828918" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="547.9505729498528" y="240.83333333333334" width="46.299427050147116" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="221.25" y="300.83333333333337" width="55.91954529068536" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="277.1695452906854" y="300.83333333333337" width="57.03050718816462" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="334.20005247885" y="300.83333333333337" width="64.92211758320609" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="399.1221700620561" y="300.83333333333337" width="64.91434171475878" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="464.0365117768149" y="300.83333333333337" width="63.31872234324235" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="527.3552341200573" y="300.83333333333337" width="66.8947658799428" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 3 -->
+  <g id="layer_3" transform="translate(9.375, 1.25) scale(0.975, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="209.375" y="281.25" width="1170.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="169.375" y="301.25" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L3</text>
+
+    <!-- attention component -->
+    <rect x="219.375" y="296.25" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="410.375" y="312.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="219.375" y="326.25" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="410.375" y="342.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="219.375" y="356.25" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="410.375" y="372.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="219.375" y="386.25" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="803.375" y="402.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="224.375" y="301.25" width="46.38169060476002" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="270.75669060476" y="301.25" width="47.50933942603697" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="318.26603003079697" y="301.25" width="46.151011621992154" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="364.4170416527891" y="301.25" width="45.81854164907449" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="410.2355833018636" y="301.25" width="46.47540387694874" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="456.71098717881233" y="301.25" width="47.67132053764237" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="504.3823077164547" y="301.25" width="46.864033437069004" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="551.2463411535238" y="301.25" width="46.12865884647626" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="224.375" y="361.25" width="55.237062827543994" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="279.612062827544" y="361.25" width="58.530955692393555" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="338.1430185199375" y="361.25" width="63.93624798355037" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="402.07926650348793" y="361.25" width="64.45505843012165" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="466.5343249336096" y="361.25" width="63.89347259800141" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="530.427797531611" y="361.25" width="66.947202468389" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 4 -->
+  <g id="layer_4" transform="translate(12.5, 1.6666666666666665) scale(0.9666666666666667, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="212.5" y="341.6666666666667" width="1160.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="172.5" y="361.6666666666667" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L4</text>
+
+    <!-- attention component -->
+    <rect x="222.5" y="356.6666666666667" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="413.5" y="372.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="222.5" y="386.6666666666667" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="413.5" y="402.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="222.5" y="416.6666666666667" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="413.5" y="432.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="222.5" y="446.6666666666667" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="806.5" y="462.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="227.5" y="361.6666666666667" width="47.08243228353688" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="274.5824322835369" y="361.6666666666667" width="46.73695404363752" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="321.3193863271744" y="361.6666666666667" width="46.72045341019514" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="368.03983973736956" y="361.6666666666667" width="45.17762983105391" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="413.2174695684235" y="361.6666666666667" width="46.506430432761455" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="459.723900001185" y="361.6666666666667" width="47.98375221460918" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="507.70765221579416" y="361.6666666666667" width="46.09604777982835" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="553.8036999956225" y="361.6666666666667" width="46.696300004377576" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="227.5" y="421.6666666666667" width="55.63793686145358" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="283.13793686145357" y="421.6666666666667" width="59.121243309041226" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="342.2591801704948" y="421.6666666666667" width="63.27604847991252" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="405.5352286504073" y="421.6666666666667" width="65.41705281326924" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="470.9522814636765" y="421.6666666666667" width="63.41183792910167" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="534.3641193927782" y="421.6666666666667" width="66.1358806072218" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 5 -->
+  <g id="layer_5" transform="translate(15.625, 2.0833333333333335) scale(0.9583333333333334, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="215.625" y="402.0833333333333" width="1150.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="175.625" y="422.0833333333333" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L5</text>
+
+    <!-- attention component -->
+    <rect x="225.625" y="417.0833333333333" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="416.625" y="433.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="225.625" y="447.0833333333333" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="416.625" y="463.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="225.625" y="477.0833333333333" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="416.625" y="493.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="225.625" y="507.0833333333333" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="809.625" y="523.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="230.625" y="422.0833333333333" width="47.00918725252017" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="277.6341872525202" y="422.0833333333333" width="47.210570652402865" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="324.84475790492303" y="422.0833333333333" width="46.65223896533651" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="371.4969968702595" y="422.0833333333333" width="45.25584591008756" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="416.75284278034707" y="422.0833333333333" width="46.174673197865474" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="462.92751597821257" y="422.0833333333333" width="47.506494757166266" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="510.4340107353788" y="422.0833333333333" width="46.30094653175208" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="556.7349572671309" y="422.0833333333333" width="46.89004273286907" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="230.625" y="482.0833333333333" width="56.901299759878725" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="287.5262997598787" y="482.0833333333333" width="60.03074502448563" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="347.55704478436434" y="482.0833333333333" width="61.57433496189461" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="409.131379746259" y="482.0833333333333" width="64.37433345755909" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="473.50571320381806" y="482.0833333333333" width="64.00499445994085" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="537.5107076637589" y="482.0833333333333" width="66.11429233624109" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 6 -->
+  <g id="layer_6" transform="translate(18.75, 2.5) scale(0.95, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="218.75" y="462.5" width="1140.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="178.75" y="482.5" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L6</text>
+
+    <!-- attention component -->
+    <rect x="228.75" y="477.5" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="419.75" y="493.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="228.75" y="507.5" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="419.75" y="523.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="228.75" y="537.5" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="419.75" y="553.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="228.75" y="567.5" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="812.75" y="583.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="233.75" y="482.5" width="50.781244095748086" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="284.5312440957481" y="482.5" width="48.01463675921494" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="332.545880854963" y="482.5" width="46.748765680217694" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="379.2946465351807" y="482.5" width="44.913776776560184" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="424.20842331174083" y="482.5" width="45.01753845050609" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="469.2259617622469" y="482.5" width="45.31058228832765" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="514.5365440505745" y="482.5" width="46.687252975582396" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="561.223797026157" y="482.5" width="45.52620297384296" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="233.75" y="542.5" width="55.810227424278736" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="289.56022742427876" y="542.5" width="61.01682649965123" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="350.57705392393" y="542.5" width="62.977107290226805" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="413.5541612141568" y="542.5" width="61.85943591044091" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="475.4135971245977" y="542.5" width="65.10108678805148" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="540.5146839126492" y="542.5" width="66.23531608735087" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 7 -->
+  <g id="layer_7" transform="translate(21.875, 2.916666666666667) scale(0.9416666666666667, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="221.875" y="522.9166666666666" width="1130.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="181.875" y="542.9166666666666" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L7</text>
+
+    <!-- attention component -->
+    <rect x="231.875" y="537.9166666666666" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="422.875" y="553.9166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="231.875" y="567.9166666666666" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="422.875" y="583.9166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="231.875" y="597.9166666666666" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="422.875" y="613.9166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="231.875" y="627.9166666666666" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="815.875" y="643.9166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="236.875" y="542.9166666666666" width="48.62012578254374" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="285.4951257825437" y="542.9166666666666" width="48.0193014135281" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="333.5144271960718" y="542.9166666666666" width="46.379637833517876" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="379.8940650295897" y="542.9166666666666" width="45.30107961397752" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="425.19514464356723" y="542.9166666666666" width="46.08488167573162" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="471.2800263192988" y="542.9166666666666" width="46.394047659142934" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="517.6740739784418" y="542.9166666666666" width="46.45783374585128" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="564.1319077242931" y="542.9166666666666" width="45.74309227570692" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="236.875" y="602.9166666666666" width="58.076077038457676" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="294.9510770384577" y="602.9166666666666" width="62.39571744408163" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="357.34679448253934" y="602.9166666666666" width="61.67537702545386" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="419.0221715079932" y="602.9166666666666" width="62.11723545126067" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="481.1394069592539" y="602.9166666666666" width="63.396619155897824" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="544.5360261151517" y="602.9166666666666" width="65.33897388484836" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 8 -->
+  <g id="layer_8" transform="translate(25.0, 3.333333333333333) scale(0.9333333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="225.0" y="583.3333333333334" width="1120.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="185.0" y="603.3333333333334" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L8</text>
+
+    <!-- attention component -->
+    <rect x="235.0" y="598.3333333333334" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="426.0" y="614.3333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="235.0" y="628.3333333333334" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="426.0" y="644.3333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="235.0" y="658.3333333333334" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="426.0" y="674.3333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="235.0" y="688.3333333333334" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="819.0" y="704.3333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="240.0" y="603.3333333333334" width="48.41218904943549" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="288.4121890494355" y="603.3333333333334" width="47.65872413513189" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="336.07091318456736" y="603.3333333333334" width="47.199078255706084" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="383.26999144027343" y="603.3333333333334" width="45.985339359369185" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="429.2553307996426" y="603.3333333333334" width="46.29367864479198" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="475.54900944443455" y="603.3333333333334" width="45.64201997977955" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="521.1910294242141" y="603.3333333333334" width="46.202011290715234" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="567.3930407149294" y="603.3333333333334" width="45.60695928507056" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="240.0" y="663.3333333333334" width="57.749100047845616" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="297.7491000478456" y="663.3333333333334" width="62.90905953483593" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="360.65815958268155" y="663.3333333333334" width="61.87069890043027" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="422.52885848311183" y="663.3333333333334" width="62.00349596505324" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="484.53235444816505" y="663.3333333333334" width="63.14264390112738" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="547.6749983492924" y="663.3333333333334" width="65.32500165070756" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 9 -->
+  <g id="layer_9" transform="translate(28.125, 3.75) scale(0.925, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="228.125" y="643.75" width="1110.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="188.125" y="663.75" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L9</text>
+
+    <!-- attention component -->
+    <rect x="238.125" y="658.75" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="429.125" y="674.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="238.125" y="688.75" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="429.125" y="704.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="238.125" y="718.75" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="429.125" y="734.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="238.125" y="748.75" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="822.125" y="764.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="243.125" y="663.75" width="48.70123298842496" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="291.826232988425" y="663.75" width="47.40870142711962" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="339.2349344155446" y="663.75" width="47.412173423674666" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="386.6471078392193" y="663.75" width="45.883963855812986" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="432.53107169503227" y="663.75" width="46.20154641430916" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="478.73261810934144" y="663.75" width="45.67699257517028" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="524.4096106845117" y="663.75" width="46.329269627535645" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="570.7388803120473" y="663.75" width="45.3861196879527" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="243.125" y="723.75" width="59.16436071997414" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="302.2893607199741" y="723.75" width="64.01606111867436" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="366.3054218386485" y="723.75" width="61.522021476657144" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="427.82744331530563" y="723.75" width="61.019197820352" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="488.84664113565765" y="723.75" width="62.75501193186677" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="551.6016530675245" y="723.75" width="64.5233469324756" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 10 -->
+  <g id="layer_10" transform="translate(31.25, 4.166666666666667) scale(0.9166666666666666, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="231.25" y="704.1666666666666" width="1100.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="191.25" y="724.1666666666666" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L10</text>
+
+    <!-- attention component -->
+    <rect x="241.25" y="719.1666666666666" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="432.25" y="735.1666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="241.25" y="749.1666666666666" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="432.25" y="765.1666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="241.25" y="779.1666666666666" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="432.25" y="795.1666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="241.25" y="809.1666666666666" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="825.25" y="825.1666666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="246.25" y="724.1666666666666" width="49.110862958475735" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="295.36086295847576" y="724.1666666666666" width="47.78962120631153" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="343.1504841647873" y="724.1666666666666" width="47.305797244083145" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="390.45628140887044" y="724.1666666666666" width="45.80442730696573" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="436.2607087158362" y="724.1666666666666" width="45.93442261068713" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="482.1951313265233" y="724.1666666666666" width="45.538470342535305" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="527.7336016690587" y="724.1666666666666" width="46.32423833723625" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="574.0578400062949" y="724.1666666666666" width="45.19215999370518" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="246.25" y="784.1666666666666" width="58.2572186333199" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="304.5072186333199" y="784.1666666666666" width="63.462579196923734" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="367.96979783024364" y="784.1666666666666" width="61.923624969388044" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="429.8934227996317" y="784.1666666666666" width="61.14455222946032" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="491.037975029092" y="784.1666666666666" width="63.68180174166198" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="554.719776770754" y="784.1666666666666" width="64.530223229246" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 11 -->
+  <g id="layer_11" transform="translate(34.375, 4.583333333333333) scale(0.9083333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="234.375" y="764.5833333333334" width="1090.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="194.375" y="784.5833333333334" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L11</text>
+
+    <!-- attention component -->
+    <rect x="244.375" y="779.5833333333334" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="435.375" y="795.5833333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="244.375" y="809.5833333333334" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="435.375" y="825.5833333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="244.375" y="839.5833333333334" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="435.375" y="855.5833333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="244.375" y="869.5833333333334" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="828.375" y="885.5833333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="249.375" y="784.5833333333334" width="48.20917826937738" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="297.5841782693774" y="784.5833333333334" width="48.05961814778671" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="345.6437964171641" y="784.5833333333334" width="47.35632696429325" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="393.00012338145734" y="784.5833333333334" width="45.91175660186012" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="438.9118799833175" y="784.5833333333334" width="46.2208661966051" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="485.1327461799226" y="784.5833333333334" width="45.93286032968899" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="531.0656065096116" y="784.5833333333334" width="46.24665344082988" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="577.3122599504414" y="784.5833333333334" width="45.06274004955856" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="249.375" y="844.5833333333334" width="61.51397232182944" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="310.88897232182944" y="844.5833333333334" width="63.88492801898238" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="374.7739003408118" y="844.5833333333334" width="60.91542410521931" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="435.6893244460311" y="844.5833333333334" width="61.35669123957065" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="497.04601568560173" y="844.5833333333334" width="62.31135282344441" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="559.3573685090462" y="844.5833333333334" width="63.017631490953804" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 12 -->
+  <g id="layer_12" transform="translate(37.5, 5.0) scale(0.9, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="237.5" y="825.0" width="1080.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="197.5" y="845.0" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L12</text>
+
+    <!-- attention component -->
+    <rect x="247.5" y="840.0" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="438.5" y="856.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="247.5" y="870.0" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="438.5" y="886.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="247.5" y="900.0" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="438.5" y="916.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="247.5" y="930.0" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="831.5" y="946.0" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="252.5" y="845.0" width="47.473371658325426" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="299.97337165832545" y="845.0" width="47.605019645170756" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="347.57839130349623" y="845.0" width="47.6920531657757" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="395.2704444692719" y="845.0" width="45.783355010227844" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="441.0537994794998" y="845.0" width="46.231347479051" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="487.2851469585508" y="845.0" width="45.94327630243636" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="533.2284232609871" y="845.0" width="46.09887159465476" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="579.3272948556419" y="845.0" width="46.17270514435816" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="252.5" y="905.0" width="62.74141696910567" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="315.24141696910567" y="905.0" width="63.7167938579968" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="378.95821082710245" y="905.0" width="60.5355782683238" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="439.4937890954262" y="905.0" width="61.238380202173104" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="500.73216929759934" y="905.0" width="62.15603920862778" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="562.8882085062271" y="905.0" width="62.61179149377287" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 13 -->
+  <g id="layer_13" transform="translate(40.625, 5.416666666666666) scale(0.8916666666666666, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="240.625" y="885.4166666666666" width="1070.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="200.625" y="905.4166666666666" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L13</text>
+
+    <!-- attention component -->
+    <rect x="250.625" y="900.4166666666666" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="441.625" y="916.4166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="250.625" y="930.4166666666666" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="441.625" y="946.4166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="250.625" y="960.4166666666666" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="441.625" y="976.4166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="250.625" y="990.4166666666666" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="834.625" y="1006.4166666666666" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="255.625" y="905.4166666666666" width="47.55708477684493" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="303.18208477684493" y="905.4166666666666" width="47.585212505813374" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="350.7672972826583" y="905.4166666666666" width="47.89939949789482" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="398.66669678055314" y="905.4166666666666" width="45.70284428274822" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="444.36954106330137" y="905.4166666666666" width="45.97585162462285" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="490.34539268792423" y="905.4166666666666" width="45.7922764548848" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="536.137669142809" y="905.4166666666666" width="46.29069383888515" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="582.4283629816941" y="905.4166666666666" width="46.19663701830587" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="255.625" y="965.4166666666666" width="64.20940589992195" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="319.83440589992193" y="965.4166666666666" width="64.46987291317026" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="384.3042788130922" y="965.4166666666666" width="60.919971223631414" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="445.2242500367236" y="965.4166666666666" width="60.33584715347015" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="505.56009719019374" y="965.4166666666666" width="61.71429918128589" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="567.2743963714796" y="965.4166666666666" width="61.35060362852031" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 14 -->
+  <g id="layer_14" transform="translate(43.75, 5.833333333333334) scale(0.8833333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="243.75" y="945.8333333333334" width="1060.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="203.75" y="965.8333333333334" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L14</text>
+
+    <!-- attention component -->
+    <rect x="253.75" y="960.8333333333334" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="444.75" y="976.8333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="253.75" y="990.8333333333334" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="444.75" y="1006.8333333333334" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="253.75" y="1020.8333333333334" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="444.75" y="1036.8333333333335" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="253.75" y="1050.8333333333335" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="837.75" y="1066.8333333333335" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="258.75" y="965.8333333333334" width="50.827425601731946" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="309.57742560173193" y="965.8333333333334" width="48.793493675055394" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="358.37091927678733" y="965.8333333333334" width="46.22072102724412" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="404.59164030403144" y="965.8333333333334" width="45.558132090696716" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="450.1497723947282" y="965.8333333333334" width="45.076617808267464" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="495.2263902029957" y="965.8333333333334" width="44.54337146682747" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="539.7697616698232" y="965.8333333333334" width="46.90793295174262" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="586.6776946215658" y="965.8333333333334" width="45.07230537843426" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="258.75" y="1025.8333333333335" width="58.45377286100812" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="317.20377286100813" y="1025.8333333333335" width="64.05816910114663" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="381.26194196215476" y="1025.8333333333335" width="62.15163763865644" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="443.4135796008112" y="1025.8333333333335" width="60.02354604086532" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="503.4371256416765" y="1025.8333333333335" width="64.23142081029792" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="567.6685464519744" y="1025.8333333333335" width="64.08145354802554" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 15 -->
+  <g id="layer_15" transform="translate(46.875, 6.25) scale(0.875, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="246.875" y="1006.25" width="1050.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="206.875" y="1026.25" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L15</text>
+
+    <!-- attention component -->
+    <rect x="256.875" y="1021.25" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="447.875" y="1037.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="256.875" y="1051.25" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="447.875" y="1067.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="256.875" y="1081.25" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="447.875" y="1097.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="256.875" y="1111.25" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="840.875" y="1127.25" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="261.875" y="1026.25" width="47.154488673734974" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="309.029488673735" y="1026.25" width="47.34311731574649" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="356.3726059894815" y="1026.25" width="49.61651596648055" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="405.98912195596205" y="1026.25" width="44.54484488713983" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="450.5339668431019" y="1026.25" width="45.17740532637129" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="495.7113721694732" y="1026.25" width="45.71967935288866" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="541.4310515223618" y="1026.25" width="45.60876268332677" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="587.0398142056886" y="1026.25" width="47.835185794311435" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="261.875" y="1086.25" width="64.35569849826855" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="326.23069849826857" y="1086.25" width="64.53367153324247" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="390.764370031511" y="1086.25" width="60.081924353184945" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="450.84629438469597" y="1086.25" width="60.61594197321529" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="511.46223635791125" y="1086.25" width="61.657366389365514" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="573.1196027472768" y="1086.25" width="61.755397252723256" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 16 -->
+  <g id="layer_16" transform="translate(50.0, 6.666666666666666) scale(0.8666666666666667, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="250.0" y="1066.6666666666667" width="1040.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="210.0" y="1086.6666666666667" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L16</text>
+
+    <!-- attention component -->
+    <rect x="260.0" y="1081.6666666666667" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="451.0" y="1097.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="260.0" y="1111.6666666666667" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="451.0" y="1127.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="260.0" y="1141.6666666666667" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="451.0" y="1157.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="260.0" y="1171.6666666666667" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="844.0" y="1187.6666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="265.0" y="1086.6666666666667" width="46.65407516518459" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="311.65407516518457" y="1086.6666666666667" width="46.7569431430972" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="358.41101830828177" y="1086.6666666666667" width="48.5570280067873" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="406.96804631506905" y="1086.6666666666667" width="45.04265570013004" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="452.01070201519906" y="1086.6666666666667" width="45.7062744083453" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="497.71697642354434" y="1086.6666666666667" width="45.99643038328558" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="543.7134068068299" y="1086.6666666666667" width="45.02040465706262" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="588.7338114638925" y="1086.6666666666667" width="49.26618853610738" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="265.0" y="1146.6666666666667" width="62.67352327063451" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="327.6735232706345" y="1146.6666666666667" width="64.12479476150452" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="391.79831803213904" y="1146.6666666666667" width="61.37513217088181" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="453.1734502030208" y="1146.6666666666667" width="62.674383590232054" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="515.8478337932529" y="1146.6666666666667" width="60.758583860311816" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="576.6064176535647" y="1146.6666666666667" width="61.3935823464353" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 17 -->
+  <g id="layer_17" transform="translate(53.125, 7.083333333333334) scale(0.8583333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="253.125" y="1127.0833333333333" width="1030.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="213.125" y="1147.0833333333333" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L17</text>
+
+    <!-- attention component -->
+    <rect x="263.125" y="1142.0833333333333" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="454.125" y="1158.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="263.125" y="1172.0833333333333" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="454.125" y="1188.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="263.125" y="1202.0833333333333" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="454.125" y="1218.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="263.125" y="1232.0833333333333" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="847.125" y="1248.0833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="268.125" y="1147.0833333333333" width="47.19906226790595" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="315.32406226790596" y="1147.0833333333333" width="47.02619345054981" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="362.35025571845574" y="1147.0833333333333" width="47.93933916174497" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="410.2895948802007" y="1147.0833333333333" width="45.5659180975619" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="455.8555129777626" y="1147.0833333333333" width="45.22621098066786" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="501.0817239584305" y="1147.0833333333333" width="45.86163560096041" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="546.9433595593908" y="1147.0833333333333" width="45.64416831666369" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="592.5875278760545" y="1147.0833333333333" width="48.53747212394545" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="268.125" y="1207.0833333333333" width="62.250539163901344" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="330.37553916390135" y="1207.0833333333333" width="63.389028581698554" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="393.7645677455999" y="1207.0833333333333" width="62.643139705852555" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="456.40770745145244" y="1207.0833333333333" width="62.581247581203606" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="518.988955032656" y="1207.0833333333333" width="60.134304797383365" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="579.1232598300394" y="1207.0833333333333" width="62.001740169960584" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 18 -->
+  <g id="layer_18" transform="translate(56.25, 7.5) scale(0.85, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="256.25" y="1187.5" width="1020.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="216.25" y="1207.5" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L18</text>
+
+    <!-- attention component -->
+    <rect x="266.25" y="1202.5" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="457.25" y="1218.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="266.25" y="1232.5" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="457.25" y="1248.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="266.25" y="1262.5" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="457.25" y="1278.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="266.25" y="1292.5" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="850.25" y="1308.5" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="271.25" y="1207.5" width="46.753747358546846" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="318.00374735854683" y="1207.5" width="46.59376915040273" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="364.5975165089496" y="1207.5" width="47.01926659672504" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="411.61678310567464" y="1207.5" width="46.159830929078325" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="457.776614034753" y="1207.5" width="45.73652298740921" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="503.5131370221622" y="1207.5" width="47.53328480056881" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="551.046421822731" y="1207.5" width="46.13702800216331" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="597.1834498248943" y="1207.5" width="47.06655017510576" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="271.25" y="1267.5" width="61.75908935655628" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="333.0090893565563" y="1267.5" width="62.237484446698815" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="395.2465738032551" y="1267.5" width="62.81432303872416" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="458.0608968419793" y="1267.5" width="62.62042930028488" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="520.6813261422642" y="1267.5" width="61.78769872371439" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="582.4690248659786" y="1267.5" width="61.78097513402144" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 19 -->
+  <g id="layer_19" transform="translate(59.375, 7.916666666666666) scale(0.8416666666666667, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="259.375" y="1247.9166666666667" width="1010.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="219.375" y="1267.9166666666667" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L19</text>
+
+    <!-- attention component -->
+    <rect x="269.375" y="1262.9166666666667" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="460.375" y="1278.9166666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="269.375" y="1292.9166666666667" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="460.375" y="1308.9166666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="269.375" y="1322.9166666666667" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="460.375" y="1338.9166666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="269.375" y="1352.9166666666667" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="853.375" y="1368.9166666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="274.375" y="1267.9166666666667" width="46.90387372011343" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="321.27887372011344" y="1267.9166666666667" width="46.42656761106686" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="367.7054413311803" y="1267.9166666666667" width="46.54416313301236" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="414.24960446419266" y="1267.9166666666667" width="46.40079036437465" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="460.6503948285673" y="1267.9166666666667" width="45.896945095604295" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="506.5473399241716" y="1267.9166666666667" width="47.88338965822229" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="554.4307295823938" y="1267.9166666666667" width="45.89643724375341" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="600.3271668261473" y="1267.9166666666667" width="47.047833173852716" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="274.375" y="1327.9166666666667" width="63.86200510621794" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="338.23700510621796" y="1327.9166666666667" width="63.444203031378564" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="401.6812081375965" y="1327.9166666666667" width="62.11625800847039" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="463.7974661460669" y="1327.9166666666667" width="61.714605416476545" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="525.5120715625434" y="1327.9166666666667" width="60.56143494264146" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="586.0735065051848" y="1327.9166666666667" width="61.301493494815105" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 20 -->
+  <g id="layer_20" transform="translate(62.5, 8.333333333333334) scale(0.8333333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="262.5" y="1308.3333333333333" width="999.9999999999999" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="222.5" y="1328.3333333333333" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L20</text>
+
+    <!-- attention component -->
+    <rect x="272.5" y="1323.3333333333333" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="463.5" y="1339.3333333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="272.5" y="1353.3333333333333" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="463.5" y="1369.3333333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="272.5" y="1383.3333333333333" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="463.5" y="1399.3333333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="272.5" y="1413.3333333333333" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="856.5" y="1429.3333333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="277.5" y="1328.3333333333333" width="44.29019372838926" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="321.7901937283893" y="1328.3333333333333" width="44.547107882687385" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="366.33730161107667" y="1328.3333333333333" width="46.72282385956808" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="413.0601254706447" y="1328.3333333333333" width="47.06241875249378" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="460.1225442231385" y="1328.3333333333333" width="47.32480286739009" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="507.4473470905286" y="1328.3333333333333" width="47.71548560583329" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="555.1628326963619" y="1328.3333333333333" width="46.36137210990793" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="601.5242048062698" y="1328.3333333333333" width="48.97579519373016" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="277.5" y="1388.3333333333333" width="63.656112580008795" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="341.15611258000877" y="1388.3333333333333" width="62.03429346705802" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="403.1904060470668" y="1388.3333333333333" width="62.19085832550168" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="465.38126437256847" y="1388.3333333333333" width="63.102726870739104" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="528.4839912433076" y="1388.3333333333333" width="61.02974854915663" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="589.5137397924642" y="1388.3333333333333" width="60.986260207535764" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 21 -->
+  <g id="layer_21" transform="translate(65.625, 8.75) scale(0.825, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="265.625" y="1368.75" width="990.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="225.625" y="1388.75" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L21</text>
+
+    <!-- attention component -->
+    <rect x="275.625" y="1383.75" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="466.625" y="1399.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="275.625" y="1413.75" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="466.625" y="1429.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="275.625" y="1443.75" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="466.625" y="1459.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="275.625" y="1473.75" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="859.625" y="1489.75" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="280.625" y="1388.75" width="43.75122341838355" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="324.3762234183836" y="1388.75" width="44.19932979677489" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="368.5755532151585" y="1388.75" width="45.9788537430269" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="414.5544069581854" y="1388.75" width="47.65721922579496" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="462.21162618398034" y="1388.75" width="48.23316280925743" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="510.44478899323775" y="1388.75" width="47.68554281189798" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="558.1303318051357" y="1388.75" width="47.3894013254562" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="605.5197331305919" y="1388.75" width="48.105266869408105" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="280.625" y="1448.75" width="65.3431525245523" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="345.9681525245523" y="1448.75" width="61.02647463308875" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="406.99462715764105" y="1448.75" width="62.00719854693737" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="469.00182570457844" y="1448.75" width="62.4699316306717" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="531.4717573352501" y="1448.75" width="61.8114805920033" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="593.2832379272534" y="1448.75" width="60.341762072746576" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 22 -->
+  <g id="layer_22" transform="translate(68.75, 9.166666666666666) scale(0.8166666666666667, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="268.75" y="1429.1666666666667" width="980.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="228.75" y="1449.1666666666667" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L22</text>
+
+    <!-- attention component -->
+    <rect x="278.75" y="1444.1666666666667" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="469.75" y="1460.1666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="278.75" y="1474.1666666666667" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="469.75" y="1490.1666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="278.75" y="1504.1666666666667" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="469.75" y="1520.1666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="278.75" y="1534.1666666666667" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="862.75" y="1550.1666666666667" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="283.75" y="1449.1666666666667" width="43.03933157535007" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="326.78933157535005" y="1449.1666666666667" width="43.5493971029498" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="370.33872867829984" y="1449.1666666666667" width="45.55447838505145" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="415.89320706335127" y="1449.1666666666667" width="48.6536211214549" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="464.54682818480615" y="1449.1666666666667" width="48.73729338736114" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="513.2841215721672" y="1449.1666666666667" width="47.68019579225888" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="560.9643173644262" y="1449.1666666666667" width="48.09753389765752" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="609.0618512620837" y="1449.1666666666667" width="47.68814873791626" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="283.75" y="1509.1666666666667" width="64.57748586337337" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="348.32748586337334" y="1509.1666666666667" width="59.34193666762158" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="407.6694225309949" y="1509.1666666666667" width="62.3240650922894" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="469.9934876232843" y="1509.1666666666667" width="63.126929047132435" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="533.1204166704167" y="1509.1666666666667" width="63.17243186945058" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="596.2928485398672" y="1509.1666666666667" width="60.45715146013267" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <!-- Layer 23 -->
+  <g id="layer_23" transform="translate(71.875, 9.583333333333334) scale(0.8083333333333333, 1)">
+    <!-- Layer background with gradient -->
+    <rect x="271.875" y="1489.5833333333333" width="970.0" height="115" 
+          fill="url(#comp_grad)" stroke="#374151" stroke-width="1" rx="5" opacity="0.6" filter="url(#shadow)"/>
+    
+    <!-- Layer label -->
+    <text x="231.875" y="1509.5833333333333" text-anchor="end" font-size="12" font-weight="bold" fill="#fbbf24">L23</text>
+
+    <!-- attention component -->
+    <rect x="281.875" y="1504.5833333333333" width="383" height="25" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="472.875" y="1520.5833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">ATTENTION</text>
+
+    <!-- ffn component -->
+    <rect x="281.875" y="1534.5833333333333" width="383" height="25" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="472.875" y="1550.5833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">FFN</text>
+
+    <!-- norm component -->
+    <rect x="281.875" y="1564.5833333333333" width="383" height="25" 
+          fill="url(#grad_norm)" stroke="#f59e0b" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="472.875" y="1580.5833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">NORM</text>
+
+    <!-- Residual connection -->
+    <rect x="281.875" y="1594.5833333333333" width="1169" height="25" 
+          fill="url(#grad_residual)" stroke="#6366f1" stroke-width="1" rx="3" filter="url(#glow)"/>
+    <text x="865.875" y="1610.5833333333333" 
+          text-anchor="middle" font-size="10" fill="white" font-weight="bold">RESIDUAL CONNECTION</text>
+
+    <!-- 中文 in attention -->
+    <rect x="286.875" y="1509.5833333333333" width="48.85667480600086" height="10.0" 
+          fill="#ef4444" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 英文 in attention -->
+    <rect x="335.73167480600085" y="1509.5833333333333" width="50.55307863888877" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 日文 in attention -->
+    <rect x="386.28475344488965" y="1509.5833333333333" width="42.897569224934095" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 法文 in attention -->
+    <rect x="429.18232266982375" y="1509.5833333333333" width="49.064835232958856" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 德文 in attention -->
+    <rect x="478.2471579027826" y="1509.5833333333333" width="47.4488810860571" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 俄文 in attention -->
+    <rect x="525.6960389888397" y="1509.5833333333333" width="45.11195828081948" height="10.0" 
+          fill="#a855f7" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 西班牙文 in attention -->
+    <rect x="570.8079972696593" y="1509.5833333333333" width="47.829718291685" height="10.0" 
+          fill="#f97316" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 韩文 in attention -->
+    <rect x="618.6377155613443" y="1509.5833333333333" width="41.23728443865584" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 数学推理 in ffn -->
+    <rect x="286.875" y="1569.5833333333333" width="66.4174165216995" height="10.0" 
+          fill="#3b82f6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 逻辑推理 in ffn -->
+    <rect x="353.29241652169947" y="1569.5833333333333" width="64.1157314332939" height="10.0" 
+          fill="#10b981" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 物理 in ffn -->
+    <rect x="417.40814795499335" y="1569.5833333333333" width="63.05161242776926" height="10.0" 
+          fill="#8b5cf6" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 历史 in ffn -->
+    <rect x="480.4597603827626" y="1569.5833333333333" width="59.67744996171106" height="10.0" 
+          fill="#f59e0b" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 地理 in ffn -->
+    <rect x="540.1372103444737" y="1569.5833333333333" width="61.34294396895135" height="10.0" 
+          fill="#22c55e" opacity="0.7" rx="1" filter="url(#glow)"/>
+
+    <!-- 文学 in ffn -->
+    <rect x="601.480154313425" y="1569.5833333333333" width="58.394845686574946" height="10.0" 
+          fill="#ec4899" opacity="0.7" rx="1" filter="url(#glow)"/>
+  </g>
+  <!-- Connection from layer 0 to 1 -->
+  <line x1="800.0" y1="215.0" x2="798.125" y2="160.41666666666666" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 1 to 2 -->
+  <line x1="798.125" y1="275.41666666666663" x2="796.25" y2="220.83333333333334" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 2 to 3 -->
+  <line x1="796.25" y1="335.83333333333337" x2="794.375" y2="281.25" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 3 to 4 -->
+  <line x1="794.375" y1="396.25" x2="792.5" y2="341.6666666666667" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 4 to 5 -->
+  <line x1="792.5" y1="456.6666666666667" x2="790.625" y2="402.0833333333333" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 5 to 6 -->
+  <line x1="790.625" y1="517.0833333333333" x2="788.75" y2="462.5" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 6 to 7 -->
+  <line x1="788.75" y1="577.5" x2="786.875" y2="522.9166666666666" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 7 to 8 -->
+  <line x1="786.875" y1="637.9166666666666" x2="785.0" y2="583.3333333333334" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 8 to 9 -->
+  <line x1="785.0" y1="698.3333333333334" x2="783.125" y2="643.75" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 9 to 10 -->
+  <line x1="783.125" y1="758.75" x2="781.25" y2="704.1666666666666" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 10 to 11 -->
+  <line x1="781.25" y1="819.1666666666666" x2="779.375" y2="764.5833333333334" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 11 to 12 -->
+  <line x1="779.375" y1="879.5833333333334" x2="777.5" y2="825.0" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 12 to 13 -->
+  <line x1="777.5" y1="940.0" x2="775.625" y2="885.4166666666666" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 13 to 14 -->
+  <line x1="775.625" y1="1000.4166666666666" x2="773.75" y2="945.8333333333334" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 14 to 15 -->
+  <line x1="773.75" y1="1060.8333333333335" x2="771.875" y2="1006.25" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 15 to 16 -->
+  <line x1="771.875" y1="1121.25" x2="770.0" y2="1066.6666666666667" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 16 to 17 -->
+  <line x1="770.0" y1="1181.6666666666667" x2="768.125" y2="1127.0833333333333" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 17 to 18 -->
+  <line x1="768.125" y1="1242.0833333333333" x2="766.25" y2="1187.5" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 18 to 19 -->
+  <line x1="766.25" y1="1302.5" x2="764.375" y2="1247.9166666666667" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 19 to 20 -->
+  <line x1="764.375" y1="1362.9166666666667" x2="762.5" y2="1308.3333333333333" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 20 to 21 -->
+  <line x1="762.5" y1="1423.3333333333333" x2="760.625" y2="1368.75" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 21 to 22 -->
+  <line x1="760.625" y1="1483.75" x2="758.75" y2="1429.1666666666667" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+  <!-- Connection from layer 22 to 23 -->
+  <line x1="758.75" y1="1544.1666666666667" x2="756.875" y2="1489.5833333333333" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+
+  <text x="120" y="280" font-size="12" font-weight="bold" fill="#60a5fa" 
+        transform="rotate(-90, 120, 280)">SHALLOW LAYERS</text>
+
+  <text x="120" y="760" font-size="12" font-weight="bold" fill="#34d399" 
+        transform="rotate(-90, 120, 760)">MIDDLE LAYERS</text>
+
+  <text x="120" y="1240" font-size="12" font-weight="bold" fill="#f472b6" 
+        transform="rotate(-90, 120, 1240)">DEEP LAYERS</text>
+
+  <!-- Components Legend -->
+  <rect x="1685" y="105" width="280" height="180" 
+        fill="#0a0a1a" fill-opacity="0.85" rx="8" stroke="#334155" stroke-width="1"/>
+  <text x="1700" y="125" font-size="14" font-weight="bold" fill="white">Transformer Components</text>
+  <rect x="1700" y="145" width="16" height="16" fill="#8b5cf6" rx="3" filter="url(#glow)"/>
+  <text x="1724" y="157" font-size="11" fill="#cbd5e1">Multi-Head Attention</text>
+  <rect x="1700" y="167" width="16" height="16" fill="#10b981" rx="3" filter="url(#glow)"/>
+  <text x="1724" y="179" font-size="11" fill="#cbd5e1">Feed Forward Network</text>
+  <rect x="1700" y="189" width="16" height="16" fill="#f59e0b" rx="3" filter="url(#glow)"/>
+  <text x="1724" y="201" font-size="11" fill="#cbd5e1">Layer Normalization</text>
+  <rect x="1700" y="211" width="16" height="16" fill="#6366f1" rx="3" filter="url(#glow)"/>
+  <text x="1724" y="223" font-size="11" fill="#cbd5e1">Residual Connection</text>
+
+  <text x="1700" y="245" font-size="12" font-weight="bold" fill="#60a5fa">Languages</text>
+  <rect x="1700" y="260" width="12" height="12" fill="#ef4444" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="268" font-size="9" fill="#cbd5e1">中文</text>
+  <rect x="1700" y="278" width="12" height="12" fill="#3b82f6" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="286" font-size="9" fill="#cbd5e1">英文</text>
+  <rect x="1700" y="296" width="12" height="12" fill="#ec4899" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="304" font-size="9" fill="#cbd5e1">日文</text>
+  <rect x="1700" y="314" width="12" height="12" fill="#8b5cf6" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="322" font-size="9" fill="#cbd5e1">法文</text>
+
+  <text x="1700" y="325" font-size="12" font-weight="bold" fill="#34d399">Capabilities</text>
+  <rect x="1700" y="340" width="12" height="12" fill="#3b82f6" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="348" font-size="9" fill="#cbd5e1">数学推理</text>
+  <rect x="1700" y="358" width="12" height="12" fill="#10b981" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="366" font-size="9" fill="#cbd5e1">逻辑推理</text>
+  <rect x="1700" y="376" width="12" height="12" fill="#8b5cf6" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="384" font-size="9" fill="#cbd5e1">物理</text>
+  <rect x="1700" y="394" width="12" height="12" fill="#f59e0b" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="402" font-size="9" fill="#cbd5e1">历史</text>
+  <rect x="1700" y="412" width="12" height="12" fill="#22c55e" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="420" font-size="9" fill="#cbd5e1">地理</text>
+  <rect x="1700" y="430" width="12" height="12" fill="#ec4899" rx="2" filter="url(#glow)"/>
+  <text x="1718" y="438" font-size="9" fill="#cbd5e1">文学</text>
+
+  <text x="1000" y="1770" text-anchor="middle" font-size="11" fill="#475569">
+    Each layer contains complete transformer components · Colors show gradient sensitivity distribution
+  </text>
+  <text x="1000" y="1788" text-anchor="middle" font-size="10" fill="#475569">
+    Generated: 2026-05-17 11:35:05
+  </text>
+</svg>

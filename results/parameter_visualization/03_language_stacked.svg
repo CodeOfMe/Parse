@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 890 480" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa"/>
+      <stop offset="100%" style="stop-color:#f0f0f0"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="890" height="480" fill="url(#bg)"/>
+  <text x="445" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">Language Dimension: Gradient Distribution by Layer Depth</text>
+  <rect x="120" y="330.8507540160428" width="60" height="49.14924598395722" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="360.0" text-anchor="middle" font-size="9" fill="white">16.4%</text>
+  <rect x="120" y="259.78209391286566" width="60" height="71.06866010317711" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="299.8507540160428" text-anchor="middle" font-size="9" fill="white">23.7%</text>
+  <rect x="120" y="80.00000299999996" width="60" height="179.7820909128657" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="174.78209391286566" text-anchor="middle" font-size="9" fill="white">59.9%</text>
+  <text x="150" y="395" text-anchor="middle" font-size="11" fill="#333">中文</text>
+  <rect x="210" y="331.4133400681625" width="60" height="48.586659931837495" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="360.0" text-anchor="middle" font-size="9" fill="white">16.2%</text>
+  <rect x="210" y="261.37613991320774" width="60" height="70.03720015495475" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="300.4133400681625" text-anchor="middle" font-size="9" fill="white">23.3%</text>
+  <rect x="210" y="80.00000299999996" width="60" height="181.37613691320777" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="175.37613991320774" text-anchor="middle" font-size="9" fill="white">60.5%</text>
+  <text x="240" y="395" text-anchor="middle" font-size="11" fill="#333">英文</text>
+  <rect x="300" y="330.34924716278937" width="60" height="49.650752837210646" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="360.0" text-anchor="middle" font-size="9" fill="white">16.6%</text>
+  <rect x="300" y="260.6269133913872" width="60" height="69.72233377140219" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="300.34924716278937" text-anchor="middle" font-size="9" fill="white">23.2%</text>
+  <rect x="300" y="80.00000299999999" width="60" height="180.62691039138718" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="174.62691339138718" text-anchor="middle" font-size="9" fill="white">60.2%</text>
+  <text x="330" y="395" text-anchor="middle" font-size="11" fill="#333">日文</text>
+  <rect x="390" y="332.44795954052796" width="60" height="47.552040459472025" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="361.0" text-anchor="middle" font-size="9" fill="white">15.9%</text>
+  <rect x="390" y="265.7425293435283" width="60" height="66.70543019699966" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="303.44795954052796" text-anchor="middle" font-size="9" fill="white">22.2%</text>
+  <rect x="390" y="80.00000299999996" width="60" height="185.74252634352834" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="177.7425293435283" text-anchor="middle" font-size="9" fill="white">61.9%</text>
+  <text x="420" y="395" text-anchor="middle" font-size="11" fill="#333">法文</text>
+  <rect x="480" y="331.8470325125255" width="60" height="48.15296748747449" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="360.0" text-anchor="middle" font-size="9" fill="white">16.1%</text>
+  <rect x="480" y="264.83925464898994" width="60" height="67.00777786353555" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="302.8470325125255" text-anchor="middle" font-size="9" fill="white">22.3%</text>
+  <rect x="480" y="80.00000299999991" width="60" height="184.83925164899003" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="176.83925464898994" text-anchor="middle" font-size="9" fill="white">61.6%</text>
+  <text x="510" y="395" text-anchor="middle" font-size="11" fill="#333">德文</text>
+  <rect x="570" y="330.9655238128031" width="60" height="49.034476187196894" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="600" y="360.0" text-anchor="middle" font-size="9" fill="white">16.3%</text>
+  <rect x="570" y="264.3223713181377" width="60" height="66.64315249466537" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="600" y="301.9655238128031" text-anchor="middle" font-size="9" fill="white">22.2%</text>
+  <rect x="570" y="80.00000299999994" width="60" height="184.32236831813776" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="600" y="176.3223713181377" text-anchor="middle" font-size="9" fill="white">61.4%</text>
+  <text x="600" y="395" text-anchor="middle" font-size="11" fill="#333">俄文</text>
+  <rect x="660" y="331.53866319928517" width="60" height="48.46133680071484" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="690" y="360.0" text-anchor="middle" font-size="9" fill="white">16.2%</text>
+  <rect x="660" y="263.8026338879784" width="60" height="67.73602931130677" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="690" y="302.53866319928517" text-anchor="middle" font-size="9" fill="white">22.6%</text>
+  <rect x="660" y="80.00000300000002" width="60" height="183.80263088797838" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="690" y="176.8026338879784" text-anchor="middle" font-size="9" fill="white">61.3%</text>
+  <text x="690" y="395" text-anchor="middle" font-size="11" fill="#333">西班牙文</text>
+  <rect x="750" y="331.1215655166083" width="60" height="48.878434483391665" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="780" y="360.0" text-anchor="middle" font-size="9" fill="white">16.3%</text>
+  <rect x="750" y="263.91371810194477" width="60" height="67.20784741466355" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="780" y="302.1215655166083" text-anchor="middle" font-size="9" fill="white">22.4%</text>
+  <rect x="750" y="80.00000299999994" width="60" height="183.91371510194483" fill="#999" stroke="#fff" stroke-width="0.5"/>
+  <text x="780" y="176.91371810194477" text-anchor="middle" font-size="9" fill="white">61.3%</text>
+  <text x="780" y="395" text-anchor="middle" font-size="11" fill="#333">韩文</text>
+  <text x="860" y="100" font-size="12" font-weight="bold" fill="#333">维度</text>
+</svg>

@@ -1,0 +1,2306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2000" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#020617"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#020617"/>
+    </linearGradient>
+    
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    
+    <filter id="glow_strong" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComponentTransfer in="blur"><feFuncA type="linear" slope="1.5"/></feComponentTransfer>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    
+    <filter id="shadow">
+      <feDropShadow dx="3" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+
+    <linearGradient id="grad_embedding" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(99,102,241);stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:rgb(149,152,255);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(99,102,241);stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="grad_attention" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(139,92,246);stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:rgb(189,142,255);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(139,92,246);stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="grad_add_norm_1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(245,158,11);stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:rgb(255,208,61);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(245,158,11);stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="grad_ffn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(16,185,129);stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:rgb(66,235,179);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(16,185,129);stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="grad_add_norm_2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(6,182,212);stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:rgb(56,232,255);stop-opacity:0.95"/>
+      <stop offset="100%" style="stop-color:rgb(6,182,212);stop-opacity:0.9"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <circle cx="1534.6" cy="50.0" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="1767.5" cy="1353.4" r="1.1" fill="white" opacity="0.13"/>
+  <circle cx="1012.6" cy="59.6" r="0.5" fill="white" opacity="0.25"/>
+  <circle cx="63.7" cy="397.7" r="0.9" fill="white" opacity="0.26"/>
+  <circle cx="529.1" cy="1178.5" r="1.0" fill="white" opacity="0.10"/>
+  <circle cx="1934.0" cy="1396.3" r="0.6" fill="white" opacity="0.15"/>
+  <circle cx="2297.3" cy="673.2" r="0.4" fill="white" opacity="0.13"/>
+  <circle cx="2034.0" cy="1207.5" r="1.0" fill="white" opacity="0.32"/>
+  <circle cx="1286.9" cy="1946.2" r="0.6" fill="white" opacity="0.27"/>
+  <circle cx="1990.6" cy="1237.0" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="1691.0" cy="91.6" r="0.5" fill="white" opacity="0.19"/>
+  <circle cx="191.5" cy="465.6" r="0.4" fill="white" opacity="0.18"/>
+  <circle cx="1525.6" cy="729.7" r="0.6" fill="white" opacity="0.16"/>
+  <circle cx="640.7" cy="1873.3" r="0.9" fill="white" opacity="0.28"/>
+  <circle cx="410.7" cy="1458.3" r="0.4" fill="white" opacity="0.21"/>
+  <circle cx="2374.9" cy="1280.0" r="0.8" fill="white" opacity="0.31"/>
+  <circle cx="2022.8" cy="1552.0" r="0.5" fill="white" opacity="0.11"/>
+  <circle cx="757.1" cy="535.5" r="0.5" fill="white" opacity="0.38"/>
+  <circle cx="2103.3" cy="629.4" r="0.9" fill="white" opacity="0.22"/>
+  <circle cx="2194.9" cy="917.7" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="1347.3" cy="525.5" r="0.8" fill="white" opacity="0.37"/>
+  <circle cx="958.6" cy="438.6" r="1.2" fill="white" opacity="0.25"/>
+  <circle cx="218.2" cy="94.2" r="0.4" fill="white" opacity="0.29"/>
+  <circle cx="1901.0" cy="844.3" r="0.4" fill="white" opacity="0.21"/>
+  <circle cx="2390.7" cy="1058.2" r="1.2" fill="white" opacity="0.36"/>
+  <circle cx="27.6" cy="1441.4" r="0.9" fill="white" opacity="0.26"/>
+  <circle cx="640.4" cy="1281.9" r="0.4" fill="white" opacity="0.23"/>
+  <circle cx="1088.9" cy="1907.6" r="1.1" fill="white" opacity="0.18"/>
+  <circle cx="1201.4" cy="357.3" r="1.1" fill="white" opacity="0.36"/>
+  <circle cx="716.3" cy="1277.9" r="0.8" fill="white" opacity="0.15"/>
+  <circle cx="1830.0" cy="1078.8" r="1.0" fill="white" opacity="0.26"/>
+  <circle cx="1.4" cy="648.3" r="0.3" fill="white" opacity="0.38"/>
+  <circle cx="2108.9" cy="1663.3" r="0.6" fill="white" opacity="0.12"/>
+  <circle cx="2107.2" cy="1893.9" r="0.4" fill="white" opacity="0.25"/>
+  <circle cx="166.1" cy="1521.2" r="1.0" fill="white" opacity="0.14"/>
+  <circle cx="1140.7" cy="1099.6" r="0.5" fill="white" opacity="0.36"/>
+  <circle cx="1015.5" cy="423.6" r="0.8" fill="white" opacity="0.32"/>
+  <circle cx="482.8" cy="623.4" r="1.2" fill="white" opacity="0.29"/>
+  <circle cx="1051.4" cy="1035.2" r="0.4" fill="white" opacity="0.17"/>
+  <circle cx="811.4" cy="1176.6" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="170.4" cy="1262.2" r="0.5" fill="white" opacity="0.37"/>
+  <circle cx="2063.1" cy="141.7" r="0.5" fill="white" opacity="0.30"/>
+  <circle cx="514.2" cy="264.6" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="1134.4" cy="1569.2" r="1.0" fill="white" opacity="0.16"/>
+  <circle cx="232.6" cy="862.1" r="0.7" fill="white" opacity="0.24"/>
+  <circle cx="1749.8" cy="1346.7" r="1.2" fill="white" opacity="0.13"/>
+  <circle cx="966.3" cy="678.6" r="1.1" fill="white" opacity="0.17"/>
+  <circle cx="456.5" cy="897.2" r="0.7" fill="white" opacity="0.18"/>
+  <circle cx="599.5" cy="1846.5" r="0.7" fill="white" opacity="0.36"/>
+  <circle cx="1320.8" cy="101.2" r="1.2" fill="white" opacity="0.35"/>
+  <circle cx="2325.6" cy="1852.7" r="1.1" fill="white" opacity="0.15"/>
+  <circle cx="1165.5" cy="427.5" r="0.7" fill="white" opacity="0.12"/>
+  <circle cx="909.5" cy="1970.6" r="0.5" fill="white" opacity="0.34"/>
+  <circle cx="1092.0" cy="846.0" r="1.2" fill="white" opacity="0.40"/>
+  <circle cx="1333.8" cy="1436.8" r="0.4" fill="white" opacity="0.19"/>
+  <circle cx="2324.9" cy="1158.4" r="0.8" fill="white" opacity="0.32"/>
+  <circle cx="137.2" cy="1168.4" r="0.8" fill="white" opacity="0.36"/>
+  <circle cx="377.8" cy="1921.6" r="0.4" fill="white" opacity="0.16"/>
+  <circle cx="1428.1" cy="1350.4" r="0.5" fill="white" opacity="0.14"/>
+  <circle cx="2136.7" cy="492.4" r="0.8" fill="white" opacity="0.29"/>
+  <circle cx="1006.1" cy="1167.3" r="0.8" fill="white" opacity="0.38"/>
+  <circle cx="490.2" cy="1432.4" r="0.5" fill="white" opacity="0.22"/>
+  <circle cx="1612.1" cy="600.0" r="0.6" fill="white" opacity="0.33"/>
+  <circle cx="174.1" cy="916.6" r="1.2" fill="white" opacity="0.40"/>
+  <circle cx="175.8" cy="426.3" r="0.5" fill="white" opacity="0.38"/>
+  <circle cx="2114.1" cy="1758.5" r="0.6" fill="white" opacity="0.15"/>
+  <circle cx="2001.0" cy="1407.1" r="0.9" fill="white" opacity="0.40"/>
+  <circle cx="1569.5" cy="15.6" r="1.0" fill="white" opacity="0.19"/>
+  <circle cx="1592.1" cy="1877.9" r="0.4" fill="white" opacity="0.13"/>
+  <circle cx="256.9" cy="1106.4" r="0.5" fill="white" opacity="0.28"/>
+  <circle cx="1722.3" cy="407.2" r="0.9" fill="white" opacity="0.18"/>
+  <circle cx="1172.5" cy="1810.7" r="1.1" fill="white" opacity="0.13"/>
+  <circle cx="1016.6" cy="553.4" r="0.3" fill="white" opacity="0.33"/>
+  <circle cx="1529.1" cy="523.9" r="1.0" fill="white" opacity="0.27"/>
+  <circle cx="1026.4" cy="19.3" r="0.4" fill="white" opacity="0.36"/>
+  <circle cx="2169.4" cy="1091.2" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="355.4" cy="254.9" r="0.6" fill="white" opacity="0.37"/>
+  <circle cx="1910.7" cy="1721.4" r="1.1" fill="white" opacity="0.16"/>
+  <circle cx="598.9" cy="205.6" r="1.0" fill="white" opacity="0.37"/>
+  <circle cx="975.3" cy="1241.3" r="0.4" fill="white" opacity="0.38"/>
+  <circle cx="2075.1" cy="1952.4" r="1.0" fill="white" opacity="0.36"/>
+  <circle cx="59.5" cy="1473.1" r="0.6" fill="white" opacity="0.38"/>
+  <circle cx="1925.4" cy="1728.1" r="1.0" fill="white" opacity="0.18"/>
+  <circle cx="1889.7" cy="216.2" r="1.1" fill="white" opacity="0.36"/>
+  <circle cx="533.8" cy="1633.2" r="0.7" fill="white" opacity="0.19"/>
+  <circle cx="1908.8" cy="455.2" r="0.3" fill="white" opacity="0.16"/>
+  <circle cx="787.8" cy="1728.7" r="1.2" fill="white" opacity="0.18"/>
+  <circle cx="1539.6" cy="799.4" r="1.2" fill="white" opacity="0.26"/>
+  <circle cx="2254.2" cy="230.7" r="1.2" fill="white" opacity="0.15"/>
+  <circle cx="2310.1" cy="530.9" r="0.4" fill="white" opacity="0.23"/>
+  <circle cx="1748.5" cy="627.4" r="0.8" fill="white" opacity="0.25"/>
+  <circle cx="924.5" cy="1153.2" r="0.5" fill="white" opacity="0.31"/>
+  <circle cx="4.1" cy="1851.2" r="0.8" fill="white" opacity="0.32"/>
+  <circle cx="1780.7" cy="1341.3" r="0.6" fill="white" opacity="0.12"/>
+  <circle cx="1594.2" cy="660.4" r="0.6" fill="white" opacity="0.35"/>
+  <circle cx="1727.4" cy="600.6" r="0.6" fill="white" opacity="0.22"/>
+  <circle cx="965.8" cy="591.3" r="0.4" fill="white" opacity="0.23"/>
+  <circle cx="2256.9" cy="1354.6" r="1.1" fill="white" opacity="0.28"/>
+  <circle cx="722.3" cy="1095.9" r="0.3" fill="white" opacity="0.19"/>
+  <circle cx="1031.7" cy="1160.0" r="0.9" fill="white" opacity="0.24"/>
+  <circle cx="1061.2" cy="427.4" r="0.7" fill="white" opacity="0.37"/>
+  <circle cx="1910.5" cy="339.4" r="0.4" fill="white" opacity="0.25"/>
+  <circle cx="1519.1" cy="670.4" r="1.0" fill="white" opacity="0.33"/>
+  <circle cx="1614.7" cy="449.3" r="0.5" fill="white" opacity="0.11"/>
+  <circle cx="587.6" cy="950.3" r="1.1" fill="white" opacity="0.12"/>
+  <circle cx="994.7" cy="1259.5" r="0.5" fill="white" opacity="0.31"/>
+  <circle cx="1186.5" cy="488.0" r="0.9" fill="white" opacity="0.10"/>
+  <circle cx="1802.3" cy="1540.1" r="0.4" fill="white" opacity="0.23"/>
+  <circle cx="422.1" cy="1915.9" r="0.8" fill="white" opacity="0.12"/>
+  <circle cx="598.1" cy="1696.7" r="0.7" fill="white" opacity="0.34"/>
+  <circle cx="1602.2" cy="1975.8" r="0.8" fill="white" opacity="0.39"/>
+  <circle cx="2139.4" cy="1225.3" r="0.9" fill="white" opacity="0.25"/>
+  <circle cx="1993.4" cy="1095.7" r="1.1" fill="white" opacity="0.32"/>
+  <circle cx="1139.2" cy="518.4" r="0.5" fill="white" opacity="0.29"/>
+  <circle cx="1838.0" cy="1042.6" r="0.9" fill="white" opacity="0.18"/>
+  <circle cx="186.0" cy="571.5" r="0.5" fill="white" opacity="0.20"/>
+  <circle cx="1296.4" cy="276.7" r="0.5" fill="white" opacity="0.31"/>
+  <circle cx="1695.4" cy="128.5" r="0.7" fill="white" opacity="0.26"/>
+  <circle cx="997.9" cy="413.7" r="0.7" fill="white" opacity="0.37"/>
+  <circle cx="1401.8" cy="1391.0" r="1.1" fill="white" opacity="0.33"/>
+  <circle cx="912.9" cy="11.8" r="0.6" fill="white" opacity="0.33"/>
+  <circle cx="2048.3" cy="1906.9" r="0.7" fill="white" opacity="0.32"/>
+  <circle cx="1310.7" cy="1206.5" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="1046.0" cy="58.0" r="0.6" fill="white" opacity="0.30"/>
+  <circle cx="970.4" cy="330.1" r="0.7" fill="white" opacity="0.14"/>
+  <circle cx="1493.4" cy="53.9" r="0.7" fill="white" opacity="0.27"/>
+  <circle cx="65.0" cy="1285.5" r="0.4" fill="white" opacity="0.24"/>
+  <circle cx="120.7" cy="758.2" r="0.5" fill="white" opacity="0.20"/>
+  <circle cx="1827.0" cy="758.3" r="1.0" fill="white" opacity="0.35"/>
+  <circle cx="605.5" cy="163.8" r="0.3" fill="white" opacity="0.26"/>
+  <circle cx="2399.8" cy="699.9" r="0.9" fill="white" opacity="0.33"/>
+  <circle cx="1564.2" cy="1508.5" r="1.2" fill="white" opacity="0.16"/>
+  <circle cx="48.9" cy="304.8" r="0.4" fill="white" opacity="0.30"/>
+  <circle cx="1353.5" cy="435.9" r="0.9" fill="white" opacity="0.33"/>
+  <circle cx="402.7" cy="1214.5" r="1.0" fill="white" opacity="0.13"/>
+  <circle cx="1966.3" cy="1929.4" r="0.4" fill="white" opacity="0.11"/>
+  <circle cx="748.7" cy="1354.7" r="1.2" fill="white" opacity="0.22"/>
+  <circle cx="1716.0" cy="152.0" r="0.9" fill="white" opacity="0.29"/>
+  <circle cx="244.6" cy="1545.0" r="1.1" fill="white" opacity="0.28"/>
+  <circle cx="290.5" cy="1967.7" r="1.0" fill="white" opacity="0.20"/>
+  <circle cx="1028.1" cy="741.1" r="0.8" fill="white" opacity="0.20"/>
+  <circle cx="2039.0" cy="1644.7" r="0.4" fill="white" opacity="0.39"/>
+  <circle cx="1525.4" cy="1657.4" r="0.9" fill="white" opacity="0.23"/>
+  <circle cx="1761.1" cy="1930.9" r="0.5" fill="white" opacity="0.34"/>
+  <circle cx="1291.6" cy="967.0" r="0.7" fill="white" opacity="0.32"/>
+  <circle cx="644.1" cy="1703.4" r="1.0" fill="white" opacity="0.13"/>
+  <circle cx="2115.9" cy="487.7" r="0.7" fill="white" opacity="0.28"/>
+  <circle cx="909.6" cy="57.4" r="1.1" fill="white" opacity="0.15"/>
+  <circle cx="509.1" cy="1595.7" r="0.6" fill="white" opacity="0.36"/>
+  <circle cx="1682.8" cy="552.5" r="0.3" fill="white" opacity="0.38"/>
+  <circle cx="205.5" cy="1440.1" r="0.7" fill="white" opacity="0.33"/>
+  <circle cx="1657.5" cy="1291.8" r="0.7" fill="white" opacity="0.34"/>
+  <circle cx="223.3" cy="443.2" r="0.9" fill="white" opacity="0.19"/>
+  <circle cx="1395.7" cy="946.5" r="0.8" fill="white" opacity="0.23"/>
+  <circle cx="1790.2" cy="661.6" r="0.9" fill="white" opacity="0.18"/>
+  <circle cx="603.4" cy="241.3" r="0.5" fill="white" opacity="0.14"/>
+  <circle cx="1286.1" cy="1524.4" r="0.5" fill="white" opacity="0.16"/>
+  <circle cx="1162.1" cy="1449.2" r="1.2" fill="white" opacity="0.26"/>
+  <circle cx="679.2" cy="201.1" r="0.5" fill="white" opacity="0.17"/>
+  <circle cx="430.7" cy="28.3" r="0.8" fill="white" opacity="0.18"/>
+  <circle cx="2338.3" cy="1106.7" r="0.9" fill="white" opacity="0.14"/>
+  <circle cx="2084.3" cy="981.8" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="1126.6" cy="880.9" r="0.5" fill="white" opacity="0.12"/>
+  <circle cx="2258.6" cy="955.5" r="1.0" fill="white" opacity="0.22"/>
+  <circle cx="177.8" cy="1258.9" r="0.3" fill="white" opacity="0.14"/>
+  <circle cx="1350.8" cy="607.7" r="1.2" fill="white" opacity="0.14"/>
+  <circle cx="1834.7" cy="1212.6" r="1.0" fill="white" opacity="0.17"/>
+  <circle cx="1254.2" cy="901.0" r="0.7" fill="white" opacity="0.36"/>
+  <circle cx="2376.1" cy="610.8" r="0.9" fill="white" opacity="0.28"/>
+  <circle cx="1776.2" cy="1895.2" r="0.5" fill="white" opacity="0.16"/>
+  <circle cx="1585.0" cy="314.1" r="0.5" fill="white" opacity="0.12"/>
+  <circle cx="6.4" cy="901.0" r="0.8" fill="white" opacity="0.19"/>
+  <circle cx="555.5" cy="1413.9" r="0.9" fill="white" opacity="0.24"/>
+  <circle cx="1649.7" cy="1847.8" r="1.0" fill="white" opacity="0.29"/>
+  <circle cx="1586.8" cy="1867.3" r="0.7" fill="white" opacity="0.26"/>
+  <circle cx="1554.3" cy="1816.8" r="1.0" fill="white" opacity="0.12"/>
+  <circle cx="398.2" cy="615.2" r="1.0" fill="white" opacity="0.27"/>
+  <circle cx="692.7" cy="248.7" r="0.9" fill="white" opacity="0.31"/>
+  <circle cx="2262.4" cy="1000.9" r="0.7" fill="white" opacity="0.12"/>
+  <circle cx="95.7" cy="864.1" r="0.6" fill="white" opacity="0.18"/>
+  <circle cx="219.2" cy="1923.8" r="1.1" fill="white" opacity="0.27"/>
+  <circle cx="2281.9" cy="1999.1" r="0.9" fill="white" opacity="0.18"/>
+  <circle cx="96.6" cy="1512.5" r="0.7" fill="white" opacity="0.30"/>
+  <circle cx="2198.6" cy="363.0" r="0.8" fill="white" opacity="0.29"/>
+  <circle cx="1180.1" cy="182.5" r="0.6" fill="white" opacity="0.20"/>
+  <circle cx="1608.3" cy="1715.5" r="0.6" fill="white" opacity="0.31"/>
+  <circle cx="691.7" cy="1890.4" r="1.0" fill="white" opacity="0.27"/>
+  <circle cx="1091.6" cy="629.0" r="0.6" fill="white" opacity="0.39"/>
+  <circle cx="970.0" cy="1029.2" r="1.2" fill="white" opacity="0.30"/>
+  <circle cx="1302.2" cy="826.5" r="0.5" fill="white" opacity="0.21"/>
+  <circle cx="1815.5" cy="1250.8" r="1.0" fill="white" opacity="0.16"/>
+  <circle cx="1318.1" cy="1855.3" r="0.7" fill="white" opacity="0.31"/>
+  <circle cx="291.4" cy="1946.3" r="0.8" fill="white" opacity="0.17"/>
+  <circle cx="380.1" cy="1101.7" r="0.8" fill="white" opacity="0.13"/>
+  <circle cx="2381.4" cy="1825.9" r="0.7" fill="white" opacity="0.14"/>
+  <circle cx="1997.1" cy="996.8" r="0.9" fill="white" opacity="0.25"/>
+  <circle cx="656.2" cy="1669.4" r="1.2" fill="white" opacity="0.17"/>
+  <circle cx="1323.0" cy="767.2" r="1.1" fill="white" opacity="0.25"/>
+  <circle cx="2110.4" cy="1728.1" r="0.5" fill="white" opacity="0.34"/>
+  <circle cx="995.9" cy="1868.5" r="0.8" fill="white" opacity="0.35"/>
+  <circle cx="678.8" cy="597.1" r="0.8" fill="white" opacity="0.40"/>
+  <circle cx="1175.1" cy="297.2" r="0.8" fill="white" opacity="0.20"/>
+  <circle cx="1324.6" cy="1086.9" r="0.7" fill="white" opacity="0.20"/>
+  <circle cx="452.8" cy="1395.0" r="0.8" fill="white" opacity="0.17"/>
+  <circle cx="1861.3" cy="87.3" r="1.0" fill="white" opacity="0.31"/>
+  <circle cx="1947.4" cy="772.2" r="0.9" fill="white" opacity="0.35"/>
+  <circle cx="2354.0" cy="990.7" r="0.3" fill="white" opacity="0.25"/>
+  <circle cx="1416.4" cy="1739.4" r="1.1" fill="white" opacity="0.23"/>
+  <circle cx="1262.3" cy="913.9" r="1.0" fill="white" opacity="0.22"/>
+  <circle cx="1571.5" cy="308.7" r="0.7" fill="white" opacity="0.39"/>
+  <circle cx="812.5" cy="1385.4" r="0.9" fill="white" opacity="0.36"/>
+  <circle cx="2045.6" cy="1718.7" r="0.6" fill="white" opacity="0.19"/>
+  <circle cx="1724.9" cy="1518.8" r="1.1" fill="white" opacity="0.11"/>
+  <circle cx="164.2" cy="1262.3" r="1.1" fill="white" opacity="0.40"/>
+  <circle cx="1792.2" cy="867.9" r="0.4" fill="white" opacity="0.29"/>
+  <circle cx="2094.2" cy="887.4" r="0.9" fill="white" opacity="0.37"/>
+  <circle cx="110.4" cy="1592.3" r="0.6" fill="white" opacity="0.21"/>
+  <circle cx="349.4" cy="1062.3" r="0.8" fill="white" opacity="0.34"/>
+  <circle cx="408.0" cy="157.9" r="1.1" fill="white" opacity="0.29"/>
+  <circle cx="578.0" cy="1825.7" r="0.4" fill="white" opacity="0.24"/>
+  <circle cx="609.5" cy="510.7" r="0.3" fill="white" opacity="0.34"/>
+  <circle cx="2162.9" cy="1355.2" r="0.4" fill="white" opacity="0.23"/>
+  <circle cx="829.4" cy="1175.1" r="0.9" fill="white" opacity="0.23"/>
+  <circle cx="600.2" cy="1690.6" r="0.5" fill="white" opacity="0.22"/>
+  <circle cx="1159.7" cy="474.4" r="0.8" fill="white" opacity="0.27"/>
+  <circle cx="2382.5" cy="590.5" r="1.2" fill="white" opacity="0.30"/>
+  <circle cx="658.8" cy="1131.9" r="0.9" fill="white" opacity="0.32"/>
+  <circle cx="117.7" cy="1212.8" r="0.7" fill="white" opacity="0.37"/>
+  <circle cx="686.9" cy="1597.7" r="0.8" fill="white" opacity="0.21"/>
+  <circle cx="1527.9" cy="1241.8" r="0.9" fill="white" opacity="0.32"/>
+  <circle cx="1582.0" cy="1676.7" r="0.9" fill="white" opacity="0.37"/>
+  <circle cx="1551.2" cy="617.9" r="0.7" fill="white" opacity="0.27"/>
+  <circle cx="1757.7" cy="180.3" r="0.6" fill="white" opacity="0.32"/>
+  <circle cx="421.5" cy="264.3" r="0.8" fill="white" opacity="0.39"/>
+  <circle cx="1274.0" cy="1827.0" r="1.0" fill="white" opacity="0.18"/>
+  <circle cx="1979.3" cy="963.7" r="1.0" fill="white" opacity="0.32"/>
+  <circle cx="812.9" cy="230.3" r="1.2" fill="white" opacity="0.14"/>
+  <circle cx="2319.6" cy="1720.3" r="1.0" fill="white" opacity="0.39"/>
+  <circle cx="2321.4" cy="1609.2" r="0.6" fill="white" opacity="0.34"/>
+  <circle cx="33.4" cy="1073.1" r="0.7" fill="white" opacity="0.30"/>
+  <circle cx="1613.6" cy="1169.1" r="1.0" fill="white" opacity="0.38"/>
+  <circle cx="260.0" cy="467.6" r="0.3" fill="white" opacity="0.37"/>
+  <circle cx="1347.4" cy="1830.5" r="0.5" fill="white" opacity="0.12"/>
+  <circle cx="1977.3" cy="1818.8" r="0.6" fill="white" opacity="0.22"/>
+  <circle cx="335.5" cy="1892.5" r="0.6" fill="white" opacity="0.25"/>
+  <circle cx="233.3" cy="1774.5" r="0.4" fill="white" opacity="0.24"/>
+  <circle cx="1609.2" cy="1486.3" r="1.2" fill="white" opacity="0.23"/>
+  <circle cx="1781.4" cy="309.0" r="0.7" fill="white" opacity="0.13"/>
+  <circle cx="1174.4" cy="816.2" r="1.2" fill="white" opacity="0.11"/>
+  <circle cx="889.3" cy="886.8" r="1.2" fill="white" opacity="0.36"/>
+
+  <text x="1200" y="45" text-anchor="middle" font-size="36" font-weight="bold" fill="white">
+    Qwen3.5-0.8B Complete Transformer Architecture
+  </text>
+  <text x="1200" y="75" text-anchor="middle" font-size="16" fill="#94a3b8">
+    24 Transformer Layers · Complete Component Structure · Gradient-based Sensitivity Analysis
+  </text>
+
+  <g id="layer_0">
+    <!-- 3D底板 -->
+    <rect x="150.0" y="120" width="1600.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="150.0,175 1750.0,175 
+                     1742.0,183 142.0,183"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="95.0" y="152.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L0</text>
+
+    <rect x="160.0" y="125" width="235.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="277.75" y="151.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="397.5" y="125" width="392.5" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="593.75" y="151.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="792.0" y="125" width="157.0" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="870.5" y="151.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="951.0" y="125" width="471.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1186.5" y="151.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1424.0" y="125" width="157.0" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1502.5" y="151.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="399.5" y="125.5" width="46.92188933975755" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="446.42188933975757" y="125.5" width="43.40818136319097" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="489.83007070294855" y="125.5" width="54.03949474966905" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="543.8695654526176" y="125.5" width="48.00484267248327" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="591.8744081251009" y="125.5" width="47.507265303475194" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="639.381673428576" y="125.5" width="47.82042112127334" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="687.2020945498493" y="125.5" width="48.28226509951113" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="735.4843596493605" y="125.5" width="52.515640350639515" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="953.0" y="125.5" width="65.33495791153662" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1018.3349579115367" y="125.5" width="69.31809081457241" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1087.653048726109" y="125.5" width="75.62444230730951" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1163.2774910334185" y="125.5" width="84.03132421195825" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1247.3088152453768" y="125.5" width="82.59902167120252" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1329.9078369165793" y="125.5" width="90.0921630834207" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_1">
+    <!-- 3D底板 -->
+    <rect x="154.16666666666666" y="185" width="1583.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="154.16666666666666,240 1737.5000000000002,240 
+                     1729.5000000000002,248 146.16666666666666,248"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="99.16666666666666" y="217.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L1</text>
+
+    <rect x="164.16666666666666" y="190" width="233.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="280.66666666666663" y="216.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="399.16666666666663" y="190" width="388.33333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="593.3333333333333" y="216.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="789.5" y="190" width="155.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="867.1666666666666" y="216.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="946.8333333333334" y="190" width="466.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1179.8333333333335" y="216.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1414.8333333333335" y="190" width="155.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1492.5000000000002" y="216.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="401.16666666666663" y="190.5" width="44.555880680615886" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="445.7225473472825" y="190.5" width="44.48580407435638" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="490.2083514216389" y="190.5" width="51.79001755811076" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="541.9983689797497" y="190.5" width="47.751100760416925" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="589.7494697401665" y="190.5" width="48.74365383180316" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="638.4931235719697" y="190.5" width="49.26654821237967" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="687.7596717843494" y="190.5" width="47.40061098183244" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="735.1602827661818" y="190.5" width="50.33971723381818" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="948.8333333333334" y="190.5" width="69.91911230763219" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1018.7524456409656" y="190.5" width="69.59962613016093" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1088.3520717711265" y="190.5" width="76.72276843942556" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1165.074840210552" y="190.5" width="83.24265114366307" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1248.3174913542152" y="190.5" width="78.78922318303667" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1327.106714537252" y="190.5" width="83.72661879608157" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_2">
+    <!-- 3D底板 -->
+    <rect x="158.33333333333334" y="250" width="1566.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="158.33333333333334,305 1724.9999999999998,305 
+                     1716.9999999999998,313 150.33333333333334,313"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="103.33333333333334" y="282.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L2</text>
+
+    <rect x="168.33333333333334" y="255" width="230.49999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="283.5833333333333" y="281.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="400.8333333333333" y="255" width="384.16666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="592.9166666666666" y="281.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="787.0" y="255" width="153.66666666666669" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="863.8333333333334" y="281.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="942.6666666666667" y="255" width="460.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1173.1666666666667" y="281.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1405.6666666666667" y="255" width="153.66666666666669" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1482.5" y="281.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="402.8333333333333" y="255.5" width="46.17341699468053" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="449.0067503280138" y="255.5" width="48.03965002408687" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="497.0464003521007" y="255.5" width="48.80218204081956" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="545.8485823929202" y="255.5" width="46.94261596766981" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="592.79119836059" y="255.5" width="47.154130432583585" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="639.9453287931735" y="255.5" width="48.651149169242196" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="688.5964779624157" y="255.5" width="47.21451707717945" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="735.8109950395952" y="255.5" width="47.18900496040463" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="944.6666666666667" y="255.5" width="68.51268685748849" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1013.1793535241552" y="255.5" width="69.87383856566014" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1083.0531920898154" y="255.5" width="79.5426480845179" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1162.5958401743333" y="255.5" width="79.53312108215752" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1242.1289612564908" y="255.5" width="77.57816651705564" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1319.7071277735465" y="255.5" width="81.95953889312025" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_3">
+    <!-- 3D底板 -->
+    <rect x="162.5" y="315" width="1550.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="162.5,370 1712.5,370 
+                     1704.5,378 154.5,378"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="107.5" y="347.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L3</text>
+
+    <rect x="172.5" y="320" width="228.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="286.5" y="346.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="402.5" y="320" width="380.0" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="592.5" y="346.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="784.5" y="320" width="152.0" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="860.5" y="346.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="938.5" y="320" width="456.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1166.5" y="346.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1396.5" y="320" width="152.0" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1472.5" y="346.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="404.5" y="320.5" width="46.75473369273396" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="451.25473369273396" y="320.5" width="47.89145207557614" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="499.1461857683101" y="320.5" width="46.522199383026944" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="545.668385151337" y="320.5" width="46.18705538887937" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="591.8554405402164" y="320.5" width="46.84920069097245" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="638.7046412311888" y="320.5" width="48.05473598432582" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="686.7593772155146" y="320.5" width="47.240955958010574" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="734.0003331735252" y="320.5" width="46.49966682647473" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="940.5" y="320.5" width="66.9360654103214" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1007.4360654103214" y="320.5" width="70.92759242080935" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1078.3636578311307" y="320.5" width="77.47770533127284" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1155.8413631624035" y="320.5" width="78.1063978831501" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1233.9477610455535" y="320.5" width="77.42587027961565" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1311.3736313251693" y="320.5" width="81.12636867483063" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_4">
+    <!-- 3D底板 -->
+    <rect x="166.66666666666666" y="380" width="1533.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="166.66666666666666,435 1700.0000000000002,435 
+                     1692.0000000000002,443 158.66666666666666,443"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="111.66666666666666" y="412.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L4</text>
+
+    <rect x="176.66666666666666" y="385" width="225.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="289.41666666666663" y="411.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="404.16666666666663" y="385" width="375.83333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="592.0833333333333" y="411.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="782.0" y="385" width="150.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="857.1666666666666" y="411.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="934.3333333333334" y="385" width="451.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1159.8333333333335" y="411.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1387.3333333333335" y="385" width="150.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1462.5000000000002" y="411.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="406.16666666666663" y="385.5" width="46.93516819685916" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="453.10183486352577" y="385.5" width="46.59077054126689" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="499.69260540479263" y="385.5" width="46.574321518384885" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="546.2669269231775" y="385.5" width="45.036323571528726" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="591.3032504947062" y="385.5" width="46.36096796045166" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="637.6642184551579" y="385.5" width="47.8336689860559" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="685.4978874412138" y="385.5" width="45.951868899373125" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="731.449756340587" y="385.5" width="46.55024365941304" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="936.3333333333334" y="385.5" width="66.67602621198324" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1003.0093595453166" y="385.5" width="70.8503907751781" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1073.8597503204946" y="385.5" width="75.8294736475091" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1149.6892239680037" y="385.5" width="78.3952348727382" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1228.084458840742" y="385.5" width="75.9922025584677" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1304.0766613992096" y="385.5" width="79.2566719341237" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_5">
+    <!-- 3D底板 -->
+    <rect x="170.83333333333334" y="445" width="1516.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="170.83333333333334,500 1687.4999999999998,500 
+                     1679.4999999999998,508 162.83333333333334,508"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="115.83333333333334" y="477.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L5</text>
+
+    <rect x="180.83333333333334" y="450" width="222.99999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="292.3333333333333" y="476.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="405.8333333333333" y="450" width="371.66666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="591.6666666666666" y="476.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="779.5" y="450" width="148.66666666666669" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="853.8333333333334" y="476.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="930.1666666666667" y="450" width="445.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1153.1666666666667" y="476.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1378.1666666666667" y="450" width="148.66666666666669" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1452.5" y="476.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="407.8333333333333" y="450.5" width="46.33702729180495" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="454.17036062513824" y="450.5" width="46.53553121501372" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="500.70589184015193" y="450.5" width="45.98518282284733" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="546.6910746629993" y="450.5" width="44.60875606686914" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="591.2998307298684" y="450.5" width="45.51444552032673" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="636.8142762501951" y="450.5" width="46.82722405465093" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="683.6415003048461" y="450.5" width="45.63891333737492" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="729.280413642221" y="450.5" width="46.21958635777889" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="932.1666666666667" y="450.5" width="67.42727746344877" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="999.5939441301155" y="450.5" width="71.13562815233954" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1070.729572282455" y="450.5" width="72.96476153661504" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1143.69433381907" y="450.5" width="76.28272222048555" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1219.9770560395555" y="450.5" width="75.84506045923285" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1295.8221164987883" y="450.5" width="78.34455016787817" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_6">
+    <!-- 3D底板 -->
+    <rect x="175.0" y="510" width="1500.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="175.0,565 1675.0,565 
+                     1667.0,573 167.0,573"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="120.0" y="542.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L6</text>
+
+    <rect x="185.0" y="515" width="220.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="295.25" y="541.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="407.5" y="515" width="367.5" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="591.25" y="541.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="777.0" y="515" width="147.0" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="850.5" y="541.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="926.0" y="515" width="441.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1146.5" y="541.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1369.0" y="515" width="147.0" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1442.5" y="541.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="409.5" y="515.5" width="49.487888012880504" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="458.9878880128805" y="515.5" width="46.791743865883724" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="505.77963187876423" y="515.5" width="45.55811347120411" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="551.3377453499684" y="515.5" width="43.769860209864945" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="595.1076055598334" y="515.5" width="43.8709791602117" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="638.9785847200451" y="515.5" width="44.15655941503244" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="683.1351441350776" y="515.5" width="45.49816744403271" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="728.6333115791102" y="515.5" width="44.36668842088986" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="928.0" y="515.5" width="65.38624499841771" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="993.3862449984177" y="515.5" width="71.48620155589165" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1064.8724465543094" y="515.5" width="73.78283079310754" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1138.6552773474168" y="515.5" width="72.4733873803289" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1211.1286647277457" y="515.5" width="76.27124645141689" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1287.3999111791625" y="515.5" width="77.60008882083734" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_7">
+    <!-- 3D底板 -->
+    <rect x="179.16666666666666" y="575" width="1483.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="179.16666666666666,630 1662.5000000000002,630 
+                     1654.5000000000002,638 171.16666666666666,638"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="124.16666666666666" y="607.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L7</text>
+
+    <rect x="189.16666666666666" y="580" width="218.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="298.16666666666663" y="606.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="409.16666666666663" y="580" width="363.33333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="590.8333333333333" y="606.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="774.5" y="580" width="145.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="847.1666666666666" y="606.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="921.8333333333334" y="580" width="436.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1139.8333333333335" y="606.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1359.8333333333335" y="580" width="145.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1432.5000000000002" y="606.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="411.16666666666663" y="580.5" width="46.83869132581068" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="458.0053579924773" y="580.5" width="46.25988107576702" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="504.2652390682443" y="580.5" width="44.68029453488139" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="548.9455336031257" y="580.5" width="43.641254534287555" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="592.5867881374132" y="580.5" width="44.396338200570774" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="636.983126337984" y="580.5" width="44.69417638655594" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="681.6773027245399" y="580.5" width="44.75562536016773" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="726.4329280847077" y="580.5" width="44.06707191529229" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="923.8333333333334" y="580.5" width="67.26237340647108" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="991.0957067398044" y="580.5" width="72.2652813293385" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1063.3609880691429" y="580.5" width="71.43099966486882" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1134.7919877340116" y="580.5" width="71.94274990601772" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1206.7347376400294" y="580.5" width="73.42450261487362" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1280.159240254903" y="580.5" width="75.67409307843027" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_8">
+    <!-- 3D底板 -->
+    <rect x="183.33333333333331" y="640" width="1466.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="183.33333333333331,695 1649.9999999999998,695 
+                     1641.9999999999998,703 175.33333333333331,703"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="128.33333333333331" y="672.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L8</text>
+
+    <rect x="193.33333333333331" y="645" width="215.49999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="301.0833333333333" y="671.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="410.83333333333326" y="645" width="359.16666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="590.4166666666665" y="671.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="771.9999999999999" y="645" width="143.66666666666669" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="843.8333333333333" y="671.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="917.6666666666665" y="645" width="430.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1133.1666666666665" y="671.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1350.6666666666665" y="645" width="143.66666666666669" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1422.4999999999998" y="671.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="412.83333333333326" y="645.5" width="46.09757590006569" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="458.93090923339895" y="645.5" width="45.38013455405096" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="504.31104378744993" y="645.5" width="44.94246459468707" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="549.2535083821369" y="645.5" width="43.78675521662901" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="593.0402635987659" y="645.5" width="44.08035263273088" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="637.1206162314968" y="645.5" width="43.4598501237311" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="680.5804663552279" y="645.5" width="43.993067944823125" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="724.573534300051" y="645.5" width="43.42646569994877" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="919.6666666666665" y="645.5" width="66.10955957219859" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="985.7762262388651" y="645.5" width="72.01653732272102" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1057.792763561586" y="645.5" width="70.8278510200636" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1128.6206145816498" y="645.5" width="70.97987339699124" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1199.600487978641" y="645.5" width="72.2839381924434" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1271.8844261710844" y="645.5" width="74.78224049558212" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_9">
+    <!-- 3D底板 -->
+    <rect x="187.5" y="705" width="1450.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="187.5,760 1637.5,760 
+                     1629.5,768 179.5,768"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="132.5" y="737.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L9</text>
+
+    <rect x="197.5" y="710" width="213.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="304.0" y="736.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="412.5" y="710" width="355.0" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="590.0" y="736.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="769.5" y="710" width="142.0" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="840.5" y="736.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="913.5" y="710" width="426.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1126.5" y="736.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1341.5" y="710" width="142.0" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1412.5" y="736.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="414.5" y="710.5" width="45.82877420626585" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="460.32877420626585" y="710.5" width="44.612477750453046" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="504.9412519567189" y="710.5" width="44.61574496436946" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="549.5569969210883" y="710.5" width="43.177671081475495" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="592.7346680025638" y="710.5" width="43.47652222901479" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="636.2111902315786" y="710.5" width="42.982907222211175" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="679.1940974537898" y="710.5" width="43.59671216961129" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="722.7908096234011" y="710.5" width="42.70919037659892" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="915.5" y="710.5" width="66.93662258399219" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="982.4366225839922" y="710.5" width="72.4256777267576" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1054.8623003107498" y="710.5" width="69.60400285026626" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1124.466303161016" y="710.5" width="69.03512461176553" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1193.5014277727814" y="710.5" width="70.9989679229163" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1264.5003956956978" y="710.5" width="72.99960430430217" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_10">
+    <!-- 3D底板 -->
+    <rect x="191.66666666666669" y="770" width="1433.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="191.66666666666669,825 1625.0000000000002,825 
+                     1617.0000000000002,833 183.66666666666669,833"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="136.66666666666669" y="802.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L10</text>
+
+    <rect x="201.66666666666669" y="775" width="210.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="306.9166666666667" y="801.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="414.1666666666667" y="775" width="350.83333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="589.5833333333334" y="801.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="767.0" y="775" width="140.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="837.1666666666666" y="801.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="909.3333333333334" y="775" width="421.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1119.8333333333335" y="801.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1332.3333333333335" y="775" width="140.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1402.5000000000002" y="801.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="416.1666666666667" y="775.5" width="45.66564156237177" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="461.83230822903846" y="775.5" width="44.43708745770076" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="506.26939568673924" y="775.5" width="43.98720467602191" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="550.2566003627611" y="775.5" width="42.591158724662954" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="592.847759087424" y="775.5" width="42.71203460806073" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="635.5597936954848" y="775.5" width="42.343859152285965" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="677.9036528477708" y="775.5" width="43.07450401241673" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="720.9781568601875" y="775.5" width="42.02184313981255" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="911.3333333333334" y="775.5" width="65.12938383403323" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="976.4627171673666" y="775.5" width="70.94878156867881" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1047.4114987360454" y="775.5" width="69.22828850465098" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1116.6397872406963" y="775.5" width="68.35731442274786" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1184.997101663444" y="775.5" width="71.19386414550414" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1256.1909658089482" y="775.5" width="72.14236752438494" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_11">
+    <!-- 3D底板 -->
+    <rect x="195.83333333333331" y="835" width="1416.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="195.83333333333331,890 1612.4999999999998,890 
+                     1604.4999999999998,898 187.83333333333331,898"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="140.83333333333331" y="867.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L11</text>
+
+    <rect x="205.83333333333331" y="840" width="207.99999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="309.8333333333333" y="866.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="415.83333333333326" y="840" width="346.66666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="589.1666666666665" y="866.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="764.4999999999999" y="840" width="138.66666666666669" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="833.8333333333333" y="866.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="905.1666666666665" y="840" width="415.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1113.1666666666665" y="866.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1323.1666666666665" y="840" width="138.66666666666669" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1392.4999999999998" y="866.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="417.83333333333326" y="840.5" width="44.28868209197493" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="462.1220154253082" y="840.5" width="44.15128458974507" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="506.2733000150532" y="840.5" width="43.505186880512476" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="549.7784868955657" y="840.5" width="42.178092749519394" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="591.9565796450851" y="840.5" width="42.46206474540665" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="634.4186443904917" y="840.5" width="42.19748026713162" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="676.6161246576233" y="840.5" width="42.48575490363996" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="719.1018795612633" y="840.5" width="41.39812043873655" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="907.1666666666665" y="840.5" width="67.94572814100195" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="975.1123948076685" y="840.5" width="70.56458537217355" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1045.676980179842" y="840.5" width="67.28459713498754" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1112.9615773148296" y="840.5" width="67.77200211984746" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1180.733579434677" y="840.5" width="68.82648086664636" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1249.5600603013233" y="840.5" width="69.60660636534307" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_12">
+    <!-- 3D底板 -->
+    <rect x="200.0" y="900" width="1400.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="200.0,955 1600.0,955 
+                     1592.0,963 192.0,963"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="145.0" y="932.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L12</text>
+
+    <rect x="210.0" y="905" width="205.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="312.75" y="931.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="417.5" y="905" width="342.5" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="588.75" y="931.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="762.0" y="905" width="137.0" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="830.5" y="931.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="901.0" y="905" width="411.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1106.5" y="931.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1314.0" y="905" width="137.0" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1382.5" y="931.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="419.5" y="905.5" width="43.08240296606744" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="462.58240296606743" y="905.5" width="43.20187439648874" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="505.78427736255617" y="905.5" width="43.280857899772315" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="549.0651352623285" y="905.5" width="41.54870153072956" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="590.613836793058" y="905.5" width="41.955257698817064" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="632.569094491875" y="905.5" width="41.69383117526731" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="674.2629256671423" y="905.5" width="41.8350349458194" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="716.0979606129617" y="905.5" width="41.90203938703817" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="903.0" y="905.5" width="68.46047374376946" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="971.4604737437694" y="905.5" width="69.52475898178203" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1040.9852327255514" y="905.5" width="66.05356663594581" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1107.0387993614972" y="905.5" width="66.82043094446234" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1173.8592303059595" y="905.5" width="67.82173715257777" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1241.6809674585372" y="905.5" width="68.31903254146262" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_13">
+    <!-- 3D底板 -->
+    <rect x="204.16666666666666" y="965" width="1383.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="204.16666666666666,1020 1587.5000000000002,1020 
+                     1579.5000000000002,1028 196.16666666666666,1028"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="149.16666666666666" y="997.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L13</text>
+
+    <rect x="214.16666666666666" y="970" width="203.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="315.66666666666663" y="996.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="419.16666666666663" y="970" width="338.33333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="588.3333333333333" y="996.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="759.5" y="970" width="135.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="827.1666666666666" y="996.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="896.8333333333334" y="970" width="406.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1099.8333333333335" y="996.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1304.8333333333335" y="970" width="135.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1372.5000000000002" y="996.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="421.16666666666663" y="970.5" width="42.627127820532145" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="463.7937944871988" y="970.5" width="42.65233971700699" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="506.4461342042058" y="970.5" width="42.9339568332337" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="549.3800910374395" y="970.5" width="40.96510528650265" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="590.3451963239421" y="970.5" width="41.20981159919278" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="631.5550079231349" y="970.5" width="41.04526656322562" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="672.6002744863605" y="970.5" width="41.49201601465756" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="714.092290501018" y="970.5" width="41.407709498981944" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="898.8333333333334" y="970.5" width="69.20155810125637" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="968.0348914345898" y="970.5" width="69.48227590105749" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1037.5171673356472" y="970.5" width="65.65637649302903" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1103.1735438286762" y="970.5" width="65.02683795092493" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1168.2003817796012" y="970.5" width="66.51246185221696" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1234.7128436318183" y="970.5" width="66.12048970151518" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_14">
+    <!-- 3D底板 -->
+    <rect x="208.33333333333334" y="1030" width="1366.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="208.33333333333334,1085 1574.9999999999998,1085 
+                     1566.9999999999998,1093 200.33333333333334,1093"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="153.33333333333334" y="1062.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L14</text>
+
+    <rect x="218.33333333333334" y="1035" width="200.49999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="318.5833333333333" y="1061.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="420.8333333333333" y="1035" width="334.16666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="587.9166666666666" y="1061.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="757.0" y="1035" width="133.66666666666669" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="823.8333333333334" y="1061.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="892.6666666666667" y="1035" width="400.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1093.1666666666667" y="1061.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1295.6666666666667" y="1035" width="133.66666666666669" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1362.5" y="1061.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="422.8333333333333" y="1035.5" width="44.99067476185477" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="467.8240080951881" y="1035.5" width="43.19030874454187" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="511.01431683973" y="1035.5" width="40.912979604544496" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="551.9272964442745" y="1035.5" width="40.326478852399546" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="592.253775296674" y="1035.5" width="39.90025910553076" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="632.1540344022047" y="1035.5" width="39.428247933773555" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="671.5822823359783" y="1035.5" width="41.52127577185082" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="713.1035581078291" y="1035.5" width="39.8964418921708" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="894.6666666666667" y="1035.5" width="62.21487352766815" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="956.8815401943349" y="1035.5" width="68.17987435162254" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1025.0614145459574" y="1035.5" width="66.15067062344934" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1091.2120851694067" y="1035.5" width="63.88565087995584" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1155.0977360493625" y="1035.5" width="68.36427362382915" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1223.4620096731917" y="1035.5" width="68.20465699347488" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_15">
+    <!-- 3D底板 -->
+    <rect x="212.5" y="1095" width="1350.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="212.5,1150 1562.5,1150 
+                     1554.5,1158 204.5,1158"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="157.5" y="1127.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L15</text>
+
+    <rect x="222.5" y="1100" width="198.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="321.5" y="1126.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="422.5" y="1100" width="330.0" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="587.5" y="1126.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="754.5" y="1100" width="132.0" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="820.5" y="1126.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="888.5" y="1100" width="396.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1086.5" y="1126.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1286.5" y="1100" width="132.0" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1352.5" y="1126.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="424.5" y="1100.5" width="41.21277026176301" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="465.712770261763" y="1100.5" width="41.377630683467444" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="507.09040094523044" y="1100.5" width="43.36456891440391" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="550.4549698596344" y="1100.5" width="38.931955585006925" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="589.3869254446413" y="1100.5" width="39.484810017150245" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="628.8717354617916" y="1100.5" width="39.958754608690896" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="668.8304900704825" y="1100.5" width="39.861814034221254" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="708.6923041047037" y="1100.5" width="41.80769589529632" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="890.5" y="1100.5" width="67.63387080783183" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="958.1338708078318" y="1100.5" width="67.82090949338082" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1025.9547803012126" y="1100.5" width="63.14239771165817" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1089.0971780128707" y="1100.5" width="63.70361730160964" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1152.8007953144804" y="1100.5" width="64.79809014646456" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1217.598885460945" y="1100.5" width="64.901114539055" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_16">
+    <!-- 3D底板 -->
+    <rect x="216.66666666666666" y="1160" width="1333.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="216.66666666666666,1215 1550.0000000000002,1215 
+                     1542.0000000000002,1223 208.66666666666666,1223"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="161.66666666666666" y="1192.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L16</text>
+
+    <rect x="226.66666666666666" y="1165" width="195.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="324.41666666666663" y="1191.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="424.16666666666663" y="1165" width="325.83333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="587.0833333333333" y="1191.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="752.0" y="1165" width="130.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="817.1666666666666" y="1191.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="884.3333333333334" y="1165" width="391.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1079.8333333333335" y="1191.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1277.3333333333335" y="1165" width="130.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1342.5000000000002" y="1191.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="426.16666666666663" y="1165.5" width="40.25425341553684" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="466.42092008220345" y="1165.5" width="40.34301037056332" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="506.7639304527668" y="1165.5" width="41.89616670290719" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="548.660097155674" y="1165.5" width="38.86388210766359" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="587.5239792633375" y="1165.5" width="39.43646822275013" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="626.9604474860877" y="1165.5" width="39.686821747151235" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="666.647269233239" y="1165.5" width="38.84468337479353" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="705.4919526080325" y="1165.5" width="42.508047391967544" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="886.3333333333334" y="1165.5" width="65.02588071242776" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="951.3592140457612" y="1165.5" width="66.53162351930898" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1017.8908375650701" y="1165.5" width="63.67875643466826" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1081.5695939997383" y="1165.5" width="65.0267733228413" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1146.5963673225797" y="1165.5" width="63.03906690064524" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1209.6354342232248" y="1165.5" width="63.69789911010848" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_17">
+    <!-- 3D底板 -->
+    <rect x="220.83333333333334" y="1225" width="1316.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="220.83333333333334,1280 1537.4999999999998,1280 
+                     1529.4999999999998,1288 212.83333333333334,1288"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="165.83333333333334" y="1257.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L17</text>
+
+    <rect x="230.83333333333334" y="1230" width="192.99999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="327.3333333333333" y="1256.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="425.8333333333333" y="1230" width="321.66666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="586.6666666666666" y="1256.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="749.5" y="1230" width="128.66666666666669" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="813.8333333333334" y="1256.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="880.1666666666667" y="1230" width="385.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1073.1666666666667" y="1256.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1268.1666666666667" y="1230" width="128.66666666666669" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1332.5" y="1256.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="427.8333333333333" y="1230.5" width="40.19723533629523" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="468.03056866962856" y="1230.5" width="40.05001104412329" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="508.08057971375183" y="1230.5" width="40.827694567598705" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="548.9082742813505" y="1230.5" width="38.80636277656522" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="587.7146370579158" y="1230.5" width="38.517050102391835" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="626.2316871603076" y="1230.5" width="39.058211552918024" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="665.2898987132256" y="1230.5" width="38.87300483090303" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="704.1629035441287" y="1230.5" width="41.33709645587132" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="882.1666666666667" y="1230.5" width="63.75256289707858" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="945.9192295637454" y="1230.5" width="64.91852256892452" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1010.83775213267" y="1230.5" width="64.15463637435838" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1074.9923885070284" y="1230.5" width="64.09125087404766" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1139.083639381076" y="1230.5" width="61.585266575336306" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1200.6689059564123" y="1230.5" width="63.49776071025453" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_18">
+    <!-- 3D底板 -->
+    <rect x="225.0" y="1290" width="1300.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="225.0,1345 1525.0,1345 
+                     1517.0,1353 217.0,1353"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="170.0" y="1322.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L18</text>
+
+    <rect x="235.0" y="1295" width="190.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="330.25" y="1321.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="427.5" y="1295" width="317.5" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="586.25" y="1321.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="747.0" y="1295" width="127.00000000000001" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="810.5" y="1321.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="876.0" y="1295" width="381.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1066.5" y="1321.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1259.0" y="1295" width="127.00000000000001" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1322.5" y="1321.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="429.5" y="1295.5" width="39.29570991127194" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="468.79570991127196" y="1295.5" width="39.16125101515082" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="507.95696092642277" y="1295.5" width="39.51887420394986" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="547.4758351303726" y="1295.5" width="38.79653350205377" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="586.2723686324264" y="1295.5" width="38.44075055376082" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="624.7131191861872" y="1295.5" width="39.95089754685877" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="664.664016733046" y="1295.5" width="38.77736803935174" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="703.4413847723977" y="1295.5" width="39.558615227602296" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="878.0" y="1295.5" width="62.42138522096975" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="940.4213852209698" y="1295.5" width="62.90491055336582" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1003.3262957743357" y="1295.5" width="63.48793508203488" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1066.8142308563706" y="1295.5" width="63.291962054175336" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1130.106192910546" y="1295.5" width="62.450301390992834" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1192.5564943015388" y="1295.5" width="62.44350569846135" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_19">
+    <!-- 3D底板 -->
+    <rect x="229.16666666666666" y="1355" width="1283.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="229.16666666666666,1410 1512.5000000000002,1410 
+                     1504.5000000000002,1418 221.16666666666666,1418"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="174.16666666666666" y="1387.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L19</text>
+
+    <rect x="239.16666666666666" y="1360" width="188.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="333.16666666666663" y="1386.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="429.16666666666663" y="1360" width="313.33333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="585.8333333333333" y="1386.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="744.5" y="1360" width="125.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="807.1666666666666" y="1386.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="871.8333333333334" y="1360" width="376.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1059.8333333333335" y="1386.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1249.8333333333335" y="1360" width="125.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1312.5000000000002" y="1386.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="431.16666666666663" y="1360.5" width="38.89793995734161" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="470.06460662400826" y="1360.5" width="38.502104328034" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="508.5667109520423" y="1360.5" width="38.59962769207817" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="547.1663386441205" y="1360.5" width="38.4807269509738" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="585.6470655950943" y="1360.5" width="38.06288208107309" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="623.7099476761674" y="1360.5" width="39.710264166961835" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="663.4202118431292" y="1360.5" width="38.06246091349703" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="701.4826727566262" y="1360.5" width="39.01732724337384" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="873.8333333333334" y="1360.5" width="63.690793296281704" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="937.5241266296151" y="1360.5" width="63.2741113342435" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1000.7982379638586" y="1360.5" width="61.949726485659475" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1062.7479644495181" y="1360.5" width="61.54915071026615" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1124.2971151597842" y="1360.5" width="60.39907184628049" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1184.6961870060647" y="1360.5" width="61.13714632726869" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_20">
+    <!-- 3D底板 -->
+    <rect x="233.33333333333334" y="1420" width="1266.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="233.33333333333334,1475 1499.9999999999998,1475 
+                     1491.9999999999998,1483 225.33333333333334,1483"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="178.33333333333334" y="1452.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L20</text>
+
+    <rect x="243.33333333333334" y="1425" width="185.49999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="336.0833333333333" y="1451.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="430.8333333333333" y="1425" width="309.16666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="585.4166666666666" y="1451.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="742.0" y="1425" width="123.66666666666667" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="803.8333333333334" y="1451.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="867.6666666666666" y="1425" width="370.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1053.1666666666665" y="1451.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1240.6666666666665" y="1425" width="123.66666666666667" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1302.4999999999998" y="1451.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="432.8333333333333" y="1425.5" width="36.23563213435243" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="469.06896546768576" y="1425.5" width="36.44582418820402" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="505.5147896558898" y="1425.5" width="38.22586706294421" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="543.740656718834" y="1425.5" width="38.503703635306564" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="582.2443603541406" y="1425.5" width="38.71837088927223" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="620.9627312434128" y="1425.5" width="39.03800453274385" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="660.0007357761566" y="1425.5" width="37.93014849563959" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="697.9308842717962" y="1425.5" width="40.06911572820371" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="869.6666666666666" y="1425.5" width="62.632153664512664" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="932.2988203311793" y="1425.5" width="61.03642279466566" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="993.335243125845" y="1425.5" width="61.19046918353649" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1054.5257123093816" y="1425.5" width="62.087669602040876" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1116.6133819114225" y="1425.5" width="60.04803677624793" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1176.6614186876704" y="1425.5" width="60.0052479789963" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_21">
+    <!-- 3D底板 -->
+    <rect x="237.5" y="1485" width="1250.0" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="237.5,1540 1487.5,1540 
+                     1479.5,1548 229.5,1548"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="182.5" y="1517.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L21</text>
+
+    <rect x="247.5" y="1490" width="183.0" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="339.0" y="1516.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="432.5" y="1490" width="305.0" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="585.0" y="1516.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="739.5" y="1490" width="122.00000000000001" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="800.5" y="1516.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="863.5" y="1490" width="366.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1046.5" y="1516.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1231.5" y="1490" width="122.00000000000001" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1292.5" y="1516.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="434.5" y="1490.5" width="35.30594704807895" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="469.80594704807896" y="1490.5" width="35.66755568050735" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="505.4735027285863" y="1490.5" width="37.10357902587426" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="542.5770817544606" y="1490.5" width="38.45797047443507" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="581.0350522288957" y="1490.5" width="38.92273996135787" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="619.9577921902535" y="1490.5" width="38.480826773140194" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="658.4386189633937" y="1490.5" width="38.24184932697672" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="696.6804682903704" y="1490.5" width="38.819531709629594" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="865.5" y="1490.5" width="63.416142664578906" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="928.916142664579" y="1490.5" width="59.226766265893104" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="988.142908930472" y="1490.5" width="60.1785680267864" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1048.3214769572585" y="1490.5" width="60.627654826550014" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1108.9491317838085" y="1490.5" width="59.98862191502733" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1168.9377536988359" y="1490.5" width="58.56224630116424" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_22">
+    <!-- 3D底板 -->
+    <rect x="241.66666666666666" y="1550" width="1233.3333333333335" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="241.66666666666666,1605 1475.0000000000002,1605 
+                     1467.0000000000002,1613 233.66666666666666,1613"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="186.66666666666666" y="1582.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L22</text>
+
+    <rect x="251.66666666666666" y="1555" width="180.5" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="341.91666666666663" y="1581.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="434.16666666666663" y="1555" width="300.83333333333337" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="584.5833333333333" y="1581.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="737.0" y="1555" width="120.33333333333334" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="797.1666666666666" y="1581.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="859.3333333333334" y="1555" width="361.0" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1039.8333333333335" y="1581.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1222.3333333333335" y="1555" width="120.33333333333334" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1282.5000000000002" y="1581.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="436.16666666666663" y="1555.5" width="34.250692375200394" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="470.41735904186703" y="1555.5" width="34.65660243089973" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="505.07396147276677" y="1555.5" width="36.25224575682603" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="541.3262072295928" y="1555.5" width="38.71854299254298" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="580.0447502221358" y="1555.5" width="38.78512936679634" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="618.8298795889322" y="1555.5" width="37.94389128955008" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="656.7737708784822" y="1555.5" width="38.27600887923505" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="695.0497797577173" y="1555.5" width="37.95022024228278" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="861.3333333333334" y="1555.5" width="61.8074060408158" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="923.1407393741491" y="1555.5" width="56.796438043809395" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="979.9371774179585" y="1555.5" width="59.650646750529" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1039.5878241684875" y="1555.5" width="60.41907150087474" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1100.0068956693622" y="1555.5" width="60.462622459500956" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1160.4695181288632" y="1555.5" width="57.86381520447014" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+
+  <g id="layer_23">
+    <!-- 3D底板 -->
+    <rect x="245.83333333333334" y="1615" width="1216.6666666666665" height="55" 
+          fill="#1e293b" stroke="#475569" stroke-width="1" rx="4" opacity="0.7"/>
+    <polygon points="245.83333333333334,1670 1462.4999999999998,1670 
+                     1454.4999999999998,1678 237.83333333333334,1678"
+          fill="#0f172a" stroke="#334155" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- 层标签 -->
+    <text x="190.83333333333334" y="1647.5" text-anchor="end" 
+          font-size="12" font-weight="bold" fill="#fbbf24">L23</text>
+
+    <rect x="255.83333333333334" y="1620" width="177.99999999999997" height="45" 
+          fill="url(#grad_embedding)" stroke="#6366f1" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="344.8333333333333" y="1646.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">EMB</text>
+
+    <rect x="435.8333333333333" y="1620" width="296.66666666666663" height="45" 
+          fill="url(#grad_attention)" stroke="#8b5cf6" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="584.1666666666666" y="1646.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">ATTN</text>
+
+    <rect x="734.5" y="1620" width="118.66666666666667" height="45" 
+          fill="url(#grad_add_norm_1)" stroke="#f59e0b" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="793.8333333333334" y="1646.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM1</text>
+
+    <rect x="855.1666666666666" y="1620" width="355.99999999999994" height="45" 
+          fill="url(#grad_ffn)" stroke="#10b981" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1033.1666666666665" y="1646.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">FFN</text>
+
+    <rect x="1213.1666666666665" y="1620" width="118.66666666666667" height="45" 
+          fill="url(#grad_add_norm_2)" stroke="#06b6d4" stroke-width="0.5" rx="2" filter="url(#glow)"/>
+    <text x="1272.4999999999998" y="1646.5" text-anchor="middle" 
+          font-size="9" fill="white" font-weight="bold">NORM2</text>
+
+    <rect x="437.8333333333333" y="1620.5" width="38.334370401848744" height="16.5" 
+          fill="#ef4444" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="476.16770373518204" y="1620.5" width="39.665418270727734" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="515.8331220059098" y="1620.5" width="33.65868255539958" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="549.4918045613093" y="1620.5" width="38.49769913720989" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="587.9895036985192" y="1620.5" width="37.229774435708784" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="625.219278134228" y="1620.5" width="35.39615672078597" height="16.5" 
+          fill="#a855f7" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="660.615434855014" y="1620.5" width="37.52859040223362" height="16.5" 
+          fill="#f97316" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="698.1440252572476" y="1620.5" width="32.3559747427523" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="857.1666666666666" y="1620.5" width="62.67809816524991" height="16.5" 
+          fill="#3b82f6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="919.8447648319166" y="1620.5" width="60.50599856439531" height="16.5" 
+          fill="#10b981" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="980.3507633963119" y="1620.5" width="59.5017897441683" height="16.5" 
+          fill="#8b5cf6" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1039.8525531404803" y="1620.5" width="56.31759352955038" height="16.5" 
+          fill="#f59e0b" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1096.1701466700306" y="1620.5" width="57.8893197776699" height="16.5" 
+          fill="#22c55e" opacity="0.8" rx="1" filter="url(#glow)"/>
+
+    <rect x="1154.0594664477005" y="1620.5" width="55.107200218966156" height="16.5" 
+          fill="#ec4899" opacity="0.8" rx="1" filter="url(#glow)"/>
+  </g>
+  <line x1="950.0" y1="175.0" x2="945.8" y2="185.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="945.8" y1="240.0" x2="941.7" y2="250.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="941.7" y1="305.0" x2="937.5" y2="315.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="937.5" y1="370.0" x2="933.3" y2="380.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="933.3" y1="435.0" x2="929.2" y2="445.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="929.2" y1="500.0" x2="925.0" y2="510.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="925.0" y1="565.0" x2="920.8" y2="575.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="920.8" y1="630.0" x2="916.7" y2="640.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="916.7" y1="695.0" x2="912.5" y2="705.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="912.5" y1="760.0" x2="908.3" y2="770.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="908.3" y1="825.0" x2="904.2" y2="835.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="904.2" y1="890.0" x2="900.0" y2="900.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="900.0" y1="955.0" x2="895.8" y2="965.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="895.8" y1="1020.0" x2="891.7" y2="1030.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="891.7" y1="1085.0" x2="887.5" y2="1095.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="887.5" y1="1150.0" x2="883.3" y2="1160.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="883.3" y1="1215.0" x2="879.2" y2="1225.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="879.2" y1="1280.0" x2="875.0" y2="1290.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="875.0" y1="1345.0" x2="870.8" y2="1355.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="870.8" y1="1410.0" x2="866.7" y2="1420.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="866.7" y1="1475.0" x2="862.5" y2="1485.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="862.5" y1="1540.0" x2="858.3" y2="1550.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <line x1="858.3" y1="1605.0" x2="854.2" y2="1615.0" stroke="#475569" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <text x="65" y="380" font-size="11" font-weight="bold" fill="#60a5fa" transform="rotate(-90, 65, 380)">SHALLOW</text>
+  <text x="65" y="900" font-size="11" font-weight="bold" fill="#34d399" transform="rotate(-90, 65, 900)">MIDDLE</text>
+  <text x="65" y="1420" font-size="11" font-weight="bold" fill="#f472b6" transform="rotate(-90, 65, 1420)">DEEP</text>
+
+  <rect x="2105" y="105" width="260" height="320" fill="#0f172a" fill-opacity="0.9" rx="8" stroke="#334155" stroke-width="1"/>
+  <text x="2120" y="125" font-size="14" font-weight="bold" fill="white">Components</text>
+  <rect x="2120" y="145" width="16" height="16" fill="#6366f1" rx="3" filter="url(#glow)"/>
+  <text x="2144" y="157" font-size="11" fill="#cbd5e1">Embedding</text>
+  <rect x="2120" y="167" width="16" height="16" fill="#8b5cf6" rx="3" filter="url(#glow)"/>
+  <text x="2144" y="179" font-size="11" fill="#cbd5e1">Multi-Head Attention</text>
+  <rect x="2120" y="189" width="16" height="16" fill="#f59e0b" rx="3" filter="url(#glow)"/>
+  <text x="2144" y="201" font-size="11" fill="#cbd5e1">Add & Norm 1</text>
+  <rect x="2120" y="211" width="16" height="16" fill="#10b981" rx="3" filter="url(#glow)"/>
+  <text x="2144" y="223" font-size="11" fill="#cbd5e1">Feed Forward</text>
+  <rect x="2120" y="233" width="16" height="16" fill="#06b6d4" rx="3" filter="url(#glow)"/>
+  <text x="2144" y="245" font-size="11" fill="#cbd5e1">Add & Norm 2</text>
+  <text x="2120" y="265" font-size="12" font-weight="bold" fill="#60a5fa">Languages</text>
+  <rect x="2120" y="285" width="12" height="12" fill="#ef4444" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="294" font-size="9" fill="#cbd5e1">中文</text>
+  <rect x="2120" y="303" width="12" height="12" fill="#3b82f6" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="312" font-size="9" fill="#cbd5e1">英文</text>
+  <rect x="2120" y="321" width="12" height="12" fill="#ec4899" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="330" font-size="9" fill="#cbd5e1">日文</text>
+  <rect x="2120" y="339" width="12" height="12" fill="#8b5cf6" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="348" font-size="9" fill="#cbd5e1">法文</text>
+  <rect x="2120" y="357" width="12" height="12" fill="#f59e0b" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="366" font-size="9" fill="#cbd5e1">德文</text>
+  <rect x="2120" y="375" width="12" height="12" fill="#a855f7" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="384" font-size="9" fill="#cbd5e1">俄文</text>
+  <rect x="2120" y="393" width="12" height="12" fill="#f97316" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="402" font-size="9" fill="#cbd5e1">西班牙文</text>
+  <rect x="2120" y="411" width="12" height="12" fill="#10b981" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="420" font-size="9" fill="#cbd5e1">韩文</text>
+  <text x="2120" y="355" font-size="12" font-weight="bold" fill="#34d399">Capabilities</text>
+  <rect x="2120" y="375" width="12" height="12" fill="#3b82f6" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="384" font-size="9" fill="#cbd5e1">数学推理</text>
+  <rect x="2120" y="393" width="12" height="12" fill="#10b981" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="402" font-size="9" fill="#cbd5e1">逻辑推理</text>
+  <rect x="2120" y="411" width="12" height="12" fill="#8b5cf6" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="420" font-size="9" fill="#cbd5e1">物理</text>
+  <rect x="2120" y="429" width="12" height="12" fill="#f59e0b" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="438" font-size="9" fill="#cbd5e1">历史</text>
+  <rect x="2120" y="447" width="12" height="12" fill="#22c55e" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="456" font-size="9" fill="#cbd5e1">地理</text>
+  <rect x="2120" y="465" width="12" height="12" fill="#ec4899" rx="2" filter="url(#glow)"/>
+  <text x="2138" y="474" font-size="9" fill="#cbd5e1">文学</text>
+
+  <text x="1200" y="1970" text-anchor="middle" font-size="11" fill="#475569">
+    Each layer: Embedding → Multi-Head Attention → Add&Norm → FFN → Add&Norm · Colors show gradient sensitivity
+  </text>
+  <text x="1200" y="1988" text-anchor="middle" font-size="10" fill="#475569">
+    Generated: 2026-05-17 11:39:47
+  </text>
+</svg>

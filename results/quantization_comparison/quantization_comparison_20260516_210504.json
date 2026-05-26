@@ -1,0 +1,180 @@
+{
+  "timestamp": "20260516_210504",
+  "f16": {
+    "file": "qwen35-0.8b-f16.gguf",
+    "size_mb": 1446.4804077148438
+  },
+  "q8_0": {
+    "file": "qwen35-0.8b-q8_0.gguf",
+    "size_mb": 774.2343139648438
+  },
+  "test_results": {
+    "F16": {
+      "size_mb": 1446.4804077148438,
+      "suites": {
+        "\u6570\u5b66\u63a8\u7406": {
+          "accuracy": 0.0,
+          "avg_time_ms": 5795.07598633063,
+          "correct": 0,
+          "total": 3
+        },
+        "\u903b\u8f91\u63a8\u7406": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5916.6795414930675,
+          "correct": 2,
+          "total": 2
+        },
+        "\u7269\u7406": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5906.0207914881175,
+          "correct": 2,
+          "total": 2
+        },
+        "\u4e2d\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4731.0362914868165,
+          "correct": 2,
+          "total": 2
+        },
+        "\u82f1\u6587": {
+          "accuracy": 0.5,
+          "avg_time_ms": 5916.727458490641,
+          "correct": 1,
+          "total": 2
+        },
+        "\u65e5\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5939.814416982699,
+          "correct": 1,
+          "total": 1
+        },
+        "\u6cd5\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4364.180916978512,
+          "correct": 1,
+          "total": 1
+        },
+        "\u5fb7\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4635.341499990318,
+          "correct": 1,
+          "total": 1
+        },
+        "\u5386\u53f2": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2512.9457705043023,
+          "correct": 2,
+          "total": 2
+        },
+        "\u5730\u7406": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3497.166749992175,
+          "correct": 1,
+          "total": 1
+        }
+      },
+      "aggregates": {
+        "STEM": {
+          "accuracy": 0.6666666666666666,
+          "avg_time_ms": 5872.5921064372715
+        },
+        "\u4fdd\u7559\u8bed\u8a00": {
+          "accuracy": 0.8333333333333334,
+          "avg_time_ms": 5529.192722320052
+        },
+        "\u9057\u5fd8\u8bed\u8a00": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4499.761208484415
+        },
+        "\u4eba\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3005.0562602482387
+        }
+      }
+    },
+    "Q8_0": {
+      "size_mb": 774.2343139648438,
+      "suites": {
+        "\u6570\u5b66\u63a8\u7406": {
+          "accuracy": 0.3333333333333333,
+          "avg_time_ms": 4646.094861333647,
+          "correct": 1,
+          "total": 3
+        },
+        "\u903b\u8f91\u63a8\u7406": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4606.368771012058,
+          "correct": 2,
+          "total": 2
+        },
+        "\u7269\u7406": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4660.8320834930055,
+          "correct": 2,
+          "total": 2
+        },
+        "\u4e2d\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4231.584645502153,
+          "correct": 2,
+          "total": 2
+        },
+        "\u82f1\u6587": {
+          "accuracy": 0.5,
+          "avg_time_ms": 4604.297979007242,
+          "correct": 1,
+          "total": 2
+        },
+        "\u65e5\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4597.3306669911835,
+          "correct": 1,
+          "total": 1
+        },
+        "\u6cd5\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3388.352042005863,
+          "correct": 1,
+          "total": 1
+        },
+        "\u5fb7\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3576.560415996937,
+          "correct": 1,
+          "total": 1
+        },
+        "\u5386\u53f2": {
+          "accuracy": 1.0,
+          "avg_time_ms": 1854.2904994974378,
+          "correct": 2,
+          "total": 2
+        },
+        "\u5730\u7406": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2622.002000018256,
+          "correct": 1,
+          "total": 1
+        }
+      },
+      "aggregates": {
+        "STEM": {
+          "accuracy": 0.7777777777777777,
+          "avg_time_ms": 4637.765238612904
+        },
+        "\u4fdd\u7559\u8bed\u8a00": {
+          "accuracy": 0.8333333333333334,
+          "avg_time_ms": 4477.7377638335265
+        },
+        "\u9057\u5fd8\u8bed\u8a00": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3482.4562290014
+        },
+        "\u4eba\u6587": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2238.146249757847
+        }
+      }
+    }
+  },
+  "total_time_min": 3.0346484661102293
+}

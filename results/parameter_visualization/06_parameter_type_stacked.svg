@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 480" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafafa"/>
+      <stop offset="100%" style="stop-color:#f0f0f0"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="620" height="480" fill="url(#bg)"/>
+  <text x="310" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">Parameter Type Dimension: Gradient Distribution</text>
+  <rect x="120" y="362.9156200128915" width="60" height="17.084379987108495" fill="#3b82f6" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="376.0" text-anchor="middle" font-size="9" fill="white">5.7%</text>
+  <rect x="120" y="344.76020082146414" width="60" height="18.155419191427363" fill="#60a5fa" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="357.9156200128915" text-anchor="middle" font-size="9" fill="white">6.1%</text>
+  <rect x="120" y="324.74796801153445" width="60" height="20.012232809929692" fill="#dc2626" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="338.76020082146414" text-anchor="middle" font-size="9" fill="white">6.7%</text>
+  <rect x="120" y="304.53677615256595" width="60" height="20.211191858968476" fill="#8b5cf6" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="318.74796801153445" text-anchor="middle" font-size="9" fill="white">6.7%</text>
+  <rect x="120" y="284.05775307168955" width="60" height="20.479023080876416" fill="#ef4444" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="298.53677615256595" text-anchor="middle" font-size="9" fill="white">6.8%</text>
+  <rect x="120" y="263.1323642215472" width="60" height="20.92538885014232" fill="#059669" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="278.05775307168955" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="120" y="241.76913026200685" width="60" height="21.363233959540377" fill="#f59e0b" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="257.1323642215472" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="120" y="219.5048028996867" width="60" height="22.26432736232016" fill="#c4b5fd" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="234.76913026200685" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <rect x="120" y="197.22416014028582" width="60" height="22.280642759400887" fill="#fbbf24" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="212.5048028996867" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <rect x="120" y="174.93537509685035" width="60" height="22.288785043435475" fill="#34d399" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="190.22416014028582" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <rect x="120" y="152.63030380472014" width="60" height="22.30507129213022" fill="#a78bfa" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="167.93537509685035" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <rect x="120" y="129.97627292741387" width="60" height="22.65403087730627" fill="#f87171" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="145.63030380472014" text-anchor="middle" font-size="9" fill="white">7.6%</text>
+  <rect x="120" y="105.51645860956003" width="60" height="24.45981431785384" fill="#10b981" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="121.97627292741387" text-anchor="middle" font-size="9" fill="white">8.2%</text>
+  <rect x="120" y="80.00000300000073" width="60" height="25.51645560955931" fill="#2563eb" stroke="#fff" stroke-width="0.5"/>
+  <text x="150" y="97.51645860956003" text-anchor="middle" font-size="9" fill="white">8.5%</text>
+  <text x="150" y="395" text-anchor="middle" font-size="11" fill="#333">Embedding</text>
+  <rect x="210" y="359.64317331623175" width="60" height="20.356826683768237" fill="#c4b5fd" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="374.0" text-anchor="middle" font-size="9" fill="white">6.8%</text>
+  <rect x="210" y="339.1445307707591" width="60" height="20.498642545472674" fill="#059669" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="353.64317331623175" text-anchor="middle" font-size="9" fill="white">6.8%</text>
+  <rect x="210" y="318.22922661628047" width="60" height="20.915304154478637" fill="#60a5fa" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="333.1445307707591" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="210" y="297.1654248919693" width="60" height="21.063801724311183" fill="#dc2626" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="312.22922661628047" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="210" y="276.06641000455977" width="60" height="21.099014887409513" fill="#a78bfa" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="291.1654248919693" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="210" y="254.60796382902393" width="60" height="21.45844617553583" fill="#10b981" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="270.06641000455977" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="210" y="233.1270063209664" width="60" height="21.48095750805755" fill="#8b5cf6" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="248.60796382902393" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="210" y="211.60848166967597" width="60" height="21.518524651290424" fill="#ef4444" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="227.1270063209664" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="210" y="190.02603289106196" width="60" height="21.58244877861401" fill="#34d399" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="205.60848166967597" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="210" y="168.44322992417642" width="60" height="21.582802966885538" fill="#f87171" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="184.02603289106196" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="210" y="146.7681440053378" width="60" height="21.675085918838608" fill="#3b82f6" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="162.44322992417642" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="210" y="124.98915144833654" width="60" height="21.77899255700126" fill="#2563eb" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="140.7681440053378" text-anchor="middle" font-size="9" fill="white">7.3%</text>
+  <rect x="210" y="103.00464770101473" width="60" height="21.98450374732181" fill="#f59e0b" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="118.98915144833654" text-anchor="middle" font-size="9" fill="white">7.3%</text>
+  <rect x="210" y="80.00000299999999" width="60" height="23.004644701014747" fill="#fbbf24" stroke="#fff" stroke-width="0.5"/>
+  <text x="240" y="96.00464770101473" text-anchor="middle" font-size="9" fill="white">7.7%</text>
+  <text x="240" y="395" text-anchor="middle" font-size="11" fill="#333">Other</text>
+  <rect x="300" y="359.05232506551846" width="60" height="20.947674934481554" fill="#2563eb" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="374.0" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="300" y="338.09082185128335" width="60" height="20.961503214235083" fill="#10b981" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="353.05232506551846" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="300" y="317.10464889400276" width="60" height="20.98617295728061" fill="#ef4444" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="332.09082185128335" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="300" y="296.07363760363506" width="60" height="21.031011290367726" fill="#dc2626" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="311.10464889400276" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="300" y="275.0233639595267" width="60" height="21.050273644108337" fill="#059669" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="290.07363760363506" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="300" y="253.88536777271668" width="60" height="21.137996186810017" fill="#f87171" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="269.0233639595267" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="300" y="232.72789361212907" width="60" height="21.157474160587615" fill="#c4b5fd" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="247.88536777271668" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="300" y="211.38166646193116" width="60" height="21.34622715019791" fill="#3b82f6" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="226.72789361212907" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="300" y="189.94745095529035" width="60" height="21.434215506640804" fill="#34d399" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="205.38166646193116" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="300" y="168.489046338177" width="60" height="21.45840461711337" fill="#60a5fa" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="183.94745095529035" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="300" y="146.67122105167928" width="60" height="21.817825286497705" fill="#8b5cf6" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="162.489046338177" text-anchor="middle" font-size="9" fill="white">7.3%</text>
+  <rect x="300" y="124.461740078667" width="60" height="22.20948097301228" fill="#a78bfa" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="139.67122105167928" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <rect x="300" y="102.23567595318308" width="60" height="22.226064125483934" fill="#f59e0b" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="117.461740078667" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <rect x="300" y="80.00000300002272" width="60" height="22.235672953160357" fill="#fbbf24" stroke="#fff" stroke-width="0.5"/>
+  <text x="330" y="95.23567595318308" text-anchor="middle" font-size="9" fill="white">7.4%</text>
+  <text x="330" y="395" text-anchor="middle" font-size="11" fill="#333">LayerNorm</text>
+  <rect x="390" y="359.031724986457" width="60" height="20.96827501354299" fill="#2563eb" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="374.0" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="390" y="337.85809847511985" width="60" height="21.17362651133715" fill="#10b981" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="353.031724986457" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="316.66811314523216" width="60" height="21.18998532988767" fill="#3b82f6" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="331.85809847511985" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="295.4406356730903" width="60" height="21.227477472141842" fill="#34d399" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="310.66811314523216" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="274.1827395064891" width="60" height="21.257896166601224" fill="#fbbf24" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="289.4406356730903" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="252.78664502342752" width="60" height="21.39609448306158" fill="#ef4444" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="268.1827395064891" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="231.3770860164265" width="60" height="21.409559007001036" fill="#f87171" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="246.78664502342752" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="209.96677591714047" width="60" height="21.41031009928601" fill="#60a5fa" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="225.3770860164265" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="188.55357380063182" width="60" height="21.41320211650864" fill="#f59e0b" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="203.96677591714047" text-anchor="middle" font-size="9" fill="white">7.1%</text>
+  <rect x="390" y="167.05343123269444" width="60" height="21.500142567937402" fill="#8b5cf6" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="182.55357380063182" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="390" y="145.46398256682545" width="60" height="21.589448665869" fill="#059669" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="161.05343123269444" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="390" y="123.77906162582727" width="60" height="21.68492094099819" fill="#a78bfa" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="139.46398256682545" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="390" y="101.94398651093783" width="60" height="21.83507511488943" fill="#dc2626" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="117.77906162582727" text-anchor="middle" font-size="9" fill="white">7.3%</text>
+  <rect x="390" y="80.00000299999999" width="60" height="21.943983510937848" fill="#c4b5fd" stroke="#fff" stroke-width="0.5"/>
+  <text x="420" y="95.94398651093783" text-anchor="middle" font-size="9" fill="white">7.3%</text>
+  <text x="420" y="395" text-anchor="middle" font-size="11" fill="#333">MLP</text>
+  <rect x="480" y="361.5854819794028" width="60" height="18.414518020597225" fill="#fbbf24" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="375.0" text-anchor="middle" font-size="9" fill="white">6.1%</text>
+  <rect x="480" y="342.57234854609004" width="60" height="19.01313343331274" fill="#dc2626" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="356.5854819794028" text-anchor="middle" font-size="9" fill="white">6.3%</text>
+  <rect x="480" y="322.5862678217148" width="60" height="19.986080724375235" fill="#c4b5fd" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="337.57234854609004" text-anchor="middle" font-size="9" fill="white">6.7%</text>
+  <rect x="480" y="302.5935404914662" width="60" height="19.992727330248634" fill="#f59e0b" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="317.5862678217148" text-anchor="middle" font-size="9" fill="white">6.7%</text>
+  <rect x="480" y="282.4755644269642" width="60" height="20.117976064502002" fill="#a78bfa" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="296.5935404914662" text-anchor="middle" font-size="9" fill="white">6.7%</text>
+  <rect x="480" y="261.7653189474941" width="60" height="20.71024547947007" fill="#8b5cf6" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="276.4755644269642" text-anchor="middle" font-size="9" fill="white">6.9%</text>
+  <rect x="480" y="240.65472308227413" width="60" height="21.11059586521999" fill="#f87171" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="255.7653189474941" text-anchor="middle" font-size="9" fill="white">7.0%</text>
+  <rect x="480" y="219.16398401123115" width="60" height="21.490739071042995" fill="#ef4444" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="234.65472308227413" text-anchor="middle" font-size="9" fill="white">7.2%</text>
+  <rect x="480" y="196.47517580424167" width="60" height="22.68880820698949" fill="#059669" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="212.16398401123115" text-anchor="middle" font-size="9" fill="white">7.6%</text>
+  <rect x="480" y="173.7825184577927" width="60" height="22.692657346448982" fill="#34d399" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="189.47517580424167" text-anchor="middle" font-size="9" fill="white">7.6%</text>
+  <rect x="480" y="150.83101066392067" width="60" height="22.951507793872032" fill="#3b82f6" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="166.7825184577927" text-anchor="middle" font-size="9" fill="white">7.7%</text>
+  <rect x="480" y="127.67179565587305" width="60" height="23.15921500804761" fill="#60a5fa" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="143.83101066392067" text-anchor="middle" font-size="9" fill="white">7.7%</text>
+  <rect x="480" y="104.24725538042549" width="60" height="23.424540275447576" fill="#10b981" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="120.67179565587305" text-anchor="middle" font-size="9" fill="white">7.8%</text>
+  <rect x="480" y="80.00000300000004" width="60" height="24.247252380425454" fill="#2563eb" stroke="#fff" stroke-width="0.5"/>
+  <text x="510" y="96.24725538042549" text-anchor="middle" font-size="9" fill="white">8.1%</text>
+  <text x="510" y="395" text-anchor="middle" font-size="11" fill="#333">Self-Attention</text>
+  <text x="590" y="100" font-size="12" font-weight="bold" fill="#333">维度</text>
+  <rect x="590" y="120" width="12" height="12" fill="#059669"/>
+  <text x="608" y="130" font-size="10" fill="#333">中文</text>
+  <rect x="590" y="138" width="12" height="12" fill="#c4b5fd"/>
+  <text x="608" y="148" font-size="10" fill="#333">俄文</text>
+  <rect x="590" y="156" width="12" height="12" fill="#dc2626"/>
+  <text x="608" y="166" font-size="10" fill="#333">历史</text>
+  <rect x="590" y="174" width="12" height="12" fill="#ef4444"/>
+  <text x="608" y="184" font-size="10" fill="#333">地理</text>
+  <rect x="590" y="192" width="12" height="12" fill="#a78bfa"/>
+  <text x="608" y="202" font-size="10" fill="#333">德文</text>
+  <rect x="590" y="210" width="12" height="12" fill="#2563eb"/>
+  <text x="608" y="220" font-size="10" fill="#333">数学推理</text>
+  <rect x="590" y="228" width="12" height="12" fill="#f87171"/>
+  <text x="608" y="238" font-size="10" fill="#333">文学</text>
+  <rect x="590" y="246" width="12" height="12" fill="#34d399"/>
+  <text x="608" y="256" font-size="10" fill="#333">日文</text>
+  <rect x="590" y="264" width="12" height="12" fill="#8b5cf6"/>
+  <text x="608" y="274" font-size="10" fill="#333">法文</text>
+  <rect x="590" y="282" width="12" height="12" fill="#60a5fa"/>
+  <text x="608" y="292" font-size="10" fill="#333">物理</text>
+  <rect x="590" y="300" width="12" height="12" fill="#10b981"/>
+  <text x="608" y="310" font-size="10" fill="#333">英文</text>
+  <rect x="590" y="318" width="12" height="12" fill="#f59e0b"/>
+  <text x="608" y="328" font-size="10" fill="#333">西班牙文</text>
+  <rect x="590" y="336" width="12" height="12" fill="#3b82f6"/>
+  <text x="608" y="346" font-size="10" fill="#333">逻辑推理</text>
+  <rect x="590" y="354" width="12" height="12" fill="#fbbf24"/>
+  <text x="608" y="364" font-size="10" fill="#333">韩文</text>
+</svg>

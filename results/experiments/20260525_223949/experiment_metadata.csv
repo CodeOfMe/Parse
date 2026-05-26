@@ -1,0 +1,11 @@
+Key,Value
+base_model_path,/home/fred/Documents/GitHub/cycleuser/Daily/研究内容/模型尺寸工程/models/qwen/Qwen3___5-0___8B
+device,cpu
+timestamp,20260525_223949
+strategy,hybrid
+target_sparsity,0.3
+preserve_languages,"zh,en"
+preserve_domains,"stem,logic"
+preserve_scenarios,"function_calling,math"
+output_dir,results/experiments
+save_pruned_model,False

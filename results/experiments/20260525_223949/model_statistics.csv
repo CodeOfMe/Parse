@@ -1,0 +1,9 @@
+Metric,Value
+Original_Params,752393024
+Pruned_Params,666171584
+Param_Reduction_Pct,11.459627780918924
+N_Layers_Original,24
+N_Layers_Pruned,20
+Strategy,hybrid
+Target_Sparsity,0.3
+Elapsed_Seconds,61.77069878578186

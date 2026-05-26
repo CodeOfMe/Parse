@@ -1,0 +1,207 @@
+{
+  "timestamp": "20260516_211019",
+  "f16": {
+    "file": "qwen35-0.8b-f16.gguf",
+    "size_mb": 1446.4804077148438,
+    "suites": {
+      "\u6570\u5b66\u63a8\u7406": {
+        "accuracy": 0.0,
+        "avg_time_ms": 6918.458194336078,
+        "correct": 0,
+        "total": 3
+      },
+      "\u903b\u8f91\u63a8\u7406": {
+        "accuracy": 1.0,
+        "avg_time_ms": 6711.08125000319,
+        "correct": 2,
+        "total": 2
+      },
+      "\u7269\u7406": {
+        "accuracy": 1.0,
+        "avg_time_ms": 6773.128271495807,
+        "correct": 2,
+        "total": 2
+      },
+      "\u4e2d\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 5308.163666515611,
+        "correct": 2,
+        "total": 2
+      },
+      "\u82f1\u6587": {
+        "accuracy": 0.5,
+        "avg_time_ms": 6666.267249995144,
+        "correct": 1,
+        "total": 2
+      },
+      "\u65e5\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 6666.485291003482,
+        "correct": 1,
+        "total": 1
+      },
+      "\u6cd5\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 5148.5743329976685,
+        "correct": 1,
+        "total": 1
+      },
+      "\u5fb7\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 4959.29695898667,
+        "correct": 1,
+        "total": 1
+      },
+      "\u5386\u53f2": {
+        "accuracy": 1.0,
+        "avg_time_ms": 2741.265979493619,
+        "correct": 2,
+        "total": 2
+      },
+      "\u5730\u7406": {
+        "accuracy": 1.0,
+        "avg_time_ms": 3409.1104580147658,
+        "correct": 1,
+        "total": 1
+      }
+    },
+    "aggregates": {
+      "STEM": {
+        "accuracy": 0.6666666666666666,
+        "avg_time_ms": 6800.889238611692
+      },
+      "\u4fdd\u7559\u8bed\u8a00": {
+        "accuracy": 0.8333333333333334,
+        "avg_time_ms": 6213.638735838079
+      },
+      "\u9057\u5fd8\u8bed\u8a00": {
+        "accuracy": 1.0,
+        "avg_time_ms": 5053.935645992169
+      },
+      "\u4eba\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 3075.1882187541923
+      }
+    }
+  },
+  "q8_0": {
+    "file": "qwen35-0.8b-q8_0.gguf",
+    "size_mb": 774.2343139648438,
+    "suites": {
+      "\u6570\u5b66\u63a8\u7406": {
+        "accuracy": 0.3333333333333333,
+        "avg_time_ms": 5108.153680339456,
+        "correct": 1,
+        "total": 3
+      },
+      "\u903b\u8f91\u63a8\u7406": {
+        "accuracy": 1.0,
+        "avg_time_ms": 5225.60756249004,
+        "correct": 2,
+        "total": 2
+      },
+      "\u7269\u7406": {
+        "accuracy": 1.0,
+        "avg_time_ms": 5112.372583011165,
+        "correct": 2,
+        "total": 2
+      },
+      "\u4e2d\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 4756.572354497621,
+        "correct": 2,
+        "total": 2
+      },
+      "\u82f1\u6587": {
+        "accuracy": 0.5,
+        "avg_time_ms": 5204.350958490977,
+        "correct": 1,
+        "total": 2
+      },
+      "\u65e5\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 4987.59245898691,
+        "correct": 1,
+        "total": 1
+      },
+      "\u6cd5\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 3747.542458004318,
+        "correct": 1,
+        "total": 1
+      },
+      "\u5fb7\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 4486.183958011679,
+        "correct": 1,
+        "total": 1
+      },
+      "\u5386\u53f2": {
+        "accuracy": 1.0,
+        "avg_time_ms": 2044.683478990919,
+        "correct": 2,
+        "total": 2
+      },
+      "\u5730\u7406": {
+        "accuracy": 1.0,
+        "avg_time_ms": 2870.4480419983156,
+        "correct": 1,
+        "total": 1
+      }
+    },
+    "aggregates": {
+      "STEM": {
+        "accuracy": 0.7777777777777777,
+        "avg_time_ms": 5148.71127528022
+      },
+      "\u4fdd\u7559\u8bed\u8a00": {
+        "accuracy": 0.8333333333333334,
+        "avg_time_ms": 4982.838590658503
+      },
+      "\u9057\u5fd8\u8bed\u8a00": {
+        "accuracy": 1.0,
+        "avg_time_ms": 4116.863208007999
+      },
+      "\u4eba\u6587": {
+        "accuracy": 1.0,
+        "avg_time_ms": 2457.5657604946173
+      }
+    }
+  },
+  "comparison": {
+    "STEM": {
+      "f16_acc": 0.6666666666666666,
+      "q8_acc": 0.7777777777777777,
+      "acc_diff": 0.11111111111111105,
+      "f16_time": 6800.889238611692,
+      "q8_time": 5148.71127528022,
+      "time_pct": -24.29355787698053
+    },
+    "\u4fdd\u7559\u8bed\u8a00": {
+      "f16_acc": 0.8333333333333334,
+      "q8_acc": 0.8333333333333334,
+      "acc_diff": 0.0,
+      "f16_time": 6213.638735838079,
+      "q8_time": 4982.838590658503,
+      "time_pct": -19.808041592131108
+    },
+    "\u9057\u5fd8\u8bed\u8a00": {
+      "f16_acc": 1.0,
+      "q8_acc": 1.0,
+      "acc_diff": 0.0,
+      "f16_time": 5053.935645992169,
+      "q8_time": 4116.863208007999,
+      "time_pct": -18.541439852469825
+    },
+    "\u4eba\u6587": {
+      "f16_acc": 1.0,
+      "q8_acc": 1.0,
+      "acc_diff": 0.0,
+      "f16_time": 3075.1882187541923,
+      "q8_time": 2457.5657604946173,
+      "time_pct": -20.084053863531768
+    }
+  },
+  "size_reduction_pct": 46.47460761753541,
+  "total_time_min": 2.9792626818021137
+}
