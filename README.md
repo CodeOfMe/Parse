@@ -33,8 +33,10 @@ PARSE quantifies each layer's contribution to every (Language × Discipline × S
 PARSE/
 ├── article.md              # English paper (full)
 ├── article_cn.md           # Chinese paper (full)
+├── literature_review.md    # Literature review (English) — 55 references
+├── 文献综述.md              # Literature review (Chinese) — 55 references
 ├── code/                   # Implementation framework
-│   └── needle_universal/   # Core architecture + trainer
+│   └── parse/              # Core architecture + trainer
 ├── md/                     # Reference papers (Markdown)
 ├── pdf/                    # Reference papers (PDF)
 ├── figures/                # Publication-quality SVG/PDF figures

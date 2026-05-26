@@ -227,7 +227,9 @@ df = pd.read_csv("capability_retention.csv")
 
 - **论文 (英文)**: `article.md`
 - **论文 (中文)**: `article_cn.md`
-- **代码**: `code/needle_universal/`
+- **代码**: `code/parse/`
 - **入口**: `run_experiment.py`
-- **文献**: `md/` 目录
+- **文献综述 (英文)**: `literature_review.md`
+- **文献综述 (中文)**: `文献综述.md`
+- **文献原文**: `md/` 目录
 - **模型**: `models/qwen/Qwen3___5-0___8B`
