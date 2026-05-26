@@ -1,0 +1,1561 @@
+{
+  "model_info": {
+    "base_model": "Qwen3.5-0.8B",
+    "original_params": 752393024,
+    "n_layers": 24,
+    "hidden_size": 1024,
+    "num_heads": 8,
+    "intermediate_size": 3584,
+    "hybrid_attention": "18 Linear + 6 Standard (at L3,7,11,15,19,23)"
+  },
+  "key_results": {
+    "parse_compressed_params": 85000000,
+    "parameter_reduction_ratio": 0.887,
+    "gsm8k_accuracy_original_pct": 45.2,
+    "gsm8k_accuracy_parse_pct": 42.8,
+    "gsm8k_crr": 0.947,
+    "bfcl_accuracy_original_pct": 88.1,
+    "bfcl_accuracy_parse_pct": 88.7,
+    "bfcl_crr": 1.007,
+    "inference_speedup_x": 10.3
+  },
+  "profile_results": {
+    "P1": {
+      "description": "Zh+En STEM+Agent",
+      "n_retained_layers": 14,
+      "n_pruned_layers": 10,
+      "compressed_params": 85000000,
+      "param_reduction_ratio": 0.8870271290553592,
+      "dcr_params": 80128,
+      "speedup_approx": 8.851682635294118,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.564,
+          "preserved": false
+        },
+        "fr": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.564,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "logic": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.495,
+          "preserved": false
+        },
+        "math_reasoning": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.493,
+          "preserved": false
+        },
+        "chat": {
+          "crr": 0.491,
+          "preserved": false
+        }
+      }
+    },
+    "P2": {
+      "description": "E.Asian+STEM",
+      "n_retained_layers": 14,
+      "n_pruned_layers": 10,
+      "compressed_params": 92000000,
+      "param_reduction_ratio": 0.8777234808599182,
+      "dcr_params": 80320,
+      "speedup_approx": 8.17818504347826,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "fr": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.564,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "history": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "chat": {
+          "crr": 0.93,
+          "preserved": true
+        }
+      }
+    },
+    "P3": {
+      "description": "En Math Specialist",
+      "n_retained_layers": 10,
+      "n_pruned_layers": 14,
+      "compressed_params": 65000000,
+      "param_reduction_ratio": 0.9136089810423336,
+      "dcr_params": 80320,
+      "speedup_approx": 11.575277292307693,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.536,
+          "preserved": false
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.536,
+          "preserved": false
+        },
+        "fr": {
+          "crr": 0.539,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.539,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.539,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.539,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.536,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "logic": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "history": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "chat": {
+          "crr": 0.93,
+          "preserved": true
+        }
+      }
+    },
+    "P4": {
+      "description": "Zh Full-Capability",
+      "n_retained_layers": 18,
+      "n_pruned_layers": 6,
+      "compressed_params": 132000000,
+      "param_reduction_ratio": 0.8245597768859696,
+      "dcr_params": 80320,
+      "speedup_approx": 5.699947151515151,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.976,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "ja": {
+          "crr": 0.581,
+          "preserved": false
+        },
+        "fr": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.581,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "geography": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "literature": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "fc": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.986,
+          "preserved": true
+        },
+        "chat": {
+          "crr": 0.976,
+          "preserved": true
+        }
+      }
+    },
+    "P5": {
+      "description": "Multi.STEM Agent",
+      "n_retained_layers": 14,
+      "n_pruned_layers": 10,
+      "compressed_params": 88000000,
+      "param_reduction_ratio": 0.8830398512573131,
+      "dcr_params": 80064,
+      "speedup_approx": 8.549920727272728,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "fr": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "de": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ru": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "es": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ko": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.495,
+          "preserved": false
+        },
+        "math_reasoning": {
+          "crr": 0.495,
+          "preserved": false
+        },
+        "translation": {
+          "crr": 0.493,
+          "preserved": false
+        },
+        "chat": {
+          "crr": 0.491,
+          "preserved": false
+        }
+      }
+    },
+    "P6": {
+      "description": "Bilingual Dev Agent",
+      "n_retained_layers": 16,
+      "n_pruned_layers": 8,
+      "compressed_params": 110000000,
+      "param_reduction_ratio": 0.8537998140716414,
+      "dcr_params": 80128,
+      "speedup_approx": 6.839936581818182,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.573,
+          "preserved": false
+        },
+        "fr": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.573,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "geography": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "literature": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "fc": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.501,
+          "preserved": false
+        },
+        "translation": {
+          "crr": 0.5,
+          "preserved": false
+        },
+        "chat": {
+          "crr": 0.498,
+          "preserved": false
+        }
+      }
+    },
+    "P7": {
+      "description": "Multi.Math Solver",
+      "n_retained_layers": 10,
+      "n_pruned_layers": 14,
+      "compressed_params": 68000000,
+      "param_reduction_ratio": 0.9096217032442874,
+      "dcr_params": 80064,
+      "speedup_approx": 11.064603294117648,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "fr": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "de": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ru": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "es": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ko": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "logic": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "history": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.523,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.474,
+          "preserved": false
+        },
+        "code": {
+          "crr": 0.474,
+          "preserved": false
+        },
+        "math_reasoning": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.471,
+          "preserved": false
+        },
+        "chat": {
+          "crr": 0.468,
+          "preserved": false
+        }
+      }
+    },
+    "P8": {
+      "description": "Quad-Lingual Translator",
+      "n_retained_layers": 16,
+      "n_pruned_layers": 8,
+      "compressed_params": 105000000,
+      "param_reduction_ratio": 0.8604452770683849,
+      "dcr_params": 80064,
+      "speedup_approx": 7.165647847619048,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "fr": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "de": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.575,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.573,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "geography": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "literature": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "fc": {
+          "crr": 0.501,
+          "preserved": false
+        },
+        "code": {
+          "crr": 0.501,
+          "preserved": false
+        },
+        "math_reasoning": {
+          "crr": 0.501,
+          "preserved": false
+        },
+        "translation": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "chat": {
+          "crr": 0.498,
+          "preserved": false
+        }
+      }
+    },
+    "P9": {
+      "description": "Universal FC Caller",
+      "n_retained_layers": 14,
+      "n_pruned_layers": 10,
+      "compressed_params": 90000000,
+      "param_reduction_ratio": 0.8803816660586157,
+      "dcr_params": 80064,
+      "speedup_approx": 8.35992248888889,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "fr": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "de": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ru": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "es": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ko": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "geography": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "literature": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "fc": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.495,
+          "preserved": false
+        },
+        "math_reasoning": {
+          "crr": 0.495,
+          "preserved": false
+        },
+        "translation": {
+          "crr": 0.493,
+          "preserved": false
+        },
+        "chat": {
+          "crr": 0.491,
+          "preserved": false
+        }
+      }
+    },
+    "P10": {
+      "description": "Bilingual Full-Cap",
+      "n_retained_layers": 18,
+      "n_pruned_layers": 6,
+      "compressed_params": 128000000,
+      "param_reduction_ratio": 0.8298761472833645,
+      "dcr_params": 80320,
+      "speedup_approx": 5.8780705,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.976,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.986,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.581,
+          "preserved": false
+        },
+        "fr": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.582,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.581,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "geography": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "literature": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "fc": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.998,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.996,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.986,
+          "preserved": true
+        },
+        "chat": {
+          "crr": 0.976,
+          "preserved": true
+        }
+      }
+    },
+    "P11": {
+      "description": "Universal STEM",
+      "n_retained_layers": 16,
+      "n_pruned_layers": 8,
+      "compressed_params": 102000000,
+      "param_reduction_ratio": 0.8644325548664311,
+      "dcr_params": 80320,
+      "speedup_approx": 7.376402196078431,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "fr": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "de": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "ru": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "es": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "ko": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "math": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.557,
+          "preserved": false
+        },
+        "logic": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.557,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.557,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.557,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.947,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.934,
+          "preserved": true
+        },
+        "chat": {
+          "crr": 0.93,
+          "preserved": true
+        }
+      }
+    },
+    "P12": {
+      "description": "Full Targeted",
+      "n_retained_layers": 14,
+      "n_pruned_layers": 10,
+      "compressed_params": 88000000,
+      "param_reduction_ratio": 0.8830398512573131,
+      "dcr_params": 80192,
+      "speedup_approx": 8.549920727272728,
+      "capability_scores": {
+        "zh": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "en": {
+          "crr": 0.92,
+          "preserved": true
+        },
+        "ja": {
+          "crr": 0.564,
+          "preserved": false
+        },
+        "fr": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "de": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "ru": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "es": {
+          "crr": 0.567,
+          "preserved": false
+        },
+        "ko": {
+          "crr": 0.564,
+          "preserved": false
+        },
+        "math": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "physics": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "logic": {
+          "crr": 0.91,
+          "preserved": true
+        },
+        "history": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "geography": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "literature": {
+          "crr": 0.549,
+          "preserved": false
+        },
+        "fc": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "code": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "math_reasoning": {
+          "crr": 0.93,
+          "preserved": true
+        },
+        "translation": {
+          "crr": 0.493,
+          "preserved": false
+        },
+        "chat": {
+          "crr": 0.491,
+          "preserved": false
+        }
+      }
+    }
+  },
+  "layer_importance": {
+    "zh": {
+      "0": 0.015466166763707954,
+      "1": 0.018301616383491363,
+      "2": 0.02023970613880568,
+      "3": 0.023723037235456816,
+      "4": 0.023600703667129228,
+      "5": 0.022735320969500667,
+      "6": 0.03843703887686424,
+      "7": 0.02772148554196245,
+      "8": 0.027583295561025914,
+      "9": 0.02797768334189194,
+      "10": 0.029851314588774727,
+      "11": 0.024691024746623436,
+      "12": 0.02481089054293751,
+      "13": 0.02720684916543478,
+      "14": 0.0573834673400157,
+      "15": 0.039436047140038066,
+      "16": 0.045842364613984894,
+      "17": 0.05046547434912894,
+      "18": 0.0585408319906087,
+      "19": 0.06256136420154836,
+      "20": 0.06943630510361669,
+      "21": 0.07557162864919358,
+      "22": 0.0858694982953732,
+      "23": 0.10254688479288517
+    },
+    "en": {
+      "0": 0.012831281198626745,
+      "1": 0.017285176626581782,
+      "2": 0.01963261053974225,
+      "3": 0.021524182926440462,
+      "4": 0.02124579301469632,
+      "5": 0.021606382502060092,
+      "6": 0.03460004250549802,
+      "7": 0.0261008866441016,
+      "8": 0.025293841077796177,
+      "9": 0.025548663187588597,
+      "10": 0.02766602361190579,
+      "11": 0.02366578065715148,
+      "12": 0.024415225798027247,
+      "13": 0.02703929334151164,
+      "14": 0.05178508119697559,
+      "15": 0.039030185784231695,
+      "16": 0.0454057202648863,
+      "17": 0.05038923730218373,
+      "18": 0.059127716401236576,
+      "19": 0.062288244464090106,
+      "20": 0.07011898266036058,
+      "21": 0.07843370966599449,
+      "22": 0.09435347651273539,
+      "23": 0.12061246211557734
+    },
+    "math": {
+      "0": 0.01095577914786562,
+      "1": 0.01637092224215185,
+      "2": 0.018397526107905935,
+      "3": 0.019768006744016433,
+      "4": 0.019466683413514308,
+      "5": 0.019759602450776372,
+      "6": 0.03157190834288444,
+      "7": 0.024369246075321312,
+      "8": 0.02338124944244723,
+      "9": 0.023659905680408353,
+      "10": 0.025745167289841074,
+      "11": 0.022363757267935738,
+      "12": 0.022780567730641587,
+      "13": 0.02536244142742396,
+      "14": 0.04705837161173631,
+      "15": 0.038769630668010785,
+      "16": 0.04479095683059619,
+      "17": 0.050338812944639696,
+      "18": 0.05843733602879584,
+      "19": 0.06376878456815417,
+      "20": 0.07471464435672034,
+      "21": 0.08544233212642302,
+      "22": 0.1017738670370783,
+      "23": 0.1309525004647111
+    },
+    "logic": {
+      "0": 0.012578045310582686,
+      "1": 0.01565025892606891,
+      "2": 0.01791928901783614,
+      "3": 0.01920119339598368,
+      "4": 0.019036366490445843,
+      "5": 0.01932027936974433,
+      "6": 0.027402133448557582,
+      "7": 0.02278150334635729,
+      "8": 0.022581275480708214,
+      "9": 0.02360225644767731,
+      "10": 0.02495892860559764,
+      "11": 0.02355609856734104,
+      "12": 0.02496763956893975,
+      "13": 0.028170453285202884,
+      "14": 0.043174475000874644,
+      "15": 0.041443290479610186,
+      "16": 0.04868216801075471,
+      "17": 0.05524562766210361,
+      "18": 0.06188288103792343,
+      "19": 0.0694969540933704,
+      "20": 0.07829615186036598,
+      "21": 0.08630539694803474,
+      "22": 0.09681024752791177,
+      "23": 0.11693708611800722
+    }
+  },
+  "moxing_comparison": {
+    "timestamp": "20260516_211019",
+    "f16": {
+      "file": "qwen35-0.8b-f16.gguf",
+      "size_mb": 1446.4804077148438,
+      "suites": {
+        "数学推理": {
+          "accuracy": 0.0,
+          "avg_time_ms": 6918.458194336078,
+          "correct": 0,
+          "total": 3
+        },
+        "逻辑推理": {
+          "accuracy": 1.0,
+          "avg_time_ms": 6711.08125000319,
+          "correct": 2,
+          "total": 2
+        },
+        "物理": {
+          "accuracy": 1.0,
+          "avg_time_ms": 6773.128271495807,
+          "correct": 2,
+          "total": 2
+        },
+        "中文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5308.163666515611,
+          "correct": 2,
+          "total": 2
+        },
+        "英文": {
+          "accuracy": 0.5,
+          "avg_time_ms": 6666.267249995144,
+          "correct": 1,
+          "total": 2
+        },
+        "日文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 6666.485291003482,
+          "correct": 1,
+          "total": 1
+        },
+        "法文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5148.5743329976685,
+          "correct": 1,
+          "total": 1
+        },
+        "德文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4959.29695898667,
+          "correct": 1,
+          "total": 1
+        },
+        "历史": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2741.265979493619,
+          "correct": 2,
+          "total": 2
+        },
+        "地理": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3409.1104580147658,
+          "correct": 1,
+          "total": 1
+        }
+      },
+      "aggregates": {
+        "STEM": {
+          "accuracy": 0.6666666666666666,
+          "avg_time_ms": 6800.889238611692
+        },
+        "保留语言": {
+          "accuracy": 0.8333333333333334,
+          "avg_time_ms": 6213.638735838079
+        },
+        "遗忘语言": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5053.935645992169
+        },
+        "人文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3075.1882187541923
+        }
+      }
+    },
+    "q8_0": {
+      "file": "qwen35-0.8b-q8_0.gguf",
+      "size_mb": 774.2343139648438,
+      "suites": {
+        "数学推理": {
+          "accuracy": 0.3333333333333333,
+          "avg_time_ms": 5108.153680339456,
+          "correct": 1,
+          "total": 3
+        },
+        "逻辑推理": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5225.60756249004,
+          "correct": 2,
+          "total": 2
+        },
+        "物理": {
+          "accuracy": 1.0,
+          "avg_time_ms": 5112.372583011165,
+          "correct": 2,
+          "total": 2
+        },
+        "中文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4756.572354497621,
+          "correct": 2,
+          "total": 2
+        },
+        "英文": {
+          "accuracy": 0.5,
+          "avg_time_ms": 5204.350958490977,
+          "correct": 1,
+          "total": 2
+        },
+        "日文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4987.59245898691,
+          "correct": 1,
+          "total": 1
+        },
+        "法文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 3747.542458004318,
+          "correct": 1,
+          "total": 1
+        },
+        "德文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4486.183958011679,
+          "correct": 1,
+          "total": 1
+        },
+        "历史": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2044.683478990919,
+          "correct": 2,
+          "total": 2
+        },
+        "地理": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2870.4480419983156,
+          "correct": 1,
+          "total": 1
+        }
+      },
+      "aggregates": {
+        "STEM": {
+          "accuracy": 0.7777777777777777,
+          "avg_time_ms": 5148.71127528022
+        },
+        "保留语言": {
+          "accuracy": 0.8333333333333334,
+          "avg_time_ms": 4982.838590658503
+        },
+        "遗忘语言": {
+          "accuracy": 1.0,
+          "avg_time_ms": 4116.863208007999
+        },
+        "人文": {
+          "accuracy": 1.0,
+          "avg_time_ms": 2457.5657604946173
+        }
+      }
+    },
+    "comparison": {
+      "STEM": {
+        "f16_acc": 0.6666666666666666,
+        "q8_acc": 0.7777777777777777,
+        "acc_diff": 0.11111111111111105,
+        "f16_time": 6800.889238611692,
+        "q8_time": 5148.71127528022,
+        "time_pct": -24.29355787698053
+      },
+      "保留语言": {
+        "f16_acc": 0.8333333333333334,
+        "q8_acc": 0.8333333333333334,
+        "acc_diff": 0.0,
+        "f16_time": 6213.638735838079,
+        "q8_time": 4982.838590658503,
+        "time_pct": -19.808041592131108
+      },
+      "遗忘语言": {
+        "f16_acc": 1.0,
+        "q8_acc": 1.0,
+        "acc_diff": 0.0,
+        "f16_time": 5053.935645992169,
+        "q8_time": 4116.863208007999,
+        "time_pct": -18.541439852469825
+      },
+      "人文": {
+        "f16_acc": 1.0,
+        "q8_acc": 1.0,
+        "acc_diff": 0.0,
+        "f16_time": 3075.1882187541923,
+        "q8_time": 2457.5657604946173,
+        "time_pct": -20.084053863531768
+      }
+    },
+    "size_reduction_pct": 46.47460761753541,
+    "total_time_min": 2.9792626818021137
+  },
+  "quantization_comparison": {
+    "timestamp": "20260516_210504",
+    "f16": {
+      "file": "qwen35-0.8b-f16.gguf",
+      "size_mb": 1446.4804077148438
+    },
+    "q8_0": {
+      "file": "qwen35-0.8b-q8_0.gguf",
+      "size_mb": 774.2343139648438
+    },
+    "test_results": {
+      "F16": {
+        "size_mb": 1446.4804077148438,
+        "suites": {
+          "数学推理": {
+            "accuracy": 0.0,
+            "avg_time_ms": 5795.07598633063,
+            "correct": 0,
+            "total": 3
+          },
+          "逻辑推理": {
+            "accuracy": 1.0,
+            "avg_time_ms": 5916.6795414930675,
+            "correct": 2,
+            "total": 2
+          },
+          "物理": {
+            "accuracy": 1.0,
+            "avg_time_ms": 5906.0207914881175,
+            "correct": 2,
+            "total": 2
+          },
+          "中文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4731.0362914868165,
+            "correct": 2,
+            "total": 2
+          },
+          "英文": {
+            "accuracy": 0.5,
+            "avg_time_ms": 5916.727458490641,
+            "correct": 1,
+            "total": 2
+          },
+          "日文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 5939.814416982699,
+            "correct": 1,
+            "total": 1
+          },
+          "法文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4364.180916978512,
+            "correct": 1,
+            "total": 1
+          },
+          "德文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4635.341499990318,
+            "correct": 1,
+            "total": 1
+          },
+          "历史": {
+            "accuracy": 1.0,
+            "avg_time_ms": 2512.9457705043023,
+            "correct": 2,
+            "total": 2
+          },
+          "地理": {
+            "accuracy": 1.0,
+            "avg_time_ms": 3497.166749992175,
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "aggregates": {
+          "STEM": {
+            "accuracy": 0.6666666666666666,
+            "avg_time_ms": 5872.5921064372715
+          },
+          "保留语言": {
+            "accuracy": 0.8333333333333334,
+            "avg_time_ms": 5529.192722320052
+          },
+          "遗忘语言": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4499.761208484415
+          },
+          "人文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 3005.0562602482387
+          }
+        }
+      },
+      "Q8_0": {
+        "size_mb": 774.2343139648438,
+        "suites": {
+          "数学推理": {
+            "accuracy": 0.3333333333333333,
+            "avg_time_ms": 4646.094861333647,
+            "correct": 1,
+            "total": 3
+          },
+          "逻辑推理": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4606.368771012058,
+            "correct": 2,
+            "total": 2
+          },
+          "物理": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4660.8320834930055,
+            "correct": 2,
+            "total": 2
+          },
+          "中文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4231.584645502153,
+            "correct": 2,
+            "total": 2
+          },
+          "英文": {
+            "accuracy": 0.5,
+            "avg_time_ms": 4604.297979007242,
+            "correct": 1,
+            "total": 2
+          },
+          "日文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 4597.3306669911835,
+            "correct": 1,
+            "total": 1
+          },
+          "法文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 3388.352042005863,
+            "correct": 1,
+            "total": 1
+          },
+          "德文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 3576.560415996937,
+            "correct": 1,
+            "total": 1
+          },
+          "历史": {
+            "accuracy": 1.0,
+            "avg_time_ms": 1854.2904994974378,
+            "correct": 2,
+            "total": 2
+          },
+          "地理": {
+            "accuracy": 1.0,
+            "avg_time_ms": 2622.002000018256,
+            "correct": 1,
+            "total": 1
+          }
+        },
+        "aggregates": {
+          "STEM": {
+            "accuracy": 0.7777777777777777,
+            "avg_time_ms": 4637.765238612904
+          },
+          "保留语言": {
+            "accuracy": 0.8333333333333334,
+            "avg_time_ms": 4477.7377638335265
+          },
+          "遗忘语言": {
+            "accuracy": 1.0,
+            "avg_time_ms": 3482.4562290014
+          },
+          "人文": {
+            "accuracy": 1.0,
+            "avg_time_ms": 2238.146249757847
+          }
+        }
+      }
+    },
+    "total_time_min": 3.0346484661102293
+  }
+}

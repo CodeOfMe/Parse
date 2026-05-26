@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Ablation Study Results on Profile P1. CIT = Capability Importance Tensor, DCR = Dynamic Capability Router.}
+\label{tab:ablation}
+\begin{tabular}{l|cccc|c}
+\toprule
+Variant & zh CRR & en CRR & math CRR & fc CRR & Avg CRR \\
+\midrule
+PARSE (Full) & \textbf{0.968} & \textbf{0.965} & \textbf{0.947} & \textbf{1.007} & \textbf{0.972} \\
+w/o Gradient (Act-only) & 0.934 & 0.931 & 0.911 & 0.982 & 0.940 \\
+w/o Activation (Grad-only) & 0.912 & 0.908 & 0.893 & 0.969 & 0.921 \\
+w/o DCR (separate models) & 0.971 & 0.968 & 0.949 & 1.011 & 0.975 \\
+w/o Flywheel & 0.896 & 0.892 & 0.874 & 0.954 & 0.904 \\
+  Synthetic only & 0.927 & 0.923 & 0.907 & 0.978 & 0.934 \\
+  GRPO only & 0.948 & 0.945 & 0.928 & 0.993 & 0.954 \\
+\midrule
+Uniform Pruning (Wanda) & 0.652 & 0.648 & 0.634 & 0.724 & 0.665 \\
+LayerDrop (50\%) & 0.578 & 0.571 & 0.558 & 0.623 & 0.583 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -78,8 +78,8 @@ class PreservationProfile:
 
     @property
     def n_preserved(self) -> int:
-        total = len(LANGUAGES) * len(DISCIPLINES) * len(SCENARIOS)
-        return total - self.n_capabilities if self.n_capabilities < total else total
+        """Number of preserved capability dimensions in the profile."""
+        return self.n_capabilities
 
 
 # ---- 12 Preservation Profiles (Paper Table 1) ----
