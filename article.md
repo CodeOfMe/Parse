@@ -4,7 +4,7 @@
 [Anonymous for Review]
 
 **Abstract**  
-The prevailing paradigm for efficient LLM deployment oscillates between two unsatisfactory extremes: uniform structural pruning, which blindly compresses models without regard for the heterogeneous distribution of linguistic, disciplinary, and task-specific capabilities within Transformer layers; and task-specific architecture design, which builds narrow expert models that abandon the broad knowledge accumulated during pretraining. This work introduces a third paradigm: treating model compression as a *capability-preserving surgical procedure* operating at the intersection of language, discipline, and scenario dimensions. Unlike prior work that either prunes uniformly (Wanda [5], SparseGPT [4]), targets general agentic capabilities (AgenticQwen [1]), designs task-specific architectures (Needle [55]), or pursues omni-modal universality (MiniMind-O [2]), PARSE introduces a tri-axial **Capability Importance Tensor (CIT)** that independently quantifies each layer's contribution along three orthogonal axes: *Language* (Chinese, English, Japanese, etc.), *Discipline* (Mathematics, Physics, History, etc.), and *Scenario* (Function Calling, Logical Reasoning, Code Generation, etc.). Through this lens, PARSE identifies "capability-critical layers" for user-specified preservation profiles and surgically transplants only the redundant layers with ultra-efficient No-FFN attention blocks. A lightweight **Dynamic Capability Router (DCR)** then modulates internal residual gates based on real-time input context, enabling a single 85M-parameter model to dynamically reconfigure itself across multiple (Language × Discipline × Scenario) combinations. Experiments on Qwen3.5-0.8B demonstrate that PARSE achieves a 8.8× parameter reduction (752M to 85M) while retaining 95.1% of mathematical reasoning accuracy (GSM8K 42.8% vs. original 45.2%), 100.7% of function calling accuracy (BFCL 88.7% vs. original 88.1%), and 10× inference speedup on consumer GPU hardware.
+The prevailing paradigm for efficient LLM deployment oscillates between two unsatisfactory extremes: uniform structural pruning, which blindly compresses models without regard for the heterogeneous distribution of linguistic, disciplinary, and task-specific capabilities within Transformer layers; and task-specific architecture design, which builds narrow expert models that abandon the broad knowledge accumulated during pretraining. This work introduces a third paradigm: treating model compression as a *capability-preserving surgical procedure* operating at the intersection of language, discipline, and scenario dimensions. Unlike prior work that either prunes uniformly (Wanda [5], SparseGPT [4]), targets general agentic capabilities (AgenticQwen [1]), designs task-specific architectures (Needle [55]), or pursues omni-modal universality (MiniMind-O [2]), PARSE introduces a tri-axial **Capability Importance Tensor (CIT)** that independently quantifies each layer's contribution along three orthogonal axes: *Language* (Chinese, English, Japanese, etc.), *Discipline* (Mathematics, Physics, History, etc.), and *Scenario* (Function Calling, Logical Reasoning, Code Generation, etc.). Through this lens, PARSE identifies "capability-critical layers" for user-specified preservation profiles and surgically transplants only the redundant layers with ultra-efficient No-FFN attention blocks. A lightweight **Dynamic Capability Router (DCR)** then modulates internal residual gates based on real-time input context, enabling a single compressed model to serve multiple (Language × Discipline × Scenario) combinations without weight switching. We describe the complete four-stage pipeline—diagnosis, sculpture, transplantation, recovery—and define 12 preservation profiles for systematic evaluation. Experimental validation is planned on Qwen3.5-0.8B (752M parameters, 24 layers) targeting 8-10× parameter reduction while maintaining capability-specific performance above 90% relative to the uncompressed baseline.
 
 **Keywords**  
 Capability-Aware Model Compression, Fine-Grained Pruning, Architecture Transplantation, Language-Discipline-Scenario Tri-Axis Analysis, Dynamic Routing, Tiny Language Models
@@ -15,7 +15,7 @@ Capability-Aware Model Compression, Fine-Grained Pruning, Architecture Transplan
 
 ### 1.1 The "One-Size-Fits-All" Fallacy in Model Compression
 
-The rapid scaling of Large Language Models has produced systems with remarkable breadth—from multilingual translation to mathematical theorem proving—all contained within a single parameter set. However, this universality comes at a steep deployment cost. A Qwen3.5-0.8B model, modest by current standards, still requires approximately 1.5GB of VRAM and operates at 1.5 tokens per second on consumer hardware, effectively excluding it from real-time edge applications.
+The rapid scaling of Large Language Models has produced systems with remarkable breadth—from multilingual translation to mathematical theorem proving—all contained within a single parameter set. However, this universality comes at a steep deployment cost: a Qwen3.5-0.8B model requires approximately 1.5GB of VRAM, and inference speed on consumer-grade GPUs is limited by memory bandwidth and the sequential nature of autoregressive generation, with typical throughput ranging from 2–15 tok/s depending on hardware and batch size. For real-time edge applications requiring sub-100ms latency per token, even the modest 0.8B scale presents a deployment barrier.
 
 The prevailing response to this challenge has bifurcated into two camps. The **compression camp** applies uniform sparsity constraints—LLM-Pruner [3] uses gradient-based coupling, SparseGPT [4] achieves one-shot 50% sparsity through second-order optimization, Wanda [5] computes weight-activation product scores, and oBERT [11] pushes compression to industry-leading ratios. These methods share a fundamental assumption: that every layer, every attention head, and every FFN neuron contributes equally to all model capabilities. As ShortGPT [7] and LaCo [6] have demonstrated, this assumption is empirically false—layers exhibit striking functional specialization, with deep layers contributing disproportionately to logical reasoning [7,37] while shallow layers primarily handle syntactic alignment.
 
@@ -237,137 +237,64 @@ We compare FGCS against the following baselines:
 5. **Needle [55]**: Full FFN removal (task-specific function calling architecture).
 6. **Original Qwen3.5-0.8B**: Uncompressed baseline.
 
-### 4.5 Evaluation Metrics
-
-We evaluate each preservation profile using capability-specific metrics:
-
-1. **Perplexity (PPL)** : Standard language modeling metric for general quality assessment.
-2. **Task Accuracy**: GSM8K for mathematical reasoning, BFCL for function calling, HumanEval for code generation, BLEU for translation.
-3. **Capability Retention Ratio (CRR)** : The ratio of compressed model performance to original model performance on preserved capabilities:
-   $$\text{CRR}(c) = \frac{\text{Metric}_{compressed}(c)}{\text{Metric}_{original}(c)}$$
-4. **Parameter Reduction Ratio (PRR)** : $\frac{|M_{original}| - |M_{compressed}|}{|M_{original}|}$.
-5. **Inference Speedup**: Tokens per second on RTX 4060.
-6. **Cross-Capability Interference (CCI)** : The degradation of non-preserved capabilities, measuring how "cleanly" the compression preserves the specified profile:
-   $$\text{CCI} = \frac{1}{|\mathcal{C} \setminus \mathcal{P}|} \sum_{c \notin \mathcal{P}} \Delta(c)$$
-
-| Profile | Languages | Disciplines | Scenarios | Params (M) | PRR | **zh** | **en** | **math** | **logic** | **fc** | **math_reas.** | CCI | Speedup |
-|:---|:---|:---|:---|---:|---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| P1 | zh, en | math, logic | fc, math_reas. | **85** | **88.7%** | **.95** | **.94** | **.95** | **.96** | **.97** | **.98** | .52 | 8.9× |
-| P2 | zh, en, ja | math, physics | all | 92 | 87.8% | **.95** | **.94** | **.95** | .56 | **.96** | **.96** | .48 | 8.2× |
-| P3 | en | math | all | 65 | 91.4% | .55 | **.96** | **.97** | .54 | **.97** | **.97** | .45 | 11.6× |
-| P4 | zh | all | all | 132 | 82.5% | **.96** | .57 | **.94** | **.94** | **.95** | **.93** | .35 | 5.7× |
-| P5 | all | math, logic, physics | fc | 88 | 88.3% | **.96** | **.95** | **.95** | **.96** | **.98** | .50 | .42 | 8.5× |
-| P6 | zh, en | all | fc, code | 110 | 85.4% | **.94** | **.94** | .54 | .54 | **.97** | .50 | .48 | 6.8× |
-| P7 | all | math | math_reas. | 68 | 91.0% | .53 | .53 | **.97** | .54 | .53 | **.98** | .44 | 11.1× |
-| P8 | zh, en, ja, fr | all | translation | 105 | 86.0% | **.95** | **.95** | .55 | **.95** | .50 | .50 | .41 | 7.2× |
-| P9 | all | all | fc | 90 | 88.0% | **.95** | **.95** | **.94** | **.95** | **.98** | .50 | .42 | 8.4× |
-| P10 | zh, en | all | all | 128 | 83.0% | **.96** | **.96** | **.94** | **.94** | **.96** | **.95** | .35 | 5.9× |
-| P11 | all | math, logic | all | 102 | 86.4% | .54 | .54 | **.97** | **.97** | **.96** | **.97** | .42 | 7.4× |
-| P12 | zh, en | math, logic, physics | fc, code, math_reas. | 88 | 88.3% | **.95** | **.94** | **.96** | **.96** | **.97** | **.97** | .55 | 8.5× |
-
-*Table 1: Capability Retention Across All 12 Preservation Profiles. CRR = Capability Retention Ratio (bold = preserved dimension). CCI = Cross-Capability Interference (degradation on non-preserved dimensions).*
-
-| Method | Params (M) | PRR (%) | Avg CRR | BFCL Acc. | GSM8K Acc. | Speedup | Tok/s |
-|:---|---:|---:|:---:|:---:|:---:|:---:|:---:|
-| Original Qwen3.5-0.8B | 752.4 | 0.0 | 1.00 | 1.00 | 1.00 | 1.0× | 1.5 |
-| Wanda [5] (50%) | 376.2 | 50.0 | 0.65 | 0.68 | 0.72 | 1.9× | 2.9 |
-| SparseGPT [4] (50%) | 376.2 | 50.0 | 0.70 | 0.71 | 0.75 | 1.9× | 2.9 |
-| LayerDrop [8] (50%) | 376.2 | 50.0 | 0.58 | 0.60 | 0.62 | 3.0× | 4.5 |
-| LLM-Pruner [3] | 376.2 | 50.0 | 0.63 | 0.66 | 0.70 | 1.9× | 2.8 |
-| Needle [55] (FC-only) | 26.0 | 96.5 | 0.00 | 1.01 | 0.00 | 28.9× | 43.2 |
-| **PARSE P1 (Ours)** | **85.0** | **88.7** | **0.96** | **1.01** | **0.95** | **8.9×** | **15.4** |
-
-*Table 2: Comparison with Baseline Methods on Qwen3.5-0.8B. BFCL Acc. = Function Calling Accuracy (normalized). GSM8K Acc. = Mathematical Reasoning Accuracy (normalized). PARSE achieves 8.8× parameter reduction while retaining 95.1% of mathematical reasoning and 100.7% of function calling accuracy.*
-
-![Figure 3: Radar chart comparing PARSE across all capability dimensions for 12 preservation profiles. PARSE maintains "spiky" profiles (high CRR on preserved dimensions, low CRR ~0.42–0.57 on non-preserved) while uniform methods show uniform degradation across all dimensions. The 0.48 average CRR gap between preserved and non-preserved dimensions is statistically significant (paired t-test, $t = 18.7$, $p < 10^{-6}$).](figures/fig3_radar_profiles_pub.pdf)
-
 ### 4.6 Ablation Studies
 
-We conduct the following ablation experiments:
+We design the following ablation experiments for systematic validation:
 
-**A1. CIT Component Ablation**: Compare full CIT (Activation + Gradient) against Activation-only and Gradient-only variants to quantify the contribution of each importance signal.
+**A1. CIT Component Ablation**: Compare full CIT (Activation + Gradient, $\alpha = 0.6$) against Activation-only ($\alpha = 1.0$) and Gradient-only ($\alpha = 0.0$) variants to quantify the marginal contribution of each importance signal.
 
-**A2. DCR Effectiveness**: Compare FGCS with DCR against FGCS without DCR (separate models per profile) to measure the capability interference introduced by the unified router.
+**A2. DCR Effectiveness**: Compare PARSE with DCR against PARSE without DCR (separate model per profile) to measure the capability interference introduced by unified routing.
 
-**A3. Flywheel Recovery**: Compare FGCS with and without the dual-flywheel post-transplantation fine-tuning to quantify the capability recovery contribution.
+**A3. Flywheel Recovery**: Compare PARSE with and without the dual-flywheel post-transplantation fine-tuning, and with individual flywheel components (synthetic only, GRPO only), to quantify the recovery contribution of each stage.
 
-**A4. Preservation Profile Sensitivity**: Vary the size of the preservation profile $|\mathcal{P}|$ from 1 to 20 and measure the impact on PRR and CRR.
+**A4. Preservation Profile Sensitivity**: Vary the size of the preservation profile $|\mathcal{P}|$ from 1 to 20 capability combinations and measure the impact on PRR and CRR.
 
-| Variant | zh CRR | en CRR | math CRR | fc CRR | Avg CRR |
-|:---|:---:|:---:|:---:|:---:|:---:|
-| **PARSE (Full)** | **.968** | **.965** | **.947** | **1.007** | **.972** |
-| w/o Gradient (Act-only) | .934 | .931 | .911 | .982 | .940 |
-| w/o Activation (Grad-only) | .912 | .908 | .893 | .969 | .921 |
-| w/o DCR (separate models) | .971 | .968 | .949 | 1.011 | .975 |
-| w/o Flywheel | .896 | .892 | .874 | .954 | .904 |
-| Synthetic only | .927 | .923 | .907 | .978 | .934 |
-| GRPO only | .948 | .945 | .928 | .993 | .954 |
-| Uniform Pruning (Wanda) | .652 | .648 | .634 | .724 | .665 |
-| LayerDrop (50%) | .578 | .571 | .558 | .623 | .583 |
+*Ablation results pending experimental execution.*
 
-*Table 3: Ablation Study Results on Profile P1. CIT = Capability Importance Tensor, DCR = Dynamic Capability Router. Full CIT (Activation + Gradient) outperforms individual components. DCR introduces only 0.3% cross-capability interference vs. separate models. Dual-flywheel recovery contributes 7.2% CRR improvement.*
+### 4.7 Expected Layer-Wise Patterns
 
-### 4.7 Layer-Wise Analysis
+Based on prior findings from ShortGPT [7] and our CIT methodology, we anticipate that the Capability Importance Tensor will reveal a "capability cliff" pattern: shallow layers (0–5) contribute primarily to surface-level linguistic features; intermediate layers (6–15) distribute evenly across disciplines and scenarios; and deep layers (16–23) accumulate disproportionately high CIT scores across all capability dimensions due to their position in the residual computation graph. Whether individual capability axes exhibit qualitatively distinct importance profiles (modularity) or merely differ in the magnitude of a shared profile (concentration) is an open question that the CIT framework is designed to answer empirically.
 
-We visualize the Capability Importance Tensor to reveal which layers contribute to which capabilities:
-
-![Figure 4: Baseline comparison. PARSE P1 (8.9× compression, 85M parameters) achieves 0.96 average CRR, outperforming Wanda (0.65), SparseGPT (0.70), LayerDrop (0.58), and LLM-Pruner (0.63) at comparable or greater compression ratios. On GSM8K, PARSE retains 94.7% of original performance vs. 72% for the next-best method (SparseGPT).](figures/fig4_baseline_comparison_pub.pdf)
-
-![Figure 5: Ablation study. Full PARSE (CRR = 0.972) vs. ablated variants: removing gradient signal costs 3.2% CRR, removing activation signal costs 5.1%, removing DCR costs only 0.3% (consistent with high cross-axis correlation limiting benefit of differentiated routing), and removing flywheel recovery costs 7.2%.](figures/fig5_ablation_pub.pdf)
 
 ---
 
-## 5. Expected Results and Discussion
+## 5. Expected Outcomes and Discussion
 
-### 5.1 Findings
+The following hypotheses derive from the methodological framework established above. They await empirical validation through the pipeline described in Section 4.
 
-**Finding 1: Capability-specific preservation outperforms uniform compression.** Across all 12 preservation profiles, PARSE achieves Capability Retention Ratios (CRR) exceeding 94% for preserved capabilities. By contrast, uniform methods (Wanda [5], SparseGPT [4]) achieve only 63-75% CRR on the same capabilities at comparable parameter reduction ratios (8-9×). On Profile P1, PARSE retains 96.8% of Chinese capability, 96.5% of English, 94.7% of mathematical reasoning, and 100.7% of function calling — while reducing parameters by 8.8× (752M to 85M). The gap widens as the preservation profile shrinks: with Profile P3 (English math specialist, 65M parameters, 91.4% PRR), mathematical reasoning CRR reaches 97% while uniform methods degrade uniformly across all dimensions. This validates the core hypothesis that capability-aware compression fundamentally outperforms capability-agnostic compression.
+### 5.1 Hypotheses
 
-**Finding 2: The Capability Cliff reveals deep-layer concentration, challenging simple modularity.** CIT analysis reveals a striking structural pattern—but one that complicates rather than confirms a simplistic modularity narrative. The mean pairwise Pearson correlation *between* Language and Discipline CIT vectors is $r = 0.994$ (minimum $r = 0.979$ for Korean–Logic, maximum $r = 0.9998$ for fr-es; see Figure 2), indicating that all capabilities share nearly identical layer importance profiles. This high correlation means that selective capability preservation operates primarily on *magnitude* differences rather than qualitatively different structural patterns. Nonetheless, these magnitude differences are practically consequential: deep layers (14-23) carry 3.5–4.4× more CIT weight than shallow layers (0-5), with mathematics (4.43×) and logic (4.16×) exhibiting the steepest cliffs and literature (3.48×) the shallowest. The coefficient of variation across capabilities drops from CV = 0.053 in shallow layers to CV = 0.033 in deep layers, confirming that deep layers serve increasingly shared reasoning functions. While FFN parameter norms show only a modest deep/shallow ratio (1.11×, Layer 23 norm 73.9 vs. shallow mean 59.9), the *functional* importance captured by CIT reveals the full 3.5–4.4× cliff—demonstrating that deep layers' disproportionate contribution stems from their central position in the computation graph rather than merely having more parameters (Figure 6).
+**Hypothesis 1 (Capability-Specific Preservation).** By selecting layers based on preservation-weighted CIT scores rather than uniform sparsity thresholds, PARSE is designed to achieve higher Capability Retention Ratios on preserved capability dimensions than capability-agnostic methods (Wanda [5], SparseGPT [4], LayerDrop [8]) at comparable parameter budgets. The margin is expected to increase as the preservation profile becomes more constrained (fewer capability dimensions specified), since fewer layers need to be retained to cover the narrower profile.
 
-**Finding 3: The Dynamic Capability Router introduces negligible interference despite high cross-axis correlation.** The DCR, at 0.08M parameters, achieves capability routing accuracy of 92.3% across the 12 profiles while introducing 0.3% cross-capability interference compared to separate specialized models (CRR 0.975 without DCR vs. 0.972 with DCR; Wilcoxon signed-rank test, $p = 0.34$, not significant). Per-layer gate activation heatmaps (Figure 5) show distinct activation patterns, but because CIT vectors are highly correlated, DCR modulates *degree* rather than *direction*—scaling gate values to amplify preserved capabilities while damping non-preserved ones. This explains why DCR achieves effective routing with only 0.08M parameters: it need not learn sharply different routing policies, only a single scalar gate per transplanted layer.
+**Hypothesis 2 (Layer Importance Structure).** CIT analysis will reveal whether capability importance follows a modular pattern (distinct layers specialize in distinct axes) or a concentration pattern (importance is monotonically depth-dependent with high inter-axis correlation). The answer has direct implications for the achievable selectivity of capability-preserving compression.
 
-**Finding 4: Dual-flywheel recovery is essential and shows convergent improvement.** Without post-transplantation fine-tuning, PARSE shows 7.2% lower average CRR across all profiles (0.904 vs. 0.972 on P1, $p < 0.001$, paired t-test). The synthetic flywheel alone recovers 44% of this gap (CRR 0.904 → 0.934); the self-refining flywheel with GRPO-based optimization [23,32,33] recovers an additional 29% (CRR 0.934 → 0.954). The remaining 27% gap is attributable to irreversible capability loss during FFN removal. Convergence analysis (Figure 7) shows diminishing returns: R0→R1 = +3.0 pp, R1→R2 = +2.0 pp, R2→R3 = +1.8 pp. Function calling (BFCL) recovers to 100.7% of original performance, suggesting that DCR gate modulation can *exceed* baseline for structured tasks where FFN redundancy is highest.
+**Hypothesis 3 (DCR Overhead).** The Dynamic Capability Router, at 0.08M parameters, is hypothesized to introduce minimal cross-capability interference compared to deploying separate specialized models per profile. The routing accuracy and interference level depend on how differentiated the per-layer CIT vectors are across capability axes.
 
-**Finding 5: Cross-axis correlation constrains but does not eliminate selective preservation.** The high inter-axis correlation ($\bar{r} = 0.994$) means that pure CIT-based selection cannot achieve qualitatively different pruning patterns for different capabilities. However, quantitative differences *are* exploitable: across profiles P1–P12, the preserved-capability CRR ranges from 0.93–1.01 (mean 0.96) while the non-preserved CRR ranges from 0.42–0.57 (mean 0.48), yielding an average CRR gap of 0.48 between preserved and non-preserved dimensions (paired t-test, $t = 18.7$, $p < 10^{-6}$). This gap creates usable models for targeted deployment scenarios, even though the "surgical" metaphor overstates the selectivity achievable with current CIT methodology.
-
-![Figure 6: Functional depth concentration vs. parameter distribution. (a) FFN parameter norms show a modest deep/shallow ratio (1.11×, Layer 23 at 73.9 vs. Layer 0 mean at 59.9), reflecting near-uniform parameter allocation. (b) In contrast, CIT functional importance exhibits a 3.5–4.4× deep/shallow cliff, demonstrating that deep layers' disproportionate capability contribution stems from their position in the computation graph (processing already-refined representations) rather than from having more parameters.](figures/fig6_ffn_redundancy_pub.pdf)
-
-![Figure 7: Dual-flywheel convergence curves. Three rounds of recovery training show diminishing returns: synthetic flywheel alone recovers 44% of the CRR gap (0.904→0.934), GRPO self-refining flywheel recovers an additional 29% (0.934→0.954), with only +1.8 pp improvement in round 3. BFCL function calling recovers to 100.7% of baseline.](figures/fig7_convergence_pub.pdf)
-
-![Figure 8: Sparsity sweep — CRR across compression ratios from 2× to 16×. PARSE maintains >94% average CRR at 8-10× compression, with graceful degradation at higher compression ratios. Uniform methods show catastrophic degradation beyond 4× compression.](figures/fig8_sparsity_sweep_pub.pdf)
+**Hypothesis 4 (Flywheel Necessity).** Post-transplantation fine-tuning via the dual-flywheel mechanism is expected to be necessary for recovering capability performance lost during FFN removal. The relative contribution of the synthetic flywheel vs. the self-refining (GRPO) flywheel will determine the optimal recovery strategy.
 
 ### 5.2 Theoretical Implications
 
-These findings suggest several implications for the field, each requiring careful qualification:
+Should the above hypotheses be confirmed, the following implications would follow:
 
-1. **The Capability Concentration Hypothesis (revised)**: Rather than supporting modularity, our evidence supports a *concentration hypothesis*: LLM capabilities are not stored in independently specialized modules, but rather in a *monotonically increasing depth-dependent pattern* where deeper layers carry progressively more capability weight across all dimensions. The high cross-axis correlation ($\bar{r} = 0.994$) means that layer selection based on CIT achieves its effect not by selecting qualitatively different functional circuits, but by leveraging *magnitude differences* in a shared importance profile. This is both a limitation and an opportunity: while the "surgical scalpel" metaphor must be tempered, the 3.5–4.4× magnitude variation across the layer stack is sufficient to create practically meaningful capability differentiation (Figure 8).
+1. **Capability Structure of LLMs.** If CIT vectors exhibit high inter-axis correlation, it would suggest that LLM capabilities are not stored in independently specialized modules but are distributed across layers in a depth-dependent pattern—consistent with residual network theory where later layers accumulate disproportionately large influence. If low correlation is observed instead, it would support a modular capability hypothesis and enable more selective (truly "surgical") pruning.
 
-    **Proposition 1 (Selective Preservation Under High Correlation).** Let $\mathbf{v}_i, \mathbf{v}_j \in \mathbb{R}^L$ be CIT vectors for capabilities $i, j$ with Pearson correlation $\rho(\mathbf{v}_i, \mathbf{v}_j) = r$. When the top-$K$ layers by $\mathbf{v}_i$ are selected for preservation, the fraction of capability $j$ preserved is:
+2. **FFN Redundancy Scope.** Needle [55] established FFN redundancy for function calling. PARSE extends this question to a broader set of capability dimensions. Confirming successful No-FFN transplantation across language, discipline, and scenario axes would generalize the FFN redundancy principle beyond structured tool-calling tasks.
 
-    $$\text{CRR}_j(K) \geq \frac{K}{L} + (1-r) \cdot \sigma_i \cdot \left(\frac{L-K}{\sqrt{K(L-K)}} \right)$$
+3. **Routing Efficiency.** If the DCR achieves effective multi-profile routing at 0.08M parameters, it would establish that shared parameter-efficient routing is a viable alternative to maintaining separate specialized models—challenging the premise that task-specific deployment requires task-specific architectures.
 
-    where $\sigma_i$ is the coefficient of variation of $\mathbf{v}_i$. For $r < 1$, the CRR of non-preserved capabilities decays *strictly below* the uniform pruning baseline, with the gap proportional to $(1-r) \cdot \sigma$. In our setting, $r = 0.994$ and $\sigma \approx 0.25$, yielding an expected CRR gap of $\approx 0.0015 \cdot \sqrt{K(L-K)/L^2} \approx 0.48$ between preserved and non-preserved dimensions—matching the observed 0.48 gap in Table 1. This establishes that even near-unity correlation permits selective preservation *provided* the CIT distribution has sufficient variance across layers.
+### 5.3 Limitations
 
-2. **The Functional Depth Concentration Principle**: The FFN parameter norm analysis (Figure 6) reveals an important dissociation: while parameter norms show only a modest deep/shallow ratio (1.11×), the *functional* importance captured by CIT exhibits a 3.5–4.4× ratio. This demonstrates that deep layers' disproportionate contribution to capabilities stems not from having more FFN parameters (they do not, in aggregate), but from their position in the residual stream where they operate on already-processed representations—a finding consistent with residual network theory where later layers disproportionately influence the output. This refines Needle's [55] claim: for structured tasks, it is not that FFNs are universally redundant, but that shallow FFNs (which process less-refined representations) can be safely removed precisely because the deep layers that *actually* encode the critical transformations remain intact.
+We acknowledge the following limitations of the current work:
 
-3. **The Dynamic Routing Efficiency Bound**: The DCR's success with 0.08M parameters—and the negligible impact of removing it (0.3% CRR difference)—establishes two bounds: (a) multi-capability routing requires far less overhead than maintaining separate specialized models, and (b) because CIT vectors are highly correlated, effective routing does not require learning sharply differentiated policies. The DCR learns a *scalar modulation* per layer rather than a *categorical routing* per capability, which is both simpler and more robust.
+1. **Pending Empirical Validation.** The experimental results described in Section 4 are designed but not yet executed. All outcomes discussed in this section are hypotheses, not confirmed findings.
 
-4. **The Quantitative Selectivity Gap**: The 0.48 CRR gap between preserved (mean 0.96) and non-preserved (mean 0.48) capabilities establishes that CIT-based selection, despite its high inter-axis correlation, creates models that are *practically* specialized even if not *structurally* modular. Proposition 1 shows this gap is proportional to $(1-r)\sigma$, linking the observed gap directly to the residual variance after correlation. This challenges the field to develop better decomposition methods that achieve lower inter-axis correlation—perhaps through contrastive activation probing or task-specific gradient decomposition—as the current CIT methodology cannot extract more information than what is present in the model's activation patterns. The theoretical upper bound on achievable selectivity is given by Proposition 1: for correlation $r$, the maximum CRR gap scales as $(1-r)\sigma\sqrt{K(L-K)}/L$, which for $r=0.994$ yields $\sim$0.48, precisely matching observation.
+2. **Single Architecture.** The CIT methodology, while architecture-agnostic in principle, is currently only integrated with Qwen-family models. Validation on Llama, Mistral, and Gemma architectures is necessary for generalizability.
 
-### 5.3 Limitations and Future Directions
+3. **Calibration Scale.** The current 15 samples per capability category provide compact diagnostic probes but may not capture the full distribution of capability-specific inputs. Larger-scale calibration could improve CIT discrimination.
 
-We acknowledge several limitations, ordered by severity:
+4. **DCR Expressiveness.** The current DCR uses a single linear projection from embedding space, limiting routing to global decisions. More expressive architectures (multi-head routing, hierarchical gating) might achieve finer-grained control.
 
-1. **High Cross-Axis CIT Correlation Limits Selectivity** (most critical). The $\bar{r} = 0.994$ cross-axis correlation means that CIT-based layer selection cannot produce qualitatively different pruning patterns across capability axes. We acknowledge that in the current implementation, the scenario-axis CIT is constructed as a weighted blend of language and discipline axes rather than independently measured—this methodological choice artificially inflates cross-axis correlation. Truly independent scenario CIT measurements may yield lower correlations. Regardless, the observed 0.48 CRR gap between preserved and non-preserved capabilities, while statistically significant ($p < 10^{-6}$), is achieved through magnitude differences rather than structural specialization. Future work should explore: (a) contrastive probing that maximizes inter-axis variance, (b) gradient-based decomposition using task-specific loss functions, and (c) attention head-level (rather than layer-level) CIT to achieve finer-grained selectivity.
-
-2. **Single Model Architecture**. All experiments are conducted on the Qwen3.5-0.8B hybrid attention architecture (6 standard + 18 linear attention layers). While Qwen's hybrid design provides a natural test bed, validation on diverse architectures (Llama, Mistral, Gemma) with uniform attention is necessary for generalizability claims. The high inter-axis correlation may be an artifact of Qwen's specific training data mixture, and different architectures may exhibit lower correlations that enable truly surgical pruning.
-
-3. **Calibration Data Scale**. The current 15 samples per capability category provides adequate activation statistics but may miss rare but capability-critical inputs. Scaling to 100–500 samples per category, using Self-Instruct expansion [1], could significantly improve CIT discrimination.
-
-4. **DCR Expressiveness Bound**. The current DCR uses a single linear projection from embedding space to capability distribution, limiting its expressiveness to *global* routing decisions. More expressive architectures (multi-head routing, hierarchical gating, or attention-based routers) might achieve lower interference at the cost of additional parameters.
-
-5. **Long-Sequence Stability**. The DCR's gate modulation is computed from mean-pooled embeddings, which may not capture position-dependent capability requirements in long contexts (>4K tokens). Future work should investigate windowed or position-aware routing mechanisms.
+5. **Long-Context Stability.** DCR gate modulation is computed from mean-pooled embeddings, which may not capture position-dependent capability requirements in long contexts.
 
 ---
 
@@ -375,9 +302,9 @@ We acknowledge several limitations, ordered by severity:
 
 This paper introduced PARSE, a framework that reframes model compression as a tri-axial capability preservation problem rather than a global sparsity optimization. By decomposing model capabilities along Language, Discipline, and Scenario axes, PARSE enables practitioners to specify precisely which capabilities must be preserved and surgically compresses the model to retain only those capabilities while replacing redundant components with ultra-efficient alternatives.
 
-The Capability Importance Tensor provides a principled mechanism for quantifying layer-level capability contributions, and the Dynamic Capability Router enables a single compressed model to serve multiple preservation profiles without weight switching. On Qwen3.5-0.8B, PARSE achieves 8.8× parameter reduction while preserving over 95% of targeted capability performance—a result that neither uniform pruning nor task-specific architecture design can match.
+The Capability Importance Tensor provides a principled mechanism for quantifying layer-level capability contributions, and the Dynamic Capability Router enables a single compressed model to serve multiple preservation profiles without weight switching. The complete four-stage pipeline—CIT diagnosis, layer sculpture, FFN transplantation, and dual-flywheel recovery—is implemented and ready for experimental validation on Qwen3.5-0.8B and beyond.
 
-The core finding is that model compression need not be a global optimization problem. By specifying which capabilities matter—Chinese grammar, English mathematics, function calling—and preserving only the layers that carry those capabilities, practitioners can achieve order-of-magnitude size reductions with minimal capability loss. In the regime of tiny models, knowing what to preserve matters more than knowing what to remove.
+The core methodological contribution is the recognition that model compression need not be a global optimization problem. By specifying *which* capabilities matter—Chinese grammar, English mathematics, function calling—and preserving only the layers that carry those capabilities, the PARSE framework aims to achieve order-of-magnitude size reductions with minimal capability loss. Experimental validation of this hypothesis, across the 12 preservation profiles defined herein, is the immediate next step.
 
 ---
 

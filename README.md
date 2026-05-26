@@ -18,14 +18,16 @@ LLM capabilities naturally decompose along three orthogonal axes:
 
 PARSE quantifies each layer's contribution to every (Language × Discipline × Scenario) combination using a **Capability Importance Tensor (CIT)**. Critical layers are preserved intact; redundant layers receive ultra-efficient No-FFN attention transplants [55]. A lightweight **Dynamic Capability Router (DCR)** (0.08M parameters) modulates internal residual gates based on input context, enabling a single compressed model to serve multiple preservation profiles without weight switching.
 
-## 📊 Key Results
+## 📊 Target Metrics
 
-| Metric | Original Qwen3.5-0.8B | PARSE (Ours) |
+| Metric | Original Qwen3.5-0.8B | PARSE Target |
 |:---|:---:|:---:|
-| Parameters | 752M | **85M** |
-| GSM8K Accuracy | 45.2% | **42.8%** (95% retained) |
-| BFCL Accuracy | 88.1% | **88.7%** (100%+ retained) |
-| Inference Speed | 1.5 tok/s | **15.4 tok/s** (10× faster) |
+| Parameters | 752M | ~85M (~8.8× reduction) |
+| Capability Retention (CRR) | 1.00 (baseline) | >0.90 on preserved dimensions |
+| Cross-Capability Interference (CCI) | — | <0.15 on non-preserved dimensions |
+| Inference | ~1.5GB VRAM | <150MB VRAM after Q4_K_M quantization |
+
+*Note: These are design targets. Empirical results pending experimental execution.*
 
 ## 📁 Repository Structure
 
