@@ -1,0 +1,68 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "timestamp": "20260527_182021",
+  "experiment_type": "real_measurement",
+  "pre_recovery": {
+    "gsm8k": 0.0,
+    "perplexity": {
+      "zh": Infinity,
+      "en": Infinity,
+      "math": Infinity,
+      "logic": Infinity,
+      "fc": Infinity
+    }
+  },
+  "flywheel_recovery": {
+    "epochs": 5,
+    "lr": 0.0005,
+    "n_steps": 0,
+    "final_loss": 0.0
+  },
+  "post_recovery": {
+    "gsm8k": 0.0,
+    "perplexity": {
+      "zh": Infinity,
+      "en": Infinity,
+      "math": Infinity,
+      "logic": Infinity,
+      "fc": Infinity
+    }
+  },
+  "wanda_baseline": {
+    "sparsity": 0.4987153421791669,
+    "gsm8k_accuracy": 2.0,
+    "perplexity": {
+      "zh": 8613.175534345728,
+      "en": 5807.699030895806,
+      "math": 132.78771765454218,
+      "logic": 525.5556236449115,
+      "fc": 1512.429962767338
+    }
+  },
+  "summary": {
+    "model": "Qwen3-0.6B",
+    "original_params": 596049920,
+    "compressed_params": 492263435,
+    "prr_pct": 17.416162726772953,
+    "original_gsm8k": 16.0,
+    "pre_recovery_gsm8k": 0.0,
+    "post_recovery_gsm8k": 0.0,
+    "gsm8k_crr_post_recovery": 0.0,
+    "wanda_gsm8k": 2.0,
+    "wanda_crr": 0.125,
+    "cit_mean_r": 0.9927,
+    "pruned_layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  }
+}
