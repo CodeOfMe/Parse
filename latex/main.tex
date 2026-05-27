@@ -26,11 +26,7 @@
 \maketitle
 
 \begin{abstract}
-The prevailing paradigm for efficient LLM deployment oscillates between two unsatisfactory extremes: uniform structural pruning, which blindly compresses models without regard for the heterogeneous distribution of capabilities within Transformer layers; and task-specific architecture design, which builds narrow expert models that abandon broad pretraining knowledge.
-This work introduces a third paradigm: treating model compression as a capability-preserving surgical procedure operating at the intersection of language, discipline, and scenario dimensions.
-PARSE (Principled Architecture Retention through Scenario-Embedded Pruning) introduces a tri-axial Capability Importance Tensor (CIT) that independently quantifies each layer's contribution along three conceptually distinct axes: Language, Discipline, and Scenario.
-Activation-based CIT probing on Qwen3.5-0.8B and Qwen3-0.6B across 12 preservation profiles reveals: (1) strong depth-dependent concentration ($\bar{r} = 0.9945$ on Qwen3.5-0.8B, $\bar{r} = 0.9927$ on Qwen3-0.6B) with all 12 profiles converging to identical layer importance ranking---confirming that tri-axial decomposition collapses to depth-weighted ranking under high inter-axis correlation; (2) this concentration pattern is cross-architecture reproducible, confirmed across Mamba-hybrid and standard Transformer architectures; (3) real pipeline validation on Qwen3-0.6B shows that FFN removal without functional flywheel recovery causes catastrophic collapse (GSM8K CRR = 0.0, PPL = $\infty$), while the projected CRR $\geq$ 0.91 values remain unvalidated computed estimates; (4) the current flywheel recovery mechanism fails to converge (0 successful training steps), requiring redesign of NoFFN block initialization.
-PARSE identifies capability-critical layers via CIT and proposes surgical FFN transplantation with Dynamic Capability Routing (DCR, 0.08M parameters), but the compression pipeline itself requires further engineering work before achieving its intended capability-preserving compression.
+Efficient LLM deployment currently faces two unsatisfactory extremes: uniform structural pruning ignores the heterogeneous distribution of capabilities across Transformer layers, while task-specific architecture design abandons broad pretraining knowledge for narrow expertise. We propose treating compression instead as a capability-preserving operation that respects the intersection of language, discipline, and scenario dimensions. PARSE (Principled Architecture Retention through Scenario-Embedded Pruning) introduces a tri-axial Capability Importance Tensor (CIT) that independently quantifies each layer's contribution along Language, Discipline, and Scenario axes. Activation-based CIT probing on Qwen3.5-0.8B and Qwen3-0.6B across 12 preservation profiles reveals a strong depth-dependent concentration pattern ($\bar{r} = 0.9945$ on Qwen3.5-0.8B, $\bar{r} = 0.9927$ on Qwen3-0.6B), with all 12 profiles converging to identical layer importance rankings---meaning that tri-axial decomposition collapses to depth-weighted ranking under high inter-axis correlation. This pattern is cross-architecture reproducible across Mamba-hybrid and standard Transformer designs. Real pipeline validation on Qwen3-0.6B, however, shows that FFN removal without functional flywheel recovery produces collapse (GSM8K CRR = 0.0, PPL = $\infty$); the projected CRR $\geq$ 0.91 values remain unvalidated computed estimates, and the current recovery mechanism fails to converge (0 successful training steps). While PARSE identifies capability-critical layers via CIT and proposes surgical FFN transplantation with Dynamic Capability Routing (DCR, 0.08M parameters), the compression pipeline requires further engineering before achieving its intended capability-preserving compression.
 \end{abstract}
 
 \textbf{Keywords:} Capability-Aware Model Compression $\bullet$ Fine-Grained Pruning $\bullet$ Architecture Transplantation $\bullet$ Language-Discipline-Scenario Tri-Axis Analysis $\bullet$ Dynamic Routing $\bullet$ Tiny Language Models
@@ -39,16 +35,16 @@ PARSE identifies capability-critical layers via CIT and proposes surgical FFN tr
 
 \subsection{The ``One-Size-Fits-All'' Fallacy in Model Compression}
 
-The rapid scaling of Large Language Models has produced systems with remarkable breadth---from multilingual translation to mathematical theorem proving---all contained within a single parameter set.
-However, this universality comes at a steep deployment cost.
-A Qwen3.5-0.8B model, modest by current standards, still requires approximately 1.5\,GB of VRAM and operates at 2--15 tok/s on mid-range consumer GPUs, effectively excluding it from real-time edge applications.
+Large Language Models have scaled to produce systems with remarkable breadth---from multilingual translation to mathematical theorem proving---all contained within a single parameter set.
+Yet this universality comes at a steep deployment cost:
+a Qwen3.5-0.8B model, modest by current standards, still requires approximately 1.5\,GB of VRAM and operates at 2--15 tok/s on mid-range consumer GPUs, effectively excluding it from real-time edge applications.
 
-The prevailing response has bifurcated into two camps.
-The \textbf{compression camp} applies uniform sparsity constraints---LLM-Pruner \citep{ma2023llmpruner} uses gradient-based coupling, SparseGPT \citep{frantar2023sparsegpt} achieves one-shot 50\% sparsity through second-order optimization, Wanda \citep{sun2023wanda} computes weight-activation product scores, and oBERT \citep{kurtic2022obert} pushes compression to industry-leading ratios.
+Responses have bifurcated into two camps.
+One camp---\textbf{compression}---applies uniform sparsity constraints.---LLM-Pruner \citep{ma2023llmpruner} uses gradient-based coupling, SparseGPT \citep{frantar2023sparsegpt} achieves one-shot 50\% sparsity through second-order optimization, Wanda \citep{sun2023wanda} computes weight-activation product scores, and oBERT \citep{kurtic2022obert} pushes compression to industry-leading ratios.
 These methods share a fundamental assumption: that all layers, attention heads, and FFN neurons contribute equally to all model capabilities.
 As ShortGPT \citep{men2024shortgpt} and LaCo \citep{yang2024laco} have demonstrated, this assumption is empirically false---layers exhibit striking functional specialization, with deep layers contributing disproportionately to logical reasoning \citep{men2024shortgpt,meng2022rome} while shallow layers primarily handle syntactic alignment.
 
-The \textbf{specialization camp} builds task-specific architectures from scratch.
+A second camp---\textbf{specialization}---builds task-specific architectures from scratch.
 AgenticQwen \citep{lyu2026agenticqwen} trains small models for agentic tasks using dual data flywheels.
 Needle \citep{ndubuaku2026needle} removes FFNs entirely for function calling, achieving 26M parameters that outperform 270M general models.
 MiniMind-O \citep{gong2026minimindo} extends to tri-modal omni processing at 100M parameters.
@@ -68,7 +64,7 @@ Prior work has treated these capabilities as an indivisible bundle; PARSE treats
 
 This tri-axial decomposition enables a fundamentally new approach to model compression.
 Rather than asking ``which layers are important?'' (a question with no single answer), PARSE asks ``which layers are important \emph{for this specific (Language, Discipline, Scenario) combination}?''
-The answer varies dramatically across the tri-axial space, revealing a rich structure of capability specialization that uniform pruning completely misses.
+Answers vary substantially across the tri-axial space, revealing a rich structure of capability specialization that uniform pruning completely misses.
 
 \subsection{Contributions}
 
@@ -105,9 +101,9 @@ Knowledge editing methods have developed precise tools for localizing informatio
 ROME \citep{meng2022rome} pioneered rank-one model editing by identifying specific MLP layers where factual associations are stored.
 MEMIT \citep{meng2023memit} extended this to batch editing.
 MEND \citep{mitchell2022mend} trained hyper-networks for efficient editing, while SERAC \citep{mitchell2022serac} employed external memory for counterfactual knowledge.
-The precision achieved by these methods directly inspires PARSE's approach: if a single fact can be localized to a specific layer, then an entire capability can similarly be traced to a specific subset of layers.
+Accuracy achieved by these methods directly inspires PARSE: if a single fact can be localized to a specific layer, then an entire capability can similarly be traced to a specific subset of layers.
 
-Machine unlearning provides the inverse perspective.
+In the inverse direction, machine unlearning provides complementary insights.
 SISA \citep{bourtouile2021sisa} proposed sharded training for efficient forgetting.
 Catastrophic forgetting \citep{french1999catastrophic} remains a fundamental challenge.
 Descent-to-Delete \citep{sekhari2021descenttodelete} introduced gradient-based unlearning.
@@ -115,7 +111,7 @@ These methods demonstrate that knowledge \emph{removal} can be achieved with sur
 
 \subsection{Data Flywheels and GRPO-Based Optimization}
 
-The data flywheel paradigm \citep{nvidia2024flywheel}---iteratively improving training data using model outputs---has become central to small model training.
+Data flywheel methods~\citep{nvidia2024flywheel}---iteratively improving training data using model outputs---have become central to small model training.
 AgenticQwen \citep{lyu2026agenticqwen} proposed a dual flywheel architecture.
 ArenaLearning \citep{luo2024arenalearning} pioneered AI-driven simulated arenas.
 SRDF \citep{wang2024srdf} introduced self-refining data pipelines.
@@ -155,7 +151,7 @@ where:
 These 19 capability axes are selected with reference to established evaluation benchmarks: language categories cover major linguistic families \citep{conneau2018xnli}; discipline categories map to broad domains from knowledge-intensive benchmarks such as MMLU~\citep{hendrycks2021mmlu} (collapsing 57 MMLU subjects into 6 top-level domains); and scenario categories reflect the deployment use cases prioritized in small-model agent research~\citep{zhang2024xlam,erdogan2024tinyagent,wang2024toolflow,sharma2025slm,haque2025tinyllm}.
 
 A \textbf{preservation profile} $\mathcal{P} \subset \mathcal{C}$ specifies which capability combinations must be preserved after compression.
-The \textbf{compression objective} is to minimize the active parameter count $|M'|$ subject to the constraint that for all $c \in \mathcal{P}$, the performance degradation $\Delta(c)$ does not exceed a threshold $\epsilon$:
+Our \textbf{compression objective} is to minimize the active parameter count $|M'|$ subject to the constraint that for all $c \in \mathcal{P}$, the performance degradation $\Delta(c)$ does not exceed a threshold $\epsilon$:
 \begin{equation}
 \min |M'| \quad \text{s.t.} \quad \forall c \in \mathcal{P}: \Delta(c) \leq \epsilon
 \end{equation}
@@ -177,12 +173,12 @@ G(l, c) = \sum_{\substack{(n, p) \in \text{FFN}_l}} \left|\frac{\partial \mathca
 \end{equation}
 
 Here, $\mathcal{D}_c$ is a compact calibration dataset for capability $c$, $h_l(x)$ denotes the hidden state activations at layer $l$ for token sequence $x$, $\mathcal{L}_c$ is the language modeling loss on $\mathcal{D}_c$, and the summation in $G$ is restricted to FFN parameters (gate\_proj, up\_proj, down\_proj).
-The design value is $\alpha = 0.6$.
+We set $\alpha = 0.6$ by design.
 
 \textbf{Preliminary measurement note.}
-The diagnostic CIT results reported in this section (correlation $\bar{r}$, capability cliff ratios, and layer selection) were obtained using activation-only probing (equivalent to $\alpha = 1.0$, $G=0$) with 10 calibration samples per category. This is because gradient computation requires standard FFN parameters for the gradient-weight product, which are absent in Qwen3.5's Mamba-style architecture. Activation-only CIT captures the dominant depth-wise concentration signal; the gradient sensitivity component $G(l,c)$ is specified for execution on standard Transformer architectures and its marginal contribution will be quantified in ablation A1.
+Diagnostic CIT results reported in this section (correlation $\bar{r}$, capability cliff ratios, and layer selection) were obtained using activation-only probing (equivalent to $\alpha = 1.0$, $G=0$) with 10 calibration samples per category. Gradient computation requires standard FFN parameters for the gradient-weight product, which are absent in Qwen3.5's Mamba-style architecture. Activation-only CIT captures the dominant depth-wise concentration signal; the gradient sensitivity component $G(l,c)$ is specified for execution on standard Transformer architectures and its marginal contribution will be quantified in ablation A1.
 
-The CIT is a $L \times |\mathcal{L}_{\text{ang}}| \times |\mathcal{D}_{\text{isc}}| \times |\mathcal{S}_{\text{cen}}|$ tensor.
+Structurally, CIT is a $L \times |\mathcal{L}_{\text{ang}}| \times |\mathcal{D}_{\text{isc}}| \times |\mathcal{S}_{\text{cen}}|$ tensor.
 We compute CIT entries for each axis independently (averaging over the other two), then combine them multiplicatively:
 \begin{equation}
 \text{CIT}(l, lang, disc, scen) = \text{CIT}_{lang}(l, lang) \cdot \text{CIT}_{disc}(l, disc) \cdot \text{CIT}_{scen}(l, scen)
@@ -191,7 +187,7 @@ where each marginal CIT is normalized to sum to 1 across layers.
 This factorization reduces computation from $O(L \times |\mathcal{L}_{\text{ang}}| \times |\mathcal{D}_{\text{isc}}| \times |\mathcal{S}_{\text{cen}}|)$ to $O(L \times (|\mathcal{L}_{\text{ang}}| + |\mathcal{D}_{\text{isc}}| + |\mathcal{S}_{\text{cen}}|))$.
 
 \textbf{Factorization assumptions and limitations.}
-The multiplicative factorization in Eq.~(6) implicitly assumes that the contributions of language, discipline, and scenario are multiplicatively separable---equivalently, that their importance vectors are approximately orthogonal in log-space.
+Multiplicative factorization in Eq.~(6) implicitly assumes that the contributions of language, discipline, and scenario are multiplicatively separable---equivalently, that their importance vectors are approximately orthogonal in log-space.
 Activation-based CIT measurement on Qwen3.5-0.8B confirms the depth-wise concentration observed in prior work~\citep{men2024shortgpt,meng2022rome}: the mean cross-axis Pearson correlation across Language, Discipline, and Scenario marginal CIT vectors is $\bar{r} = 0.9945$ (Language-Discipline: $r = 0.994$, Language-Scenario: $r = 0.992$, Discipline-Scenario: $r = 0.998$; minimum cross-axis pair Korean--Math: $r = 0.980$).
 Under such high correlation, the multiplicative factorization loses additive information: all 12 preservation profiles (P1--P12) produce an identical layer importance ranking; the 6 lowest-importance layers ($\{0,1,2,4,5,8\}$) are pruned by all profiles, while the total number of pruned layers varies from 6 (P4, P10) to 14 (P3, P7) depending on the profile's retention threshold.
 This empirically validates the concern that the tri-axial decomposition collapses toward a single depth-weighted importance ranking when cross-axis correlations approach unity.
@@ -221,19 +217,19 @@ S_{\text{preserve}}(l) = \sum_{c \in \mathcal{P}} w_c \cdot \text{CIT}(l, c)
 \end{equation}
 where $w_c$ are user-specified capability weights (default: uniform).
 Layers are ranked by $S_{\text{preserve}}(l)$, and the top $K$ layers are retained in their original form, where $K = \lceil L \cdot (1 - \tau/2) \rceil$ and $\tau$ is the target sparsity.
-The factor $\tau/2$ (rather than $\tau$) reflects the fact that transplantation (Section~3.4) removes only FFN parameters ($\sim$65\% of each layer) while retaining Self-Attention ($\sim$35\%).
+Factor $\tau/2$ (rather than $\tau$) reflects the fact that transplantation (Section~3.4) removes only FFN parameters ($\sim$65\% of each layer) while retaining Self-Attention ($\sim$35\%).
 
 \textbf{Standard attention layer retention.}
 For standard Transformer architectures, layers at positions that use full softmax attention are \textbf{always retained} regardless of their CIT scores.
 These layers carry critical routing and cross-referencing functions that cannot be approximated by NoFFN pass-through.
 For Qwen3.5-0.8B's hybrid architecture, the 6 layers at $\{3, 7, 11, 15, 19, 23\}$ that incorporate standard attention components are treated as forced-retain, though they use Mamba-style selective state space modules rather than standard FFNs.
 
-The remaining $L-K$ layers (excluding the forced-retained standard attention layers) are designated for \textbf{architecture transplantation}: their FFN components are removed and their Self-Attention modules are retained with gated residual connections.
+Remaining $L-K$ layers (excluding the forced-retained standard attention layers) are designated for \textbf{architecture transplantation}: their FFN components are removed and their Self-Attention modules are retained with gated residual connections.
 
 \subsection{Dynamic Capability Router (DCR)}
 
 To enable a single compressed model to serve multiple preservation profiles without weight switching, we introduce the Dynamic Capability Router.
-The DCR is a lightweight neural probe (0.08M parameters) that analyzes the input context at the embedding level:
+DCR is a lightweight neural probe (0.08M parameters) that analyzes the input context at the embedding level:
 \begin{equation}
 R(x) = \text{softmax}(W_r \cdot \text{mean}(h_{\text{embed}}(x)) + b_r)
 \end{equation}
@@ -245,14 +241,14 @@ g_l(x) = \sigma \!\left( g_l^{\text{base}} + \sum_{c \in \mathcal{C}} R_c(x) \cd
 where $g_l^{\text{base}}$ is the base gate value (initialized to 0, giving $\sigma(0) = 0.5$), and $g_{l,c}^{\text{specialized}}$ are learned capability-specific gate perturbations.
 
 \textbf{DCR Training.}
-The DCR parameters $W_r$, $b_r$, and $g_{l,c}^{\text{specialized}}$ are trained jointly with the post-transplantation recovery stage.
-The training objective combines two signals: (1) a \textbf{capability classification loss} $\mathcal{L}_{cls} = -\sum_{c \in \mathcal{C}} y_c \log R_c(x)$, where $y_c$ is 1 if capability $c$ belongs to the preservation profile and 0 otherwise; (2) a \textbf{task-specific LM loss} $\mathcal{L}_{lm}$ on the flywheel-generated training data.
-The joint loss is $\mathcal{L}_{dcr} = \mathcal{L}_{lm} + \beta \cdot \mathcal{L}_{cls}$, with $\beta = 0.1$.
+During training, DCR parameters $W_r$, $b_r$, and $g_{l,c}^{\text{specialized}}$ are optimized jointly with the post-transplantation recovery stage.
+Two signals compose the objective: (1) a \textbf{capability classification loss} $\mathcal{L}_{cls} = -\sum_{c \in \mathcal{C}} y_c \log R_c(x)$, where $y_c$ is 1 if capability $c$ belongs to the preservation profile and 0 otherwise; (2) a \textbf{task-specific LM loss} $\mathcal{L}_{lm}$ on the flywheel-generated training data.
+Joint loss: $\mathcal{L}_{dcr} = \mathcal{L}_{lm} + \beta \cdot \mathcal{L}_{cls}$, with $\beta = 0.1$.
 Training uses AdamW~\citep{loshchilov2019adamw} with learning rate $1\times 10^{-4}$, weight decay $0.01$, and a linear warmup of 100 steps followed by cosine decay over 3 flywheel rounds.
 To prevent the router from degenerating into a trivial mapping, the training data includes both in-profile and out-of-profile capability samples (with $y_c = 0$ for non-preserved capabilities).
 
 \textbf{Parameter count derivation.}
-The 0.08M parameter count arises from: (1) the router MLP using a bottleneck dimension of $\lfloor d_{model}/8 \rfloor = 256$ (for $d_{model}=2048$), with low-rank decomposition $W_r = U V^T$ where $U \in \mathbb{R}^{2048 \times 32}, V \in \mathbb{R}^{256 \times 32}$, yielding $2048 \times 32 + 256 \times 32 \approx 73,728$ parameters; and (2) $L_{transplanted} \times |\mathcal{C}|$ scalar gate perturbation parameters for $g_{l,c}^{\text{specialized}}$, reduced to $\lceil L_{transplanted}/3 \rceil \times |\mathcal{C}| \approx 960$ through layer-grouped sharing. With bias terms, the total is approximately 0.075M, rounded to 0.08M (approximately 0.09\% of a target $\sim$85M-parameter compressed model).
+Parameter count 0.08M arises from: (1) the router MLP using a bottleneck dimension of $\lfloor d_{model}/8 \rfloor = 256$ (for $d_{model}=2048$), with low-rank decomposition $W_r = U V^T$ where $U \in \mathbb{R}^{2048 \times 32}, V \in \mathbb{R}^{256 \times 32}$, yielding $2048 \times 32 + 256 \times 32 \approx 73,728$ parameters; and (2) $L_{transplanted} \times |\mathcal{C}|$ scalar gate perturbation parameters for $g_{l,c}^{\text{specialized}}$, reduced to $\lceil L_{transplanted}/3 \rceil \times |\mathcal{C}| \approx 960$ through layer-grouped sharing. With bias terms, the total is approximately 0.075M, rounded to 0.08M (approximately 0.09\% of a target $\sim$85M-parameter compressed model).
 
 \begin{figure*}[t]
   \centering
@@ -263,7 +259,7 @@ The 0.08M parameter count arises from: (1) the router MLP using a bottleneck dim
 
 \subsection{Transplantation and Recovery Pipeline}
 
-The complete PARSE pipeline proceeds in four stages:
+PARSE proceeds in four stages:
 
 \textbf{Stage 1: Diagnostic Probing.}
 For each axis of the capability space, we construct compact calibration datasets $\mathcal{D}_{\text{lang}}$, $\mathcal{D}_{\text{disc}}$, $\mathcal{D}_{\text{scen}}$ using 10--15 representative prompts per category (category-level counts range from 3 to 15 due to resource imbalance; 10 used in the preliminary activation-only measurement).
@@ -282,23 +278,22 @@ Post-transplantation, we apply a dual data flywheel:
 
 \subsection{Complexity Analysis}
 
-The computational complexity of PARSE is dominated by the CIT computation, which requires $O(L \cdot (|\mathcal{L}_{\text{ang}}| + |\mathcal{D}_{\text{isc}}| + |\mathcal{S}_{\text{cen}}|) \cdot |\mathcal{D}_c| \cdot d_{\text{model}}^2)$ forward pass operations.
+Computational complexity of PARSE is dominated by the CIT computation, which requires $O(L \cdot (|\mathcal{L}_{\text{ang}}| + |\mathcal{D}_{\text{isc}}| + |\mathcal{S}_{\text{cen}}|) \cdot |\mathcal{D}_c| \cdot d_{\text{model}}^2)$ forward pass operations.
 With $L=24$, 19 axis categories, $|\mathcal{D}_c|=10$ (preliminary activation-only measurement), and $d_{\text{model}}=2048$, this amounts to approximately $24 \times 19 \times 10 \times 2048^2 \approx 1.9 \times 10^{10}$ operations---negligible compared to pretraining cost.
 Adding gradient sensitivity would approximately triple the computation.
-The DCR adds approximately 0.08M parameters (design target), and gate modulation introduces no additional inference latency beyond one matrix-vector multiplication and sigmoid per transplanted layer.
+DCR adds approximately 0.08M parameters (design target), and gate modulation introduces no additional inference latency beyond one matrix-vector multiplication and sigmoid per transplanted layer.
 
 \section{Experimental Design}
 
 \subsection{Experimental Infrastructure}
 
-The preliminary CIT diagnostic probing was conducted on an Apple M4 (16\,GB unified memory) with PyTorch 2.5.1.
-The full transplantation and evaluation pipeline targets an NVIDIA RTX 4060 (8\,GB VRAM) with CUDA 12.1.
-The base model is Qwen3.5-0.8B, comprising 752M parameters across 24 layers.
+Preliminary CIT diagnostic probing was conducted on an Apple M4 (16\,GB unified memory) with PyTorch 2.5.1.
+Full transplantation and evaluation pipeline targets an NVIDIA RTX 4060 (8\,GB VRAM) with CUDA 12.1.
+Base model is Qwen3.5-0.8B, comprising 752M parameters across 24 layers.
 \textbf{Architecture note}: Qwen3.5-0.8B uses a Mamba-style selective state space (linear attention) architecture where each layer's primary computation is a \texttt{linear\_attn} module rather than the standard Self-Attention + FFN (gate\_proj, up\_proj, down\_proj) design.
 All 24 layers employ this mechanism; 6 layers at positions $\{3, 7, 11, 15, 19, 23\}$ additionally incorporate standard softmax attention components for cross-referencing.
-The CIT diagnostic probing (Section~3.2) is architecture-agnostic, operating on hidden state activations.
-The FFN-removal transplantation methodology (Stage~3, Section~3.5) is designed for standard Transformer architectures (e.g., LLaMA, Qwen2.5, Mistral) where FFN modules constitute the majority of parameters.
-The hidden dimension is $d_{\text{model}} = 2048$. Calibration prompts and the CIT computation code are available in the project repository.
+Because CIT diagnostic probing (Section~3.2) is architecture-agnostic---operating on hidden state activations---the measurement on Qwen3.5-0.8B is valid. However, the FFN-removal transplantation methodology (Stage~3, Section~3.5) targets standard Transformer architectures (e.g., LLaMA, Qwen2.5, Mistral) where FFN modules constitute the majority of parameters.
+Hidden dimension is $d_{\text{model}} = 2048$. Calibration prompts and the CIT computation code are available in the project repository.
 
 \subsection{Capability Dimensions and Calibration Data}
 
@@ -391,7 +386,7 @@ We define the following evaluation metrics:
 \subsection{Layer-Wise Patterns}
 
 Activation-based CIT measurement on Qwen3.5-0.8B confirms the ``capability cliff'' pattern: shallow layers (0--5) contribute primarily to surface-level linguistic features; intermediate layers (6--15) distribute evenly across disciplines and scenarios; and deep layers (16--23) accumulate disproportionately high CIT scores across all capability dimensions, with a mean deep/shallow ratio of 3.8--4.0$\times$.
-The high cross-axis correlation ($\bar{r} = 0.9945$) indicates that capability importance follows a concentration (depth-dependent) pattern rather than a modular pattern, with all 12 preservation profiles converging to identical layer selection.
+Cross-axis correlation ($\bar{r} = 0.9945$) indicates that capability importance follows a concentration (depth-dependent) pattern rather than a modular pattern, with all 12 preservation profiles converging to identical layer selection.
 Whether finer-grained analysis (attention head-level CIT, task-specific gradient decomposition) can reveal modular structure not visible at the layer level remains an open empirical question.
 
 \section{Experimental Results}
@@ -417,9 +412,7 @@ P10 & Bilingual Full-Cap & 83.0\% & \textbf{0.976} & \textbf{0.986} & 0.581 & 0.
 \end{tabular}
 \end{table*}
 
-Key observations: (1) Selective preservation is confirmed---preserved capabilities achieve CRR $\geq$ 0.91 while non-preserved capabilities degrade to CRR $\approx$ 0.50--0.57, qualitatively different from the uniform degradation (CRR $\approx$ 0.58--0.65) of capability-agnostic pruning.
-(2) Function calling CRR reaches 1.007 for P1, exceeding the original model's BFCL score (88.7\% vs.\ 88.1\%).
-(3) Narrower profiles (P3, 65M) achieve higher per-capability CRR than broad profiles (P10, 128M), confirming the PRR--CRR trade-off.
+Selective preservation is confirmed: preserved capabilities achieve CRR $\geq$ 0.91 while non-preserved capabilities degrade to CRR $\approx$ 0.50--0.57, qualitatively different from the uniform degradation (CRR $\approx$ 0.58--0.65) of capability-agnostic pruning. Notably, function calling CRR reaches 1.007 for P1, exceeding the original model's BFCL score (88.7\% vs.\ 88.1\%). Narrower profiles (P3, 65M) achieve higher per-capability CRR than broad profiles (P10, 128M), confirming the PRR--CRR trade-off.
 
 \subsection{Baseline Comparison}
 
@@ -478,19 +471,19 @@ Both CIT components contribute (A1): activation-only CIT achieves Avg CRR = 0.94
 
 \subsection{Confirmed Hypotheses}
 
-\textbf{H1 (Capability-Specific Preservation) $\checkmark$ Partially Confirmed.}
+\textbf{H1 (Capability-Specific Preservation) --- Partially Confirmed (computed estimates only).}
 Computed CRR estimates suggest $\geq$ 0.91 on preserved capabilities, but real validation on Qwen3-0.6B (Section~5.6) shows that without functional flywheel recovery, actual CRR = 0.0. The computed estimates remain projections pending a working recovery mechanism.
 
-\textbf{H2 (Layer Importance Structure) $\checkmark$ Confirmed (concentration).}
-The CIT measurement confirms the concentration hypothesis ($\bar{r} = 0.9945$ on Qwen3.5-0.8B, $\bar{r} = 0.9927$ on Qwen3-0.6B), revealing depth-dependent rather than modular structure. This finding is cross-architecture reproducible.
+\textbf{H2 (Layer Importance Structure) --- Confirmed (cross-architecture).}
+CIT measurement confirms the concentration hypothesis ($\bar{r} = 0.9945$ on Qwen3.5-0.8B, $\bar{r} = 0.9927$ on Qwen3-0.6B), revealing depth-dependent rather than modular structure. This finding is cross-architecture reproducible.
 
-\textbf{H3 (DCR Overhead) --- Not Evaluated.}
+\textbf{H3 (DCR Overhead) --- Not evaluated.}
 DCR routing evaluation is left for future work.
 
-\textbf{H4 (Flywheel Necessity) $\checkmark$ Confirmed.}
+\textbf{H4 (Flywheel Necessity) --- Confirmed in negative direction.}
 Real validation on Qwen3-0.6B confirms that without flywheel recovery, FFN removal causes catastrophic collapse (GSM8K CRR = 0.0, PPL = $\infty$). However, the current recovery mechanism itself fails to converge (0 training steps), so the flywheel hypothesis remains unvalidated in the positive direction.
 
-\textbf{H5 (Asymmetric Preservation) --- Partially Confirmed.}
+\textbf{H5 (Asymmetric Preservation) --- Unvalidated.}
 Computed estimates suggest asymmetric preservation, but real measurements show complete collapse without recovery. Wanda 50\% baseline achieves GSM8K CRR = 0.125, providing a lower bound for what structured pruning can achieve at this parameter scale.
 
 \subsection{Real Empirical Validation on Qwen3-0.6B}
@@ -517,14 +510,11 @@ Parameters & 596M & 492M & 596M \\
 \end{tabular}
 \end{table}
 
-\textbf{Flywheel Recovery Failure.} The 5-epoch supervised fine-tuning produced 0 successful training steps---all loss values were infinite or NaN, indicating that the NoFFN block initialization creates a distribution so far from the original that gradient-based recovery cannot converge. This requires redesign of the initialization strategy (progressive pruning, FFN distillation, or residual adapter pre-training).
+\textbf{Flywheel Recovery Failure.}
+The 5-epoch supervised fine-tuning produced 0 successful training steps---all loss values were infinite or NaN, indicating that the NoFFN block initialization creates a distribution so far from the original that gradient-based recovery cannot converge. Redesign of the initialization strategy (progressive pruning, FFN distillation, or residual adapter pre-training) is required.
 
 \textbf{Key Implications.}
-(1) The CIT concentration pattern is real and cross-architecture reproducible.
-(2) Computed CRR $\geq$ 0.91 estimates are not validated; actual CRR = 0.0 without working recovery.
-(3) Wanda 50\% preserves minimal capability (CRR = 0.125) but degrades PPL dramatically (5,808 vs.\ 45).
-(4) The 17.4\% PRR (FFN-only removal from 11/28 layers) is far below the projected 88.7\%, confirming that significant compression requires combining FFN removal with layer removal and robust recovery.
-(5) The flywheel recovery mechanism specified in Section~3.4 is insufficient for convergence.
+The CIT concentration pattern is real and cross-architecture reproducible. However, computed CRR $\geq$ 0.91 estimates remain unvalidated; actual CRR = 0.0 without working recovery. While Wanda 50\% preserves minimal capability (CRR = 0.125), it degrades perplexity substantially (5,808 vs.\ 45). The achieved 17.4\% PRR (FFN-only removal from 11/28 layers) falls well below the projected 88.7\%, confirming that meaningful compression requires combining FFN removal with layer removal and robust recovery. The flywheel recovery mechanism specified in Section~3.4, as currently designed, is insufficient for convergence.
 
 \subsection{Limitations}
 
@@ -545,30 +535,19 @@ Current 10--15 samples per category (imbalanced: 3--15 across languages) may not
 \textbf{(5) Contrastive CIT Unevaluated.}
 Contrastive CIT is introduced as a potential mitigation but its effectiveness is not empirically measured.
 
-\textbf{(8) Computed vs.\ Measured Results.}
+\textbf{(6) Computed vs.\ Measured Results.}
 The CRR values in Tables~\ref{tab:results} and \ref{tab:ablation} are computed from CIT retention fractions, not measured from an actual compressed model. Until a compressed model is produced and evaluated, these values remain projections that may not reflect real compression behavior.
 
-\textbf{(9) Baseline Budget Mismatch.}
+\textbf{(7) Baseline Budget Mismatch.}
 Standard pruning baselines (Wanda, SparseGPT, LayerDrop, LLM-Pruner) operate at 50\% sparsity ($\sim$376M active parameters), while PARSE targets $\sim$85M active parameters---a 4.4$\times$ parameter budget difference. Comparisons at unequal budgets may conflate the effects of compression method and compression degree.
 
 \section{Conclusion}
 
-This paper introduced PARSE, a framework that reframes model compression as a tri-axial capability preservation problem.
-Activation-based CIT diagnostic evaluation across two architectures reveals a strong depth-dependent concentration pattern: $\bar{r} = 0.9945$ on Qwen3.5-0.8B and $\bar{r} = 0.9927$ on Qwen3-0.6B, with all 12 profiles converging to identical layer importance ranking---confirming that the tri-axial decomposition collapses to depth-weighted ranking under high inter-axis correlation.
-This finding is simultaneously the paper's most important empirical result and its most significant limitation: the tri-axial machinery provides no discriminative value over simple depth-based ranking on these models.
+PARSE reframes model compression around tri-axial capability preservation, and our results yield a finding that is simultaneously the most important empirical result and the most significant limitation of this work. Activation-based CIT evaluation across two architectures reveals strong depth-dependent concentration ($\bar{r} = 0.9945$ on Qwen3.5-0.8B, $\bar{r} = 0.9927$ on Qwen3-0.6B), with all 12 profiles converging to identical layer importance rankings. Under such high inter-axis correlation, the tri-axial machinery offers no discriminative advantage over simple depth-based ranking.
 
-Real pipeline validation on Qwen3-0.6B (28-layer standard Transformer with explicit FFN submodules) provides critical ground truth:
-(1) The CIT concentration pattern is cross-architecture reproducible ($\bar{r} = 0.9927$ confirms $\bar{r} = 0.9945$).
-(2) FFN removal from 11/28 shallow layers (17.4\% PRR) without flywheel recovery causes catastrophic collapse (GSM8K CRR = 0.0, PPL = $\infty$).
-(3) The 5-epoch flywheel recovery with NoFFN block initialization produced 0 successful training steps (all losses infinite), indicating that the current recovery mechanism is insufficient for convergence.
-(4) Wanda 50\% unstructured pruning preserves minimal capability (GSM8K CRR = 0.125) but degrades PPL dramatically (5,808 vs.\ 45.34).
-(5) The projected CRR $\geq$ 0.91 values reported in Tables~\ref{tab:results} and \ref{tab:ablation} are not validated by real measurements---these remain computed estimates pending a functional flywheel recovery strategy.
+Real pipeline validation on Qwen3-0.6B (28-layer standard Transformer with explicit FFN submodules) grounds these observations in concrete measurements. Cross-architecture reproducibility of the concentration pattern is confirmed ($\bar{r} = 0.9927$ on Qwen3-0.6B). Yet FFN removal from 11/28 shallow layers (17.4\% PRR) without flywheel recovery triggers collapse: GSM8K CRR drops to 0.0 and perplexity diverges. The 5-epoch recovery procedure with NoFFN block initialization fails entirely---0 successful training steps, all losses infinite---indicating that the current initialization strategy cannot support gradient convergence. As a reference, Wanda at 50\% sparsity preserves minimal capability (GSM8K CRR = 0.125) while degrading perplexity to 5,808 (vs.\ 45.34 original). Crucially, the projected CRR $\geq$ 0.91 values reported in Tables~\ref{tab:results} and \ref{tab:ablation} are not validated by real measurements; they remain computed estimates pending a functional recovery strategy.
 
-Future work must address:
-(a) NoFFN block initialization strategies enabling gradient convergence (progressive pruning schedules, knowledge distillation from original FFNs, or residual adapter pre-training);
-(b) full pipeline validation with functional recovery;
-(c) contrastive and full-tensor CIT variants for models with lower inter-axis correlation;
-and (d) multi-profile DCR routing evaluation and ablation studies A4--A6.
+Several avenues remain open. NoFFN block initialization must be redesigned---progressive pruning schedules, knowledge distillation from original FFNs, or residual adapter pre-training could enable convergence. Full pipeline validation with working recovery is essential. For models exhibiting lower inter-axis correlation, contrastive and full-tensor CIT variants may recover the discriminative value that eludes the current multiplicative factorization. Multi-profile DCR routing evaluation and the remaining ablation studies (A4--A6) also require completion.
 
 \section*{Statements and Declarations}
 
