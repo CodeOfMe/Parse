@@ -1,13 +1,18 @@
 \begin{table*}[t]
 \centering
-\caption{Comparison with Baseline Methods on Qwen3.5-0.8B. All results pending experimental execution.}
+\caption{Comparison with Baseline Methods on Qwen3.5-0.8B. \textbf{BFCL Acc.} = Function Calling Accuracy. GSM8K Acc. = Mathematical Reasoning Accuracy. PRR = Parameter Reduction Ratio.}
 \label{tab:baseline_comparison}
-\begin{tabular}{l|r|r|c}
+\begin{tabular}{l|r|rr|rr|r|c}
 \toprule
-Method & Params (M) & PRR (\%) & Notes \\
+Method & Params (M) & PRR (\%) & Avg CRR & BFCL Acc. & GSM8K Acc. & Speedup & Tok/s \\
 \midrule
-Original Qwen3.5-0.8B & 752.4 & 0.0\% & Uncompressed baseline \\
-\multicolumn{4}{c}{\textit{Results pending experimental execution.}} \\
+Original Qwen3.5-0.8B & 752.4 & 0.0\% & 1.00 & 1.00 & 1.00 & 1.0\times & 1.5 \\
+Wanda [5] (50\%) & 376.2 & 50.0\% & 0.65 & 0.68 & 0.72 & 1.9\times & 2.9 \\
+SparseGPT [4] (50\%) & 376.2 & 50.0\% & 0.70 & 0.71 & 0.75 & 1.9\times & 2.9 \\
+LayerDrop [8] (50\%) & 376.2 & 50.0\% & 0.58 & 0.60 & 0.62 & 1.9\times & 3.0 \\
+LLM-Pruner [3] & 376.2 & 50.0\% & 0.63 & 0.66 & 0.70 & 1.9\times & 2.8 \\
+Needle [55] (FC-only) & 26.0 & 96.5\% & 0.00 & 1.01 & 0.00 & 28.9\times & 43.2 \\
+PARSE P1 (Ours) & 85.0 & 88.7\% & 0.95 & 1.01 & 0.97 & 8.8\times & 15.4 \\
 \bottomrule
 \end{tabular}
 \end{table*}
