@@ -404,7 +404,9 @@ The activation-based CIT diagnostic on Qwen3.5-0.8B confirms the depth-dependent
 
 4. **Single Architecture.** The CIT methodology, while architecture-agnostic in principle, is currently validated on Qwen-family models. Validation on Llama, Mistral, and Gemma architectures is necessary for generalizability.
 
-5. **Calibration Scale.** The current 10–15 samples per capability category (with category-level imbalance: 3–15 across languages) provide compact diagnostic probes. Larger-scale, balanced calibration could improve CIT discrimination.
+5. **Statistical Uncertainty.** All CIT diagnostic results (correlations, cliff ratios, layer rankings) are point estimates from a single run with 10–15 calibration samples per category. No bootstrap confidence intervals or multi-seed repetitions are reported. The reported $\bar{r} = 0.9945$ is sufficiently high that even wide confidence intervals would not change the qualitative conclusion (high inter-axis correlation → factorization collapse), but the precise numerical values carry sampling uncertainty.
+
+6. **Calibration Scale.** The current 10–15 samples per capability category (with category-level imbalance: 3–15 across languages) provide compact diagnostic probes. Larger-scale, balanced calibration could improve CIT discrimination.
 
 6. **DCR Expressiveness.** The DCR uses a single low-rank projection from embedding space, limiting routing to global decisions. More expressive architectures (multi-head routing, hierarchical gating) might achieve finer-grained control at additional parameter cost.
 

@@ -282,6 +282,10 @@ def compute_profile_stats(cit_lang, cit_disc, cit_scen):
 
 
 # ── 3. CRR Computation Using Real Data ───────────────────────────────
+# NOTE: compute_crr_for_profile() derives CRR from CIT retention fractions combined
+# with empirical boost factors (FLYWHEEL_PRESERVED_BOOST, DCR_ROUTING_BOOST).
+# These are COMPUTED ESTIMATES, not measurements from an actual compressed model.
+# See paper Section 5.7 Limitation 8 for full disclosure.
 
 def compute_crr_for_profile(profile_name, profile_stats, moxing_data):
     """
@@ -507,7 +511,13 @@ def generate_table1(profile_stats, crr_data):
 
 
 def generate_table2(moxing_data, profile_stats):
-    """Table 2: Baseline Comparison."""
+    """Table 2: Baseline Comparison.
+    
+    NOTE: Baseline CRR values (Wanda, SparseGPT, LayerDrop, LLM-Pruner) are from
+    published literature at 50% sparsity. PARSE P1 values are COMPUTED ESTIMATES
+    derived from CIT retention fractions, not measured from an actual compressed model.
+    The parameter budgets are unmatched (85M vs 376M). See paper Limitations 8-9.
+    """
     base_prr = profile_stats["P1"]["param_reduction_ratio"]
 
     baselines = [

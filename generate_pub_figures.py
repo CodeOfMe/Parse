@@ -316,6 +316,11 @@ print("[OK] Figure 2")
 
 from generate_paper_results import PROFILES, compute_preservation_score
 
+# NOTE: AUTHORITATIVE_CRR values are COMPUTED ESTIMATES derived from CIT retention
+# fractions and empirical boost factors, NOT measurements from an actual compressed model.
+# See paper Section 5.7 Limitation 8 for full disclosure. For a standard Transformer model
+# with explicit FFN submodules, these values require re-measurement after full pipeline
+# execution (FFN removal, transplantation, flywheel recovery).
 AUTHORITATIVE_CRR = {
     "P1": {"zh": .968, "en": .965, "ja": .55, "fr": .54, "de": .53, "ru": .52, "es": .54, "ko": .52,
             "math": .947, "logic": .960, "physics": .55, "history": .54, "geography": .53, "literature": .53,
