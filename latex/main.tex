@@ -30,10 +30,11 @@ The prevailing paradigm for efficient LLM deployment oscillates between two unsa
 This work introduces a third paradigm: treating model compression as a capability-preserving surgical procedure operating at the intersection of language, discipline, and scenario dimensions.
 PARSE (Principled Architecture Retention through Scenario-Embedded Pruning) introduces a tri-axial Capability Importance Tensor (CIT) that independently quantifies each layer's contribution along three conceptually distinct (Cartesian product) axes: Language, Discipline, and Scenario.
 Through this lens, PARSE identifies capability-critical layers for user-specified preservation profiles and surgically transplants redundant layers with ultra-efficient No-FFN attention blocks for standard Transformer architectures.
-A lightweight Dynamic Capability Router (DCR), at 0.08M parameters, modulates internal residual gates based on real-time input context, enabling a single compressed model to serve multiple capability combinations without weight switching.
+A lightweight Dynamic Capability Router (DCR), at 0.08M parameters, modulates internal residual gates based on real-time input context, enabling a single compressed model to serve multiple capability combinations without weight switching (multi-profile routing evaluation is left for future work).
 We describe the complete four-stage pipeline---diagnosis, sculpture, transplantation, recovery---provide full specifications for the DCR training algorithm (joint loss with negative-sample strategy, low-rank parameter decomposition, optimizer, learning rate schedule), define 12 preservation profiles for systematic evaluation, and specify a fair comparison framework including knowledge distillation and parameter-matched baselines.
 Preliminary activation-based CIT diagnostic probing on Qwen3.5-0.8B (which uses a Mamba-style architecture without standard FFN; see Section~4.1) measured a mean cross-axis Pearson correlation of $\bar{r} = 0.9945$, a capability cliff ratio of 3.8--4.0$\times$ (deep/shallow), and the minimum cross-axis pair Korean--Mathematics at $r = 0.980$.
-All 12 preservation profiles converge to identical layer importance ranking under the factorized CIT (the 6 lowest-importance layers are pruned by every profile; total pruned layers vary from 6 to 14), empirically confirming that the tri-axial decomposition collapses to depth-weighted ranking under high inter-axis correlation.
+All 12 preservation profiles converge to identical layer importance ranking under the factorized CIT (the 6 lowest-importance layers are pruned by every profile; total pruned layers vary from 6 to 14), empirically confirming that $\bar{r} = 0.9945$ collapses the tri-axial decomposition to depth-weighted ranking under high inter-axis correlation.
+All reported CRR values are projected estimates computed from CIT retention fractions rather than evaluations of an actual compressed model.
 The experimental pipeline is implemented as open-source software.
 \end{abstract}
 
@@ -85,7 +86,7 @@ This work makes the following contributions:
 
 \item \textbf{Dynamic Capability Router (DCR)}: We introduce a 0.08M-parameter routing mechanism that analyzes input context at the embedding level and dynamically modulates internal residual gates. We provide complete training specifications: joint loss function (with negative-sample strategy preventing routing degeneration), low-rank parameter decomposition ($W_r = U V^T$), optimization algorithm, learning rate schedule, and parameter count derivation.
 
-\item \textbf{12-Profile Evaluation Framework}: We define 12 preservation profiles (P1--P12) spanning the tri-axial capability space, specify comparison baselines including knowledge distillation (with temperature and student architecture specifications), and detail evaluation metrics. Preliminary activation-based CIT measurement was performed on Qwen3.5-0.8B, yielding $\bar{r} = 0.9945$, Korean--Math as the minimum cross-axis pair ($r = 0.980$), and all 12 profiles converging to identical layer importance ranking (the 6 lowest-importance layers $\{0,1,2,4,5,8\}$ are pruned by every profile; total pruned layers range from 6 to 14 depending on retention threshold). The experimental pipeline is implemented as open-source software.
+\item \textbf{12-Profile Diagnostic Evaluation}: We define 12 preservation profiles (P1--P12) spanning the tri-axial capability space, specify comparison baselines including knowledge distillation (with temperature and student architecture specifications), and detail evaluation metrics. Preliminary activation-based CIT measurement was performed on Qwen3.5-0.8B, yielding $\bar{r} = 0.9945$, Korean--Math as the minimum cross-axis pair ($r = 0.980$), and all 12 profiles converging to identical layer importance ranking (the 6 lowest-importance layers $\{0,1,2,4,5,8\}$ are pruned by every profile; total pruned layers range from 6 to 14 depending on retention threshold). Reported CRR values are projected estimates computed from CIT retention fractions, not measurements of an actual compressed model. The experimental pipeline is implemented as open-source software.
 \end{enumerate}
 
 \section{Related Work and the Capability Gap}
@@ -286,8 +287,8 @@ Post-transplantation, we apply a dual data flywheel:
 
 \subsection{Complexity Analysis}
 
-The computational complexity of PARSE is dominated by the CIT computation, which requires $O(L \cdot (|\mathcal{L}_{\text{ang}}| + |\mathcal{D}_{\text{isc}}| + |\mathcal{S}_{\text{cen}}|) \cdot |\mathcal{D}_c| \cdot d_{\text{model}})$ forward pass operations.
-With $L=24$, 19 axis categories, $|\mathcal{D}_c|=10$ (preliminary activation-only measurement), and $d_{\text{model}}=2048$, this amounts to approximately $24 \times 19 \times 10 \times 2048 \approx 9.3 \times 10^6$ operations---negligible compared to pretraining cost.
+The computational complexity of PARSE is dominated by the CIT computation, which requires $O(L \cdot (|\mathcal{L}_{\text{ang}}| + |\mathcal{D}_{\text{isc}}| + |\mathcal{S}_{\text{cen}}|) \cdot |\mathcal{D}_c| \cdot d_{\text{model}}^2)$ forward pass operations.
+With $L=24$, 19 axis categories, $|\mathcal{D}_c|=10$ (preliminary activation-only measurement), and $d_{\text{model}}=2048$, this amounts to approximately $24 \times 19 \times 10 \times 2048^2 \approx 1.9 \times 10^{10}$ operations---negligible compared to pretraining cost.
 Adding gradient sensitivity would approximately triple the computation.
 The DCR adds approximately 0.08M parameters (design target), and gate modulation introduces no additional inference latency beyond one matrix-vector multiplication and sigmoid per transplanted layer.
 
@@ -384,11 +385,11 @@ We define the following evaluation metrics:
 
 \textbf{A3. Flywheel Recovery}: Compare PARSE with and without the dual-flywheel post-transplantation fine-tuning, and with individual components.
 
-\textbf{A4. Preservation Profile Sensitivity}: Vary $|\mathcal{P}|$ from 1 to 20 and measure impact on PRR and CRR.
+\textbf{A4. Preservation Profile Sensitivity}: Vary $|\mathcal{P}|$ from 1 to 20 and measure impact on PRR and CRR. Left for future work.
 
-\textbf{A5. Sparsity Sweep}: Evaluate PARSE across compression ratios from 2$\times$ to 16$\times$.
+\textbf{A5. Sparsity Sweep}: Evaluate PARSE across compression ratios from 2$\times$ to 16$\times$. Left for future work.
 
-\textbf{A6. Factorization vs.\ Full CIT}: Compare multiplicative factorization against the full (non-factorized) CIT.
+\textbf{A6. Factorization vs.\ Full CIT}: Compare multiplicative factorization against the full (non-factorized) CIT. Left for future work.
 
 \textit{Ablation results reported in Section~5.3 (Table~\ref{tab:ablation}).}
 
@@ -405,7 +406,7 @@ Whether finer-grained analysis (attention head-level CIT, task-specific gradient
 Table~\ref{tab:results} presents the CRR for selected capability dimensions across representative preservation profiles. The results confirm selective preservation: preserved capabilities achieve CRR $\geq$ 0.91, while non-preserved capabilities degrade to CRR $\approx$ 0.50--0.57.
 
 \begin{table*}[t]
-\caption{Capability Retention Ratio (CRR) across representative preservation profiles. \textbf{Bold} = preserved capability. $m\_r$ = math\_reasoning.}
+\caption{Capability Retention Ratio (CRR) across representative preservation profiles. \textbf{Bold} = preserved capability. $m\_r$ = math\_reasoning. Note: this table shows only 6 of the 12 defined profiles; all CRR values are computed estimates derived from CIT retention fractions, not measurements of an actual compressed model.}
 \label{tab:results}
 \centering
 \small
@@ -430,7 +431,7 @@ Key observations: (1) Selective preservation is confirmed---preserved capabiliti
 Table~\ref{tab:baseline} compares PARSE with baseline methods. PARSE achieves the strongest combination of compression ratio, capability retention, and task-specific accuracy.
 
 \begin{table}[t]
-\caption{Baseline comparison on Qwen3.5-0.8B. PRR = Parameter Reduction Ratio.}
+\caption{Baseline comparison on Qwen3.5-0.8B. PRR = Parameter Reduction Ratio. Note: baselines are compared at 50\% sparsity ($\sim$376M active parameters) versus PARSE at $\sim$85M parameters---a baseline budget mismatch that may conflate compression method and compression degree effects.}
 \label{tab:baseline}
 \centering
 \small
@@ -478,7 +479,7 @@ LayerDrop (50\%) & 0.578 & 0.571 & 0.558 & 0.623 & 0.583 \\
 \end{tabular}
 \end{table}
 
-Both CIT components contribute (A1): activation-only CIT achieves Avg CRR = 0.940, a 3.3-point deficit from the full pipeline. DCR introduces negligible overhead (A2): removing DCR improves Avg CRR by only 0.003. Both flywheel components are necessary (A3): without flywheel recovery, Avg CRR drops to 0.904; the full dual-flywheel (0.972) exceeds GRPO-only (0.954) and synthetic-only (0.934).
+Both CIT components contribute (A1): activation-only CIT achieves Avg CRR = 0.940, a 3.2-point deficit from the full pipeline. DCR introduces negligible overhead (A2): removing DCR improves Avg CRR by only 0.003. Both flywheel components are necessary (A3): without flywheel recovery, Avg CRR drops to 0.904; the full dual-flywheel (0.972) exceeds GRPO-only (0.954) and synthetic-only (0.934).
 
 \subsection{Confirmed Hypotheses}
 
@@ -504,8 +505,8 @@ We acknowledge the following limitations:
 \textbf{(1) CIT Factorization Under High Correlation.}
 Our own measurement confirms $\bar{r} = 0.9945$ cross-axis correlation; all 12 profiles converge to identical layer selection. Full non-factorized CIT and contrastive CIT provide alternative paths.
 
-\textbf{(2) Qwen3.5 Architecture Context.}
-Qwen3.5-0.8B uses a Mamba-style architecture without standard FFN submodules. The CRR results are based on activation-only CIT with architecture-appropriate transplantation simulation.
+\textbf{(2) Projected CRR Values.}
+All reported CRR values are computed estimates derived from CIT retention fractions rather than evaluations of an actually compressed model. Qwen3.5-0.8B uses a Mamba-style architecture without standard FFN submodules, so the transplantation simulation is architecture-appropriate rather than a true FFN removal. The CRR values should be interpreted as projected performance estimates, not measured outcomes.
 
 \textbf{(3) Single Architecture.}
 Validation on diverse architectures (Llama, Mistral, Gemma) is necessary for generalizability.
@@ -516,10 +517,16 @@ Current 10--15 samples per category (imbalanced: 3--15 across languages) may not
 \textbf{(5) Contrastive CIT Unevaluated.}
 Contrastive CIT is introduced as a potential mitigation but its effectiveness is not empirically measured.
 
+\textbf{(8) Computed vs.\ Measured Results.}
+The CRR values in Tables~\ref{tab:results} and \ref{tab:ablation} are computed from CIT retention fractions, not measured from an actual compressed model. Until a compressed model is produced and evaluated, these values remain projections that may not reflect real compression behavior.
+
+\textbf{(9) Baseline Budget Mismatch.}
+Standard pruning baselines (Wanda, SparseGPT, LayerDrop, LLM-Pruner) operate at 50\% sparsity ($\sim$376M active parameters), while PARSE targets $\sim$85M active parameters---a 4.4$\times$ parameter budget difference. Comparisons at unequal budgets may conflate the effects of compression method and compression degree.
+
 \section{Conclusion}
 
 This paper introduced PARSE, a framework that reframes model compression as a tri-axial capability preservation problem.
-Experimental evaluation on Qwen3.5-0.8B across 12 preservation profiles demonstrates that PARSE achieves 88.7\% parameter reduction (752M$\to$85M) with CRR $\geq$ 0.91 on preserved capabilities---compared to Wanda's CRR $\leq$ 0.65 at 50\% sparsity.
+Activation-based CIT diagnostic evaluation on Qwen3.5-0.8B across 12 preservation profiles demonstrates that PARSE achieves 88.7\% parameter reduction (752M$\to$85M) with projected CRR $\geq$ 0.91 on preserved capabilities---compared to Wanda's CRR $\leq$ 0.65 at 50\% sparsity.
 Function calling CRR reaches 1.007, exceeding the original model.
 Ablation studies confirm that both flywheel components are essential (+6.8 CRR), while DCR introduces negligible overhead ($-$0.3 CRR).
 
