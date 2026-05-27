@@ -16,18 +16,17 @@ LLM capabilities naturally decompose along three orthogonal axes:
 - **Discipline** (Mathematics, Physics, Logic, History, Geography, Literature)
 - **Scenario** (Function Calling, Code, Math Reasoning, Translation, Chat)
 
-PARSE quantifies each layer's contribution to every (Language × Discipline × Scenario) combination using a **Capability Importance Tensor (CIT)**. Critical layers are preserved intact; redundant layers receive ultra-efficient No-FFN attention transplants [55]. A lightweight **Dynamic Capability Router (DCR)** (0.08M parameters) modulates internal residual gates based on input context, enabling a single compressed model to serve multiple preservation profiles without weight switching.
+PARSE quantifies each layer's contribution to every (Language × Discipline × Scenario) combination using a **Capability Importance Tensor (CIT)**. Critical layers are preserved intact; redundant layers receive ultra-efficient No-FFN attention transplants [54]. A lightweight **Dynamic Capability Router (DCR)** (0.08M parameters) modulates internal residual gates based on input context, enabling a single compressed model to serve multiple preservation profiles without weight switching.
 
-## 📊 Target Metrics
+## 📊 Design Targets
 
-| Metric | Original Qwen3.5-0.8B | PARSE Target |
+| Metric | Original Qwen3.5-0.8B | PARSE Design Target |
 |:---|:---:|:---:|
-| Parameters | 752M | ~85M (~8.8× reduction) |
-| Capability Retention (CRR) | 1.00 (baseline) | >0.90 on preserved dimensions |
-| Cross-Capability Interference (CCI) | — | <0.15 on non-preserved dimensions |
-| Inference | ~1.5GB VRAM | <150MB VRAM after Q4_K_M quantization |
+| Parameters | 752M | Dependent on preservation profile |
+| Capability Retention (CRR) | 1.00 (baseline) | >0.90 on preserved dimensions (hypothesis) |
+| Cross-Capability Interference (CCI) | — | Lower CCI indicates cleaner selective preservation |
 
-*Note: These are design targets. Empirical results pending experimental execution.*
+*Note: All metrics are design targets derived from the methodological framework. Empirical results pending experimental execution of the implemented pipeline. The 8.8× compression figure is a target that requires additional measures (attention head pruning, aggressive layer removal) beyond FFN-only transplantation to achieve.*
 
 ## 📁 Repository Structure
 
@@ -122,8 +121,8 @@ This work draws on foundational studies in:
 - Knowledge editing and machine unlearning [37-47]
 - Data flywheels and self-improving training [1,17-23]
 - Agentic systems and tool calling [24-30]
-- GRPO-based reinforcement learning [23,31-36]
-- Specialized architectures [2,54,55]
+- GRPO-based reinforcement learning [31-36,55]
+- Specialized architectures [2,54]
 
 All references are available in `md/` and `pdf/` directories.
 

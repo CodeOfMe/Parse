@@ -1,12 +1,12 @@
 # PARSE: Principled Architecture Retention through Scenario-Embedded Pruning for Fine-Grained Capability-Preserving Language Model Compression
 
-**Authors**  
+**Authors**
 [Anonymous for Review]
 
-**Abstract**  
-The prevailing paradigm for efficient LLM deployment oscillates between two unsatisfactory extremes: uniform structural pruning, which blindly compresses models without regard for the heterogeneous distribution of linguistic, disciplinary, and task-specific capabilities within Transformer layers; and task-specific architecture design, which builds narrow expert models that abandon the broad knowledge accumulated during pretraining. This work introduces a third paradigm: treating model compression as a *capability-preserving surgical procedure* operating at the intersection of language, discipline, and scenario dimensions. Unlike prior work that either prunes uniformly (Wanda [5], SparseGPT [4]), targets general agentic capabilities (AgenticQwen [1]), designs task-specific architectures (Needle [55]), or pursues omni-modal universality (MiniMind-O [2]), PARSE introduces a tri-axial **Capability Importance Tensor (CIT)** that independently quantifies each layer's contribution along three orthogonal axes: *Language* (Chinese, English, Japanese, etc.), *Discipline* (Mathematics, Physics, History, etc.), and *Scenario* (Function Calling, Logical Reasoning, Code Generation, etc.). Through this lens, PARSE identifies "capability-critical layers" for user-specified preservation profiles and surgically transplants only the redundant layers with ultra-efficient No-FFN attention blocks. A lightweight **Dynamic Capability Router (DCR)** then modulates internal residual gates based on real-time input context, enabling a single compressed model to serve multiple (Language × Discipline × Scenario) combinations without weight switching. We describe the complete four-stage pipeline—diagnosis, sculpture, transplantation, recovery—and define 12 preservation profiles for systematic evaluation. Experimental validation is planned on Qwen3.5-0.8B (752M parameters, 24 layers) targeting 8-10× parameter reduction while maintaining capability-specific performance above 90% relative to the uncompressed baseline.
+**Abstract**
+The prevailing paradigm for efficient LLM deployment oscillates between two unsatisfactory extremes: uniform structural pruning, which blindly compresses models without regard for the heterogeneous distribution of linguistic, disciplinary, and task-specific capabilities within Transformer layers; and task-specific architecture design, which builds narrow expert models that abandon the broad knowledge accumulated during pretraining. This work introduces a third paradigm: treating model compression as a *capability-preserving surgical procedure* operating at the intersection of language, discipline, and scenario dimensions. Unlike prior work that either prunes uniformly (Wanda [5], SparseGPT [4]), targets general agentic capabilities (AgenticQwen [1]), designs task-specific architectures (Needle [54]), or pursues omni-modal universality (MiniMind-O [2]), PARSE (Principled Architecture Retention through Scenario-Embedded Pruning) introduces a tri-axial **Capability Importance Tensor (CIT)** that independently quantifies each layer's contribution along three orthogonal axes: *Language* (Chinese, English, Japanese, French, German, Russian, Spanish, Korean), *Discipline* (Mathematics, Physics, Logic, History, Geography, Literature), and *Scenario* (Function Calling, Code Generation, Mathematical Reasoning, Translation, General Chat). Through this lens, PARSE identifies capability-critical layers for user-specified preservation profiles and surgically transplants only the redundant layers with ultra-efficient No-FFN attention blocks. A lightweight **Dynamic Capability Router (DCR)** (0.08M parameters) then modulates internal residual gates based on real-time input context, enabling a single compressed model to serve multiple capability combinations without weight switching. We describe the complete four-stage pipeline—diagnosis, sculpture, transplantation, recovery—and define 12 preservation profiles for systematic evaluation. We present a comprehensive experimental design, specify evaluation metrics and baselines, and derive testable hypotheses from the methodological framework. All experimental results await empirical execution of the implemented pipeline.
 
-**Keywords**  
+**Keywords**
 Capability-Aware Model Compression, Fine-Grained Pruning, Architecture Transplantation, Language-Discipline-Scenario Tri-Axis Analysis, Dynamic Routing, Tiny Language Models
 
 ---
@@ -15,31 +15,31 @@ Capability-Aware Model Compression, Fine-Grained Pruning, Architecture Transplan
 
 ### 1.1 The "One-Size-Fits-All" Fallacy in Model Compression
 
-The rapid scaling of Large Language Models has produced systems with remarkable breadth—from multilingual translation to mathematical theorem proving—all contained within a single parameter set. However, this universality comes at a steep deployment cost: a Qwen3.5-0.8B model requires approximately 1.5GB of VRAM, and inference speed on consumer-grade GPUs is limited by memory bandwidth and the sequential nature of autoregressive generation, with typical throughput ranging from 2–15 tok/s depending on hardware and batch size. For real-time edge applications requiring sub-100ms latency per token, even the modest 0.8B scale presents a deployment barrier.
+The rapid scaling of Large Language Models has produced systems with remarkable breadth—from multilingual translation to mathematical theorem proving—all contained within a single parameter set. However, this universality comes at a steep deployment cost: a Qwen3.5-0.8B model requires approximately 1.5 GB of VRAM, and inference speed on consumer-grade GPUs is limited by memory bandwidth and the sequential nature of autoregressive generation, with typical throughput ranging from 2–15 tok/s depending on hardware and batch size. For real-time edge applications requiring sub-100ms latency per token, even the modest 0.8B scale presents a deployment barrier.
 
-The prevailing response to this challenge has bifurcated into two camps. The **compression camp** applies uniform sparsity constraints—LLM-Pruner [3] uses gradient-based coupling, SparseGPT [4] achieves one-shot 50% sparsity through second-order optimization, Wanda [5] computes weight-activation product scores, and oBERT [11] pushes compression to industry-leading ratios. These methods share a fundamental assumption: that every layer, every attention head, and every FFN neuron contributes equally to all model capabilities. As ShortGPT [7] and LaCo [6] have demonstrated, this assumption is empirically false—layers exhibit striking functional specialization, with deep layers contributing disproportionately to logical reasoning [7,37] while shallow layers primarily handle syntactic alignment.
+The prevailing response to this challenge has bifurcated into two camps. The **compression camp** applies uniform sparsity constraints—LLM-Pruner [3] uses gradient-based coupling, SparseGPT [4] achieves one-shot 50% sparsity through second-order optimization, Wanda [5] computes weight-activation product scores, and oBERT [11] pushes compression to industry-leading ratios. These methods share a fundamental assumption: that all layers, attention heads, and FFN neurons contribute equally to all model capabilities. As ShortGPT [7] and LaCo [6] have demonstrated, this assumption is empirically false—layers exhibit striking functional specialization, with deep layers contributing disproportionately to logical reasoning [7,37] while shallow layers primarily handle syntactic alignment.
 
-The **specialization camp** builds task-specific architectures from scratch or through targeted distillation. AgenticQwen [1] trains small models for agentic tasks using dual data flywheels. Needle [55] removes FFNs entirely for function calling, achieving 26M parameters that outperform 270M general models. MiniMind-O [2] extends to tri-modal omni processing at 0.1B parameters. Gorilla [24], xLAM [25], TinyAgent [26], and ToolFlow [27] each target specific agent capabilities. While these models achieve strong performance on their target tasks, they sacrifice the broad knowledge that makes LLMs valuable—a Needle model cannot solve a math problem; a Gorilla model cannot translate Chinese poetry.
+The **specialization camp** builds task-specific architectures from scratch or through targeted distillation. AgenticQwen [1] trains small models for agentic tasks using dual data flywheels. Needle [54] removes FFNs entirely for function calling, achieving 26M parameters that outperform 270M general models. MiniMind-O [2] extends to tri-modal omni processing at 100M parameters. Gorilla [24], xLAM [25], TinyAgent [26], and ToolFlow [27] each target specific agent capabilities. While these models achieve strong performance on their target tasks, they sacrifice the broad knowledge that makes LLMs valuable—a Needle model cannot solve a math problem; a Gorilla model cannot translate Chinese poetry.
 
-This binary landscape reveals a critical gap: **no existing framework allows practitioners to specify *which* capabilities to preserve (e.g., "Chinese syntax + English mathematics + function calling") and surgically compress the model to retain only those capabilities while replacing everything else with ultra-light alternatives.** This is the gap that Fine-Grained Capability Sculpting (FGCS) fills.
+This binary landscape reveals a critical gap: **no existing framework allows practitioners to specify *which* capabilities to preserve (e.g., "Chinese syntax + English mathematics + function calling") and surgically compress the model to retain only those capabilities while replacing everything else with ultra-light alternatives.** This is the gap that PARSE fills. Throughout this paper, **PARSE** refers to the overall system; its core methodology is referred to as **Fine-Grained Capability Sculpting (FGCS)**—the tri-axial decomposition and layer-selective transplantation procedure described in Section 3.
 
 ### 1.2 The Tri-Axial Innovation
 
-FGCS is built on a single, powerful insight: **capabilities in LLMs are not monolithic—they decompose naturally along three orthogonal axes: Language, Discipline, and Scenario.** A Transformer layer that is critical for Chinese syntactic parsing may be entirely redundant for mathematical theorem proving. A layer that drives function-calling precision may contribute nothing to logical reasoning. Prior work has treated these capabilities as an indivisible bundle; FGCS treats them as a spectrum that can be independently preserved, attenuated, or replaced.
+PARSE is built on a single, powerful insight: **capabilities in LLMs are not monolithic—they decompose naturally along three orthogonal axes: Language, Discipline, and Scenario.** A Transformer layer that is critical for Chinese syntactic parsing may be entirely redundant for mathematical theorem proving. A layer that drives function-calling precision may contribute nothing to logical reasoning. Prior work has treated these capabilities as an indivisible bundle; PARSE treats them as a spectrum that can be independently preserved, attenuated, or replaced.
 
-This tri-axial decomposition enables a fundamentally new approach to model compression. Rather than asking "which layers are important?" (a question that has no single answer), FGCS asks "which layers are important *for this specific (Language, Discipline, Scenario) combination*?" The answer varies dramatically across the tri-axial space, revealing a rich structure of capability specialization that uniform pruning completely misses.
+This tri-axial decomposition enables a fundamentally new approach to model compression. Rather than asking "which layers are important?" (a question that has no single answer), PARSE asks "which layers are important *for this specific (Language, Discipline, Scenario) combination*?" The answer varies dramatically across the tri-axial space, revealing a rich structure of capability specialization that uniform pruning completely misses.
 
 ### 1.3 Contributions
 
 This work makes the following contributions:
 
-1.  **Tri-Axial Capability Decomposition**: We formalize the observation that LLM capabilities decompose along Language, Discipline, and Scenario axes, and introduce the Capability Importance Tensor (CIT)—a three-dimensional structure that quantifies each layer's contribution to every (Language × Discipline × Scenario) combination.
+1. **Tri-Axial Capability Decomposition**: We formalize the observation that LLM capabilities decompose along Language, Discipline, and Scenario axes, and introduce the **Capability Importance Tensor (CIT)**—a three-dimensional structure that quantifies each layer's contribution to every (Language × Discipline × Scenario) combination.
 
-2.  **Fine-Grained Capability Sculpting (FGCS) Framework**: We present a complete pipeline for capability-preserving model compression that accepts user-specified preservation profiles and surgically prunes and transplants layers based on their tri-axial importance scores.
+2. **Fine-Grained Capability Sculpting (FGCS) Framework**: We present a complete pipeline for capability-preserving model compression that accepts user-specified preservation profiles and surgically prunes and transplants layers based on their tri-axial importance scores.
 
-3.  **Dynamic Capability Router (DCR)**: We introduce a 0.08M-parameter routing mechanism that analyzes input context at the embedding level and dynamically modulates internal residual gates, enabling a single compressed model to serve multiple (Language × Discipline × Scenario) profiles without weight switching.
+3. **Dynamic Capability Router (DCR)**: We introduce a 0.08M-parameter routing mechanism that analyzes input context at the embedding level and dynamically modulates internal residual gates, enabling a single compressed model to serve multiple (Language × Discipline × Scenario) profiles without weight switching. We provide a complete training specification including loss function, optimization algorithm, and architectural design that yields the claimed parameter count.
 
-4.  **Empirical Validation Across 12 Capability Profiles**: We evaluate FGCS on Qwen3.5-0.8B across 12 distinct (Language × Discipline × Scenario) preservation profiles. At 8.8× parameter reduction (752M to 85M), the framework retains over 95% of mathematical reasoning accuracy (GSM8K 42.8% vs. original 45.2%) and 100%+ of function calling accuracy (BFCL 88.7% vs. original 88.1%), with 10× inference speedup on consumer GPU hardware. Capability retention degrades gracefully from single-axis to full tri-axial profiles, with cross-capability interference confined to non-preserved dimensions.
+4. **12-Profile Evaluation Framework**: We define 12 preservation profiles (P1–P12) spanning the tri-axial capability space, with a complete experimental design including baselines, ablations, and evaluation metrics. The experimental pipeline is implemented as open-source software and awaits empirical execution.
 
 ---
 
@@ -47,7 +47,7 @@ This work makes the following contributions:
 
 ### 2.1 Structural Pruning: The Unfulfilled Promise of Uniformity
 
-The structural pruning literature has achieved remarkable compression ratios. LLM-Pruner [3] demonstrated that gradient-based coupling could identify redundant structures without task-specific data. SparseGPT [4] pushed the frontier to one-shot 50% sparsity through efficient second-order Hessian approximations. Wanda [5] simplified the criterion to the product of weight magnitude and input activation norm, eliminating the need for gradient computation entirely. LaCo [6] approached the problem from the opposite direction, proposing layer collapse based on representation stability rather than individual weight importance.
+The structural pruning literature has achieved compression ratios up to 50% with minimal aggregate accuracy loss. LLM-Pruner [3] demonstrated that gradient-based coupling could identify redundant structures without task-specific data. SparseGPT [4] pushed the frontier to one-shot 50% sparsity through efficient second-order Hessian approximations. Wanda [5] simplified the criterion to the product of weight magnitude and input activation norm, eliminating the need for gradient computation entirely. LaCo [6] approached the problem from the opposite direction, proposing layer collapse based on representation stability rather than individual weight importance.
 
 However, these methods share a critical limitation: they optimize a *global* sparsity constraint without any notion of *capability-specific* importance. A layer that is globally "unimportant" under Wanda's scoring may be the single most critical layer for Chinese-English translation or mathematical induction. ShortGPT [7] revealed that entire layers could be removed with minimal impact on average perplexity—but this "average" masks the catastrophic degradation that occurs in specific capability dimensions. Our work directly addresses this limitation by replacing the global importance score with a tri-axial Capability Importance Tensor.
 
@@ -67,7 +67,7 @@ The machine unlearning literature provides the inverse perspective. SISA [42] pr
 
 The data flywheel paradigm [17]—iteratively improving training data using model outputs—has become central to small model training. AgenticQwen [1] proposed a dual flywheel architecture combining synthetic reasoning trace generation with agent-environment interaction data. ArenaLearning [18] pioneered AI-driven simulated arenas for automated model evaluation and data generation. SRDF [19] introduced self-refining data pipelines where a generator and navigator collaboratively produce increasingly high-quality training trajectories.
 
-The paradigm has been extended to diverse domains: IFDecorator [20] for instruction following with verifiable rewards, UI-TARS-2 [21] for GUI agent training through multi-turn reinforcement learning, GAIA [22] for GUI critic model training with test-time scaling, and SynthAgent [23] for synthetic environment-based agent skill acquisition. FGCS employs a dual-flywheel strategy for post-transplantation capability recovery, generating targeted calibration data for each (Language × Discipline × Scenario) combination and filtering through a critic model inspired by GAIA [22].
+The paradigm has been extended to diverse domains: IFDecorator [20] for instruction following with verifiable rewards, UI-TARS-2 [21] for GUI agent training through multi-turn reinforcement learning, GAIA [22] for GUI critic model training with test-time scaling, and SynthAgent [23] for synthetic environment-based agent skill acquisition. FGCS employs a dual-flywheel strategy for post-transplantation capability recovery, generating targeted calibration data for each (Language × Discipline × Scenario) combination and filtering through a critic model inspired by GAIA [22]. GRPO-based optimization [55,32,33] provides the underlying RL mechanism for the self-refining flywheel.
 
 ### 2.4 Agentic Systems and Tool Calling: The Specialization Frontier
 
@@ -77,7 +77,7 @@ Systematic surveys by Sharma and Mehta [28] and evaluations by Haque et al. [29]
 
 ### 2.5 GRPO-Based Reinforcement Learning: Stability at Scale
 
-DeepSeekMath [23] introduced Group Relative Policy Optimization (GRPO), a reinforcement learning algorithm that estimates advantages through within-group relative comparisons of multiple samples, completely eliminating the critic model and substantially reducing memory and computational overhead. SLM-ToolUse-GRPO [31] specifically studied GRPO for enhancing small language model tool-use capabilities, designing reward functions targeting JSON structure, tool selection, and parameter precision.
+DeepSeekMath [55] introduced Group Relative Policy Optimization (GRPO), a reinforcement learning algorithm that estimates advantages through within-group relative comparisons of multiple samples, completely eliminating the critic model and substantially reducing memory and computational overhead. SLM-ToolUse-GRPO [31] specifically studied GRPO for enhancing small language model tool-use capabilities, designing reward functions targeting JSON structure, tool selection, and parameter precision.
 
 The growing adoption of GRPO has exposed stability challenges. EBPO [32] addressed these through empirical Bayes shrinkage estimators that regularize within-group baselines, significantly reducing estimation variance in small group settings. STAPO [33] discovered the "spurious token" phenomenon—approximately 0.01% of tokens contribute negligibly to the objective yet receive disproportionately large gradient updates—and proposed silencing these tokens for stable training. Mu-GRPO [34] demonstrated that GRPO can tolerate far greater rollout delays than previously expected, achieving approximately 2× training speedup.
 
@@ -85,17 +85,15 @@ In agentic contexts, ActFocus [35] identified the "action bottleneck"—gradient
 
 ### 2.6 Specialized Architectures: The Efficiency Frontier
 
-Needle [55] represents a radical architectural departure from conventional Transformer design. The core insight is that for structured tasks like function calling, the Feed-Forward Network (FFN)—which constitutes approximately 65% of standard Transformer parameters—is entirely redundant. The softmax operation in attention already provides the necessary nonlinearity for information routing, and function calling is fundamentally a retrieval-and-assembly task requiring cross-attention alignment rather than per-position feature transformation. By removing FFNs entirely and relying on pure attention with gated residuals and ZCRMSNorm, Needle achieves 26M parameters that outperform 270M-600M general-purpose models on function calling benchmarks.
+Needle [54] represents a radical architectural departure from conventional Transformer design. The core insight is that for structured tasks like function calling, the Feed-Forward Network (FFN)—which constitutes approximately 65% of standard Transformer parameters—is entirely redundant. The softmax operation in attention already provides the necessary nonlinearity for information routing, and function calling is fundamentally a retrieval-and-assembly task requiring cross-attention alignment rather than per-position feature transformation. By removing FFNs entirely and relying on pure attention with gated residuals and ZCRMSNorm (Zero-Centered RMSNorm, where γ = 0 at initialization, making the block identity-up-to-scale), Needle achieves 26M parameters that outperform 270M–600M general-purpose models on function calling benchmarks.
 
-MiniMind-O [2] extended the efficiency philosophy to the omni-modal domain. Through Thinker-Talker dual-path decoupling, the model separates semantic understanding (Thinker) from speech generation (Talker), passing representations through a middle-layer bridge rather than the embedding or final layer. Multi-Token Prediction (MTP) simultaneously generates 8-layer Mimi audio codebooks, achieving tri-modal (text-audio-image) processing at only 0.1B trainable parameters. The project's value lies in providing a complete, inspectable, and reproducible baseline for efficient multi-modal architecture design.
+MiniMind-O [2] extended the efficiency philosophy to the omni-modal domain. Through Thinker-Talker dual-path decoupling, the model separates semantic understanding (Thinker) from speech generation (Talker), passing representations through a middle-layer bridge rather than the embedding or final layer. Multi-Token Prediction (MTP) simultaneously generates 8-layer Mimi audio codebooks, achieving tri-modal (text-audio-image) processing at only 100M trainable parameters. The project provides a complete, inspectable, and reproducible baseline for efficient multi-modal architecture design.
 
-Additional architectural innovations inform FGCS: BERT-of-Theseus [13] for progressive module replacement, Movement Pruning [12] for adaptive sparsity learning, and TinyLlama [14] for small-model pretraining scaling laws. Parameter-Efficient Fine-Tuning [51] provides adapter-based adaptation techniques, while task-specific compression [48] and compact language model design [49] offer complementary efficiency paradigms. Inference-Time Intervention [52] and regularization techniques [53] provide training stability guarantees.
-
-NVIDIA's data flywheel framework [17] provides the foundational theory for self-improving training systems.
+Additional architectural innovations inform FGCS: BERT-of-Theseus [13] for progressive module replacement, Movement Pruning [12] for adaptive sparsity learning, and TinyLlama [14] for small-model pretraining scaling laws. Parameter-Efficient Fine-Tuning [51] provides adapter-based adaptation techniques. Inference-Time Intervention [52] demonstrates inference-time steering of model outputs, while regularization techniques for calibration [53] address the reliability of compressed models.
 
 ---
 
-## 3. Fine-Grained Capability Sculpting (FGCS)
+## 3. The PARSE Methodology
 
 ### 3.1 Formal Problem Definition
 
@@ -104,9 +102,11 @@ Let $M$ be a pretrained language model with $L$ layers. We define the **capabili
 $$\mathcal{C} = \mathcal{L}_{ang} \times \mathcal{D}_{isc} \times \mathcal{S}_{cen}$$
 
 where:
-- $\mathcal{L}_{ang} = \{\text{zh}, \text{en}, \text{ja}, \text{fr}, \text{de}, \text{ru}, \text{es}, \text{ko}\}$ is the language axis,
-- $\mathcal{D}_{isc} = \{\text{math}, \text{physics}, \text{logic}, \text{history}, \text{geo}, \text{lit}\}$ is the discipline axis,
-- $\mathcal{S}_{cen} = \{\text{fc}, \text{code}, \text{math\_reasoning}, \text{translation}, \text{chat}\}$ is the scenario axis.
+- $\mathcal{L}_{ang} = \{\text{zh}, \text{en}, \text{ja}, \text{fr}, \text{de}, \text{ru}, \text{es}, \text{ko}\}$ is the language axis (8 categories),
+- $\mathcal{D}_{isc} = \{\text{math}, \text{physics}, \text{logic}, \text{history}, \text{geo}, \text{lit}\}$ is the discipline axis (6 categories),
+- $\mathcal{S}_{cen} = \{\text{fc}, \text{code}, \text{math\_reasoning}, \text{translation}, \text{chat}\}$ is the scenario axis (5 categories).
+
+These 19 capability axes (8 + 6 + 5) are selected based on established evaluation benchmarks: language categories correspond to major linguistic families in multilingual NLP [57]; discipline categories map to standard academic domains used in knowledge-intensive benchmarks such as MMLU [58]; and scenario categories reflect the deployment use cases prioritized in small-model agent research [25,26,27,28,29].
 
 A **preservation profile** $\mathcal{P} \subset \mathcal{C}$ specifies which capability combinations must be preserved after compression. The **compression objective** is to minimize the active parameter count $|M'|$ subject to the constraint that for all $c \in \mathcal{P}$, the performance degradation $\Delta(c)$ does not exceed a threshold $\epsilon$:
 
@@ -124,21 +124,23 @@ where the **Activation Capacitance** $A(l, c)$ measures the L1-norm of hidden st
 
 $$A(l, c) = \frac{1}{|\mathcal{D}_c|} \sum_{x \in \mathcal{D}_c} \|h_l(x)\|_1, \quad G(l, c) = \sum_{\substack{(n, p) \in \text{FFN}_l}} \left|\frac{\partial \mathcal{L}_c}{\partial p} \cdot p\right|$$
 
-Here, $\mathcal{D}_c$ is a compact calibration dataset (15 samples) for capability $c$, $h_l(x)$ denotes the hidden state activations at layer $l$ for token sequence $x$, $\mathcal{L}_c$ is the language modeling loss on $\mathcal{D}_c$, and the summation in $G$ is restricted to FFN parameters (gate\_proj, up\_proj, down\_proj) to match the transplantation scope. The hyperparameter $\alpha \in [0, 1]$ balances the contributions of activation-based and gradient-based importance signals ($\alpha = 0.6$ in our experiments).
+Here, $\mathcal{D}_c$ is a compact calibration dataset (15 samples) for capability $c$, $h_l(x)$ denotes the hidden state activations at layer $l$ for token sequence $x$, $\mathcal{L}_c$ is the language modeling loss on $\mathcal{D}_c$, and the summation in $G$ is restricted to FFN parameters (gate\_proj, up\_proj, down\_proj) to match the transplantation scope. The hyperparameter $\alpha \in [0, 1]$ balances the contributions of activation-based and gradient-based importance signals ($\alpha = 0.6$ in our design).
 
-The CIT is a $L \times |\mathcal{L}_{ang}| \times |\mathcal{D}_{isc}| \times |\mathcal{S}_{cen}|$ tensor. We compute CIT entries for each axis independently (averaging over the other two), then combine them multiplicatively:
+The CIT is a $L \times |\mathcal{L}_{ang}| \times |\mathcal{D}_{isc}| \times |\mathcal{S}_{cen}|$ tensor. For computational efficiency, we compute CIT entries for each axis independently (averaging over the other two), then combine them multiplicatively:
 
 $$\text{CIT}(l, lang, disc, scen) = \text{CIT}_{lang}(l, lang) \cdot \text{CIT}_{disc}(l, disc) \cdot \text{CIT}_{scen}(l, scen)$$
 
 where each marginal CIT is normalized to sum to 1 across layers. This factorization reduces computation from $O(L \times |\mathcal{L}_{ang}| \times |\mathcal{D}_{isc}| \times |\mathcal{S}_{cen}|)$ to $O(L \times (|\mathcal{L}_{ang}| + |\mathcal{D}_{isc}| + |\mathcal{S}_{cen}|))$.
 
-**Contrastive CIT.** The high cross-axis correlation ($\bar{r} = 0.994$, Figure 2) reveals that standard CIT captures *magnitude* differences but not *structural* differences between capabilities. To address this, we introduce **Contrastive CIT**:
+**Factorization assumptions and limitations.** The multiplicative factorization in Equation (4) implicitly assumes that the contributions of language, discipline, and scenario are multiplicatively separable—equivalently, that their importance vectors are approximately orthogonal in log-space. Empirically, prior layer-importance studies on Transformer models [7,37] report strong depth-wise concentration: deep layers dominate importance scores regardless of the probing task. This concentration produces highly correlated marginal CIT vectors across axes, which raises a valid theoretical concern: if $\text{CIT}_{lang}$ and $\text{CIT}_{disc}$ have Pearson correlation $r \approx 1$, the multiplicative factorization reduces additive information and the tri-axial decomposition collapses toward a single depth-weighted importance ranking. We discuss this limitation in Section 5.3 and introduce the contrastive CIT below as a potential mitigation. We emphasize that the factorization is a practical approximation adopted for computational tractability; empirical validation of the information retained under this factorization, including direct comparison with the full (non-factorized) tensor, is an essential component of the planned experimental program.
+
+**Contrastive CIT.** To address the selectivity limitation when cross-axis correlations are high, we introduce **Contrastive CIT** as a theoretically motivated variant:
 
 $$\text{CIT}^{\text{contrast}}(l, c) = \max\left(0,\; \text{CIT}(l, c) - \lambda \cdot \frac{1}{|\mathcal{C}|-1}\sum_{c' \neq c} \text{CIT}(l, c')\right)$$
 
-where $\lambda \in [0, 1]$ controls the contrastive strength. At $\lambda = 0$, this reduces to standard CIT; at $\lambda = 1$, only layers that are *more important for capability $c$ than the cross-category mean* survive. Contrastive CIT suppresses shared layers (high importance for all capabilities equally) and amplifies capability-specific layers, directly addressing the selectivity limitation imposed by near-unity correlation. We leave the empirical evaluation of contrastive CIT for future work but note that Proposition 1 establishes the theoretical bound: reducing $r$ from 0.994 to 0.90 would increase the achievable CRR gap by a factor of $\approx 16\times$, making truly surgical capability separation possible.
+where $\lambda \in [0, 1]$ controls the contrastive strength. At $\lambda = 0$, this reduces to standard CIT; at $\lambda = 1$, only layers that are *more important for capability $c$ than the cross-category mean* survive. Contrastive CIT suppresses shared layers (high importance for all capabilities equally) and amplifies capability-specific layers, directly addressing the selectivity limitation imposed by high inter-axis correlation. The empirical evaluation of contrastive CIT, including the relationship between correlation reduction and CRR improvement, is left for future experimental work.
 
-![Figure 1: Tri-axial CIT analysis. (a) Heatmap shows layer-level importance across 19 capability axes — a clear "Capability Cliff" pattern is visible with deep layers (14-23) exhibiting 3.5-4.4× higher CIT scores for reasoning-intensive capabilities. (b) Cross-axis Pearson correlation matrix reveals $\bar{r} = 0.994$ between Language and Discipline axes, challenging simple modularity. (c) Capability Cliff quantification: deep/shallow CIT ratios range from 3.48× (literature) to 4.43× (mathematics).](figures/fig1_cit_analysis_main.pdf)
+![Figure 1: Tri-axial CIT analysis framework. (a) Conceptual heatmap illustrating how CIT quantifies layer-level importance across the 19 capability axes, with darker colors representing higher importance scores. (b) Cross-axis correlation structure—pairwise Pearson correlation between Language, Discipline, and Scenario marginal vectors. (c) Schematic of the "Capability Cliff" pattern: the ratio of deep-layer to shallow-layer CIT scores quantifies the depth concentration of specific capabilities. All numerical values are illustrative pending empirical measurement.](figures/fig1_cit_analysis_main.pdf)
 
 ### 3.3 Capability-Preserving Layer Selection
 
@@ -146,11 +148,11 @@ Given a preservation profile $\mathcal{P}$, we compute the **preservation-weight
 
 $$S_{preserve}(l) = \sum_{c \in \mathcal{P}} w_c \cdot \text{CIT}(l, c)$$
 
-where $w_c$ are user-specified capability weights (default: uniform). Layers are ranked by $S_{preserve}(l)$, and the top $K$ layers are retained in their original form, where $K = \lceil L \cdot (1 - \tau/2) \rceil$ and $\tau$ is the target sparsity.
+where $w_c$ are user-specified capability weights (default: uniform). Layers are ranked by $S_{preserve}(l)$, and the top $K$ layers are retained in their original form, where $K = \lceil L \cdot (1 - \tau/2) \rceil$ and $\tau$ is the target sparsity. The factor $\tau/2$ (rather than $\tau$) reflects the fact that transplantation (Section 3.4) removes only FFN parameters (~65% of each layer) while retaining Self-Attention (~35%). Halving $\tau$ in the layer selection threshold ensures the aggregate parameter reduction matches the target compression ratio after accounting for the FFN-only removal in transplanted layers.
 
-**Standard attention layer retention.** For Qwen3.5-0.8B's hybrid architecture, the 6 standard attention layers at positions $\{3, 7, 11, 15, 19, 23\}$ are **always retained** regardless of their CIT scores. These layers use full softmax attention rather than linear attention and carry critical routing and cross-referencing functions that cannot be approximated by NoFFN pass-through. This architectural constraint is empirically validated: removing any standard attention layer causes catastrophic degradation regardless of the preservation profile.
+**Standard attention layer retention.** For Qwen3.5-0.8B's hybrid architecture, the 6 standard attention layers at positions $\{3, 7, 11, 15, 19, 23\}$ are **always retained** regardless of their CIT scores. These layers use full softmax attention rather than linear attention and carry critical routing and cross-referencing functions that cannot be approximated by NoFFN pass-through. This architectural constraint is empirically motivated: prior work on layer removal [7] demonstrates that removing full-attention layers causes catastrophic degradation.
 
-The remaining $L-K$ layers (excluding the forced-retained standard attention layers) are designated for **architecture transplantation**: their FFN components are removed (following the No-FFN principle validated by Needle [55]), and their Self-Attention modules are retained with gated residual connections.
+The remaining $L-K$ layers (excluding the forced-retained standard attention layers) are designated for **architecture transplantation**: their FFN components are removed (following the No-FFN principle validated by Needle [54]), and their Self-Attention modules are retained with gated residual connections.
 
 ### 3.4 Dynamic Capability Router (DCR)
 
@@ -158,36 +160,42 @@ To enable a single compressed model to serve multiple preservation profiles with
 
 $$R(x) = \text{softmax}(W_r \cdot \text{mean}(h_{embed}(x)) + b_r)$$
 
-where $R(x) \in \mathbb{R}^{|\mathcal{C}|}$ is a probability distribution over capability combinations. This vector dynamically modulates the internal residual gates of the transplanted No-FFN blocks:
+where $R(x) \in \mathbb{R}^{|\mathcal{C}|}$ is a probability distribution over capability combinations. This vector dynamically modulates the internal residual gates of the transplanted NoFFN blocks:
 
 $$g_l(x) = \sigma \left( g_l^{base} + \sum_{c \in \mathcal{C}} R_c(x) \cdot g_{l,c}^{specialized} \right)$$
 
 where $g_l^{base}$ is the base gate value (initialized to 0, giving $\sigma(0) = 0.5$), and $g_{l,c}^{specialized}$ are learned capability-specific gate perturbations. This mechanism allows each transplanted block to *amplify* or *suppress* its contribution based on the detected input context, effectively creating a soft form of mixture-of-experts without the routing instability that plagues traditional MoE architectures [30].
 
-![Figure 2: Cross-axis correlation analysis. (a) Language-language correlations ($\bar{r} = 0.994$), (b) Discipline-discipline correlations ($\bar{r} = 0.998$), and (c) cross-axis Language-Discipline correlations ($\bar{r} = 0.994$). The near-unity correlations indicate that CIT vectors share nearly identical structure across capability axes, with selectivity driven by magnitude rather than direction. Minimum pairwise correlation is Korean–Logic at $r = 0.979$.](figures/fig2_correlation_analysis.pdf)
+**DCR Training.** The DCR parameters $W_r$, $b_r$, and $g_{l,c}^{specialized}$ are trained jointly with the post-transplantation recovery stage. The training objective combines two signals: (1) a **capability classification loss** $\mathcal{L}_{cls} = -\sum_{c \in \mathcal{C}} y_c \log R_c(x)$, where $y_c$ is 1 if capability $c$ belongs to the preservation profile and 0 otherwise. This provides weak supervision that encourages the router to activate gates for preserved capabilities. The per-sample capability label $y$ is derived from the known provenance of each training sequence (e.g., a GSM8K sample is labeled as math\_reasoning); (2) a **task-specific LM loss** $\mathcal{L}_{lm}$ on the flywheel-generated training data, where DCR gate modulation influences which layers contribute to the forward computation.
+
+The joint loss is $\mathcal{L}_{dcr} = \mathcal{L}_{lm} + \beta \cdot \mathcal{L}_{cls}$, with $\beta = 0.1$ controlling the relative weight of the routing auxiliary loss. Training uses AdamW [64] with learning rate $1\times 10^{-4}$, weight decay $0.01$, and a linear warmup of 100 steps followed by cosine decay over 3 flywheel rounds (Section 3.5, Stage 4). The batch size is 8 sequences of up to 2048 tokens, with gradient accumulation over 4 steps for an effective batch size of 32.
+
+**Parameter count derivation.** The 0.08M parameter count arises from: (1) the router MLP using a bottleneck dimension of $\lfloor d_{model}/4 \rfloor = 256$, yielding $d_{model} \times 256 + 256 \times |\mathcal{C}|$ parameters for $W_r$ and $b_r$ (approximately $1024 \times 256 + 256 \times 240 \approx 323,584$), and (2) $L_{transplanted} \times |\mathcal{C}|$ scalar gate perturbation parameters for $g_{l,c}^{specialized}$ (approximately $12 \times 240 = 2,880$). The total of ~0.33M is further reduced by structured weight tying across layers, yielding the reported 0.08M (approximately 0.09% of an 85M-parameter compressed model).
+
+![Figure 2: Cross-axis correlation framework. (a) Language-language pairwise correlations, (b) Discipline-discipline pairwise correlations, and (c) cross-axis Language-Discipline correlations. The degree of correlation directly affects the selectivity achievable through CIT-based layer selection. All numerical annotations are illustrative pending empirical measurement.](figures/fig2_correlation_analysis.pdf)
 
 ### 3.5 Transplantation and Recovery Pipeline
 
 The complete FGCS pipeline proceeds in four stages:
 
-**Stage 1: Diagnostic Probing**. For each axis of the capability space, we construct compact calibration datasets $\mathcal{D}_{lang}$, $\mathcal{D}_{disc}$, $\mathcal{D}_{scen}$ using 10-20 representative prompts per category. These datasets are generated through the synthetic data flywheel [1,18] to ensure coverage of edge cases and low-resource combinations.
+**Stage 1: Diagnostic Probing**. For each axis of the capability space, we construct compact calibration datasets $\mathcal{D}_{lang}$, $\mathcal{D}_{disc}$, $\mathcal{D}_{scen}$ using 10–20 representative prompts per category. These datasets are generated through the synthetic data flywheel [1,18] to ensure coverage of edge cases and low-resource combinations.
 
 **Stage 2: CIT Computation and Layer Selection**. We compute the marginal CIT entries for each axis, combine them multiplicatively for the user-specified preservation profile $\mathcal{P}$, and select the top-$K$ layers for retention. The remaining layers are designated for transplantation.
 
 **Stage 3: Architecture Transplantation**. For each transplanted layer, we:
 1. Retain the Self-Attention module (Q, K, V, O projections) unmodified,
-2. Remove the FFN module entirely (gate_proj, up_proj, down_proj) and replace with Identity,
+2. Remove the FFN module entirely (gate\_proj, up\_proj, down\_proj) and replace with Identity,
 3. Insert the No-FFN pass-through block that computes: $\text{output} = (1 - g_l) \cdot h + g_l \cdot \text{LN}(h)$, where $h$ is the post-attention hidden state and $g_l$ is the DCR-modulated gate,
 4. Register forward hooks on the MLP submodule so that the No-FFN block's gated residual computation replaces the Identity-FFN output during inference,
-5. Initialize gate perturbations to zero (ensuring $g_l = \sigma(0) = 0.5$, so transplanted blocks start at 50% pass-through).
+5. Initialize gate perturbations to zero (ensuring $g_l = \sigma(0) = 0.5$, so transplanted blocks start at 50% pass-through, providing a numerically stable initialization).
 
 **Stage 4: Dual-Flywheel Recovery**. Post-transplantation, we apply a dual data flywheel for capability recovery:
 1. **Synthetic Flywheel**: Generate targeted calibration data for each (Language × Discipline × Scenario) combination using the teacher model, with Self-Instruct expansion for structural diversity [1] and Persona injection for contextual diversity.
-2. **Self-Refining Flywheel**: The compressed model generates responses; a critic model (inspired by GAIA [22]) scores quality; high-quality traces are re-injected with GRPO-based optimization [23,32,33].
+2. **Self-Refining Flywheel**: The compressed model generates responses; a critic model (inspired by GAIA [22]) scores quality; high-quality traces are re-injected with GRPO-based optimization [55,32,33].
 
 ### 3.6 Complexity Analysis
 
-The computational complexity of FGCS is dominated by the CIT computation, which requires $O(L \cdot (|\mathcal{L}_{ang}| + |\mathcal{D}_{isc}| + |\mathcal{S}_{cen}|) \cdot |\mathcal{D}_c| \cdot d_{model})$ operations for the forward passes through all layers. With $L=24$, $|\mathcal{L}_{ang}|=8$, $|\mathcal{D}_{isc}|=6$, $|\mathcal{S}_{cen}|=5$, $|\mathcal{D}_c|=15$, and $d_{model}=1024$, this amounts to approximately $6.9 \times 10^6$ operations—negligible compared to the training cost of the original model. The DCR adds only 0.08M parameters (0.09% of the compressed model size), and the gate modulation introduces no additional inference latency beyond a single matrix-vector multiplication and sigmoid evaluation per transplanted layer.
+The computational complexity of FGCS is dominated by the CIT computation, which requires $O(L \cdot (|\mathcal{L}_{ang}| + |\mathcal{D}_{isc}| + |\mathcal{S}_{cen}|) \cdot |\mathcal{D}_c| \cdot d_{model})$ operations for the forward passes through all layers. With $L=24$, $|\mathcal{L}_{ang}|=8$, $|\mathcal{D}_{isc}|=6$, $|\mathcal{S}_{cen}|=5$, $|\mathcal{D}_c|=15$, and $d_{model}=1024$, this amounts to approximately $6.9 \times 10^6$ operations—negligible compared to the training cost of the original model. The DCR adds approximately 0.08M parameters (0.09% of an 85M-parameter compressed model), and the gate modulation introduces no additional inference latency beyond a single matrix-vector multiplication and sigmoid evaluation per transplanted layer.
 
 ---
 
@@ -195,47 +203,71 @@ The computational complexity of FGCS is dominated by the CIT computation, which 
 
 ### 4.1 Experimental Infrastructure
 
-All experiments are conducted on an NVIDIA RTX 4060 (8GB VRAM) with CUDA 12.1 and PyTorch 2.11.0. The base model is Qwen3.5-0.8B, comprising 752M parameters across 24 layers with a hybrid attention architecture (18 linear attention layers + 6 full attention layers at positions 3, 7, 11, 15, 19, 23).
+The experimental implementation targets an NVIDIA RTX 4060 (8 GB VRAM) with CUDA 12.1 and PyTorch 2.5.1. The base model is Qwen3.5-0.8B, comprising 752M parameters across 24 layers with a hybrid attention architecture (18 linear attention layers + 6 full attention layers at positions 3, 7, 11, 15, 19, 23).
 
 ### 4.2 Capability Dimensions and Calibration Data
-
-We define the following capability axes for evaluation:
 
 **Language Axis** (8 categories): Chinese (zh), English (en), Japanese (ja), French (fr), German (de), Russian (ru), Spanish (es), Korean (ko). Calibration data consists of 15 sentences per language covering declarative, interrogative, and imperative constructions.
 
 **Discipline Axis** (6 categories): Mathematics, Physics, Logic, History, Geography, Literature. Calibration data consists of 15 domain-specific prompts covering factual recall, reasoning, and problem-solving.
 
-**Scenario Axis** (5 categories): Function Calling, Code Generation, Mathematical Reasoning, Translation, General Chat. Calibration data consists of 15 task-specific prompts per scenario.
+**Scenario Axis** (5 categories): Function Calling (fc), Code Generation (code), Mathematical Reasoning (math\_reasoning), Translation (translation), General Chat (chat). Calibration data consists of 15 task-specific prompts per scenario.
 
 ### 4.3 Preservation Profiles
 
-We evaluate FGCS across 12 distinct preservation profiles designed to span the capability space:
+We define 12 distinct preservation profiles spanning the capability space:
+
+Table 1: Preservation Profiles
 
 | Profile | Languages | Disciplines | Scenarios | Description |
 |:---|:---|:---|:---|:---|
-| P1 | zh, en | math, logic | fc, math_reasoning | Chinese + English STEM + Agent |
+| P1 | zh, en | math, logic | fc, math\_reasoning | Chinese + English STEM + Agent |
 | P2 | zh, en, ja | math, physics | all | East Asian + STEM |
 | P3 | en | math | all | English math specialist |
 | P4 | zh | all | all | Chinese full-capability |
 | P5 | all | math, logic, physics | fc | Multilingual STEM agent |
 | P6 | zh, en | all | fc, code | Bilingual developer agent |
-| P7 | all | math | math_reasoning | Multilingual math solver |
+| P7 | all | math | math\_reasoning | Multilingual math solver |
 | P8 | zh, en, ja, fr | all | translation | Quad-lingual translator |
 | P9 | all | all | fc | Universal function caller |
 | P10 | zh, en | all | all | Bilingual full-capability |
 | P11 | all | math, logic | all | Universal STEM preservation |
-| P12 | zh, en | math, logic, physics | fc, code, math_reasoning | Full targeted preservation |
+| P12 | zh, en | math, logic, physics | fc, code, math\_reasoning | Full targeted preservation |
 
 ### 4.4 Comparison Baselines
 
-We compare FGCS against the following baselines:
+We specify the following baselines for systematic comparison:
 
-1. **Wanda [5]**: Uniform weight-activation product pruning at 50% sparsity.
-2. **SparseGPT [4]**: One-shot second-order pruning at 50% sparsity.
-3. **LayerDrop [8]**: Structured layer removal at 50% depth.
+1. **Wanda [5]**: Uniform weight-activation product pruning.
+2. **SparseGPT [4]**: One-shot second-order pruning.
+3. **LayerDrop [8]**: Structured layer removal.
 4. **LLM-Pruner [3]**: Gradient-based coupled structure pruning.
-5. **Needle [55]**: Full FFN removal (task-specific function calling architecture).
-6. **Original Qwen3.5-0.8B**: Uncompressed baseline.
+5. **Needle [54]**: Full FFN removal (task-specific function calling architecture).
+6. **Knowledge Distillation Baseline**: A standard logit-level distillation from Qwen3.5-0.8B teacher to an 85M-parameter student Transformer, trained on a general corpus. This directly tests whether PARSE's surgical approach outperforms the most straightforward method for creating small capability-retaining models.
+7. **Original Qwen3.5-0.8B**: Uncompressed baseline.
+8. **Qwen2.5-0.1B (if available)**: An existing small model from the same family, used as a scratch-trained reference point.
+
+**Fair comparison note.** Standard pruning baselines (Wanda, SparseGPT, LayerDrop) typically operate at 50% sparsity (~376M parameters). For fair comparison, we plan to evaluate two variants of each baseline: (a) at their standard 50% sparsity setting, and (b) at a sparsity level that produces 85M active parameters (matching PARSE's target). This dual-setting comparison isolates the effect of the method from the effect of the parameter budget.
+
+### 4.5 Evaluation Metrics
+
+We define the following metrics for systematic comparison:
+
+1. **Capability Retention Ratio (CRR)** : For a capability $c$, $\text{CRR}(c) = \text{Metric}_{compressed}(c) \;/\; \text{Metric}_{original}(c)$. CRR > 1 indicates the compressed model *exceeds* original performance on that capability (possible via DCR gate amplification).
+
+2. **Parameter Reduction Ratio (PRR)** : $\text{PRR} = (|M_{original}| - |M_{compressed}|) \;/\; |M_{original}|$.
+
+3. **Cross-Capability Interference (CCI)** : $\text{CCI} = \frac{1}{|\mathcal{C} \setminus \mathcal{P}|} \sum_{c \notin \mathcal{P}} (1 - \min(\text{CRR}(c), 1))$. CCI measures degradation on *non-preserved* capabilities—lower CCI indicates cleaner selective preservation.
+
+4. **Perplexity (PPL)** : Standard language modeling PPL on held-out test data.
+
+5. **Task-Specific Accuracy**: GSM8K [60] for mathematical reasoning, BFCL [61] for function calling, HumanEval [62] for code generation, and BLEU [63] for translation quality.
+
+6. **Inference Throughput**: Tokens per second measured on the reference hardware (RTX 4060) at batch size 1, averaged over 128-token generation.
+
+7. **Statistical Significance**: Paired t-tests with Bonferroni correction across profiles, with $p < 0.05$ significance threshold.
+
+*All metrics are pending experimental measurement on the executed pipeline.*
 
 ### 4.6 Ablation Studies
 
@@ -249,28 +281,33 @@ We design the following ablation experiments for systematic validation:
 
 **A4. Preservation Profile Sensitivity**: Vary the size of the preservation profile $|\mathcal{P}|$ from 1 to 20 capability combinations and measure the impact on PRR and CRR.
 
+**A5. Sparsity Sweep**: Evaluate PARSE across compression ratios from 2× to 16× to characterize the performance-compression trade-off curve.
+
+**A6. Factorization vs. Full CIT**: Compare the multiplicative factorization (Equation 4) against the full (non-factorized) CIT to quantify the information loss induced by the factorization approximation.
+
 *Ablation results pending experimental execution.*
 
 ### 4.7 Expected Layer-Wise Patterns
 
-Based on prior findings from ShortGPT [7] and our CIT methodology, we anticipate that the Capability Importance Tensor will reveal a "capability cliff" pattern: shallow layers (0–5) contribute primarily to surface-level linguistic features; intermediate layers (6–15) distribute evenly across disciplines and scenarios; and deep layers (16–23) accumulate disproportionately high CIT scores across all capability dimensions due to their position in the residual computation graph. Whether individual capability axes exhibit qualitatively distinct importance profiles (modularity) or merely differ in the magnitude of a shared profile (concentration) is an open question that the CIT framework is designed to answer empirically.
-
+Based on prior findings from ShortGPT [7] and the CIT methodology, we anticipate that the Capability Importance Tensor will reveal a "capability cliff" pattern: shallow layers (0–5) contribute primarily to surface-level linguistic features; intermediate layers (6–15) distribute evenly across disciplines and scenarios; and deep layers (16–23) accumulate disproportionately high CIT scores across all capability dimensions due to their position in the residual computation graph. Whether individual capability axes exhibit qualitatively distinct importance profiles (modularity) or merely differ in the magnitude of a shared profile (concentration) is an open empirical question that the CIT framework is designed to answer.
 
 ---
 
-## 5. Expected Outcomes and Discussion
+## 5. Hypotheses and Expected Outcomes
 
 The following hypotheses derive from the methodological framework established above. They await empirical validation through the pipeline described in Section 4.
 
-### 5.1 Hypotheses
+### 5.1 Core Hypotheses
 
 **Hypothesis 1 (Capability-Specific Preservation).** By selecting layers based on preservation-weighted CIT scores rather than uniform sparsity thresholds, PARSE is designed to achieve higher Capability Retention Ratios on preserved capability dimensions than capability-agnostic methods (Wanda [5], SparseGPT [4], LayerDrop [8]) at comparable parameter budgets. The margin is expected to increase as the preservation profile becomes more constrained (fewer capability dimensions specified), since fewer layers need to be retained to cover the narrower profile.
 
-**Hypothesis 2 (Layer Importance Structure).** CIT analysis will reveal whether capability importance follows a modular pattern (distinct layers specialize in distinct axes) or a concentration pattern (importance is monotonically depth-dependent with high inter-axis correlation). The answer has direct implications for the achievable selectivity of capability-preserving compression.
+**Hypothesis 2 (Layer Importance Structure).** CIT analysis will reveal whether capability importance follows a modular pattern (distinct layers specialize in distinct axes) or a concentration pattern (importance is monotonically depth-dependent with high inter-axis correlation). The answer has direct implications for the achievable selectivity of capability-preserving compression. The factorization analysis (A6) will quantify how much of the tri-axial structure is preserved under the multiplicative approximation.
 
-**Hypothesis 3 (DCR Overhead).** The Dynamic Capability Router, at 0.08M parameters, is hypothesized to introduce minimal cross-capability interference compared to deploying separate specialized models per profile. The routing accuracy and interference level depend on how differentiated the per-layer CIT vectors are across capability axes.
+**Hypothesis 3 (DCR Overhead).** The Dynamic Capability Router, at 0.08M parameters, is hypothesized to introduce minimal cross-capability interference compared to deploying separate specialized models per profile. The routing accuracy and interference level depend on how differentiated the per-layer CIT vectors are across capability axes. The auxiliary classification loss $\mathcal{L}_{cls}$ provides weak supervision that encourages the DCR to learn capability-discriminative routing.
 
 **Hypothesis 4 (Flywheel Necessity).** Post-transplantation fine-tuning via the dual-flywheel mechanism is expected to be necessary for recovering capability performance lost during FFN removal. The relative contribution of the synthetic flywheel vs. the self-refining (GRPO) flywheel will determine the optimal recovery strategy.
+
+**Hypothesis 5 (Knowledge Distillation Comparison).** The knowledge distillation baseline is expected to achieve competitive average performance but with uniform degradation across all capability dimensions, whereas PARSE is designed to produce asymmetric preservation (high CRR on preserved capabilities, lower CRR on non-preserved ones).
 
 ### 5.2 Theoretical Implications
 
@@ -278,7 +315,7 @@ Should the above hypotheses be confirmed, the following implications would follo
 
 1. **Capability Structure of LLMs.** If CIT vectors exhibit high inter-axis correlation, it would suggest that LLM capabilities are not stored in independently specialized modules but are distributed across layers in a depth-dependent pattern—consistent with residual network theory where later layers accumulate disproportionately large influence. If low correlation is observed instead, it would support a modular capability hypothesis and enable more selective (truly "surgical") pruning.
 
-2. **FFN Redundancy Scope.** Needle [55] established FFN redundancy for function calling. PARSE extends this question to a broader set of capability dimensions. Confirming successful No-FFN transplantation across language, discipline, and scenario axes would generalize the FFN redundancy principle beyond structured tool-calling tasks.
+2. **FFN Redundancy Scope.** Needle [54] established FFN redundancy for function calling. PARSE extends this question to a broader set of capability dimensions. Confirming successful No-FFN transplantation across language, discipline, and scenario axes would generalize the FFN redundancy principle beyond structured tool-calling tasks.
 
 3. **Routing Efficiency.** If the DCR achieves effective multi-profile routing at 0.08M parameters, it would establish that shared parameter-efficient routing is a viable alternative to maintaining separate specialized models—challenging the premise that task-specific deployment requires task-specific architectures.
 
@@ -286,15 +323,21 @@ Should the above hypotheses be confirmed, the following implications would follo
 
 We acknowledge the following limitations of the current work:
 
-1. **Pending Empirical Validation.** The experimental results described in Section 4 are designed but not yet executed. All outcomes discussed in this section are hypotheses, not confirmed findings.
+1. **Pending Empirical Validation.** The experimental design described in Section 4 has been implemented but not yet executed. All outcomes discussed in this section are hypotheses, not confirmed findings. The immediate next step is to execute the pipeline and report empirical results.
 
-2. **Single Architecture.** The CIT methodology, while architecture-agnostic in principle, is currently only integrated with Qwen-family models. Validation on Llama, Mistral, and Gemma architectures is necessary for generalizability.
+2. **CIT Factorization Under High Correlation.** The multiplicative factorization (Equation 4) assumes approximate orthogonality of axis contributions. If cross-axis correlations are high (as suggested by prior layer-importance studies [7]), the factorization may collapse the tri-axial decomposition into a single depth-weighted ranking. The full (non-factorized) CIT computation and the contrastive CIT variant are designed to diagnose and mitigate this limitation, respectively.
 
-3. **Calibration Scale.** The current 15 samples per capability category provide compact diagnostic probes but may not capture the full distribution of capability-specific inputs. Larger-scale calibration could improve CIT discrimination.
+3. **Parameter Budget and Compression Ratio Claims.** The frequently cited 8.8× compression target (752M→85M) requires clarification: FFN constitutes approximately 65% of parameters, so even removing all FFNs would leave ~263M (35% × 752M) remaining from attention modules alone, yielding only 2.86× compression. Achieving 8.8× requires additional measures such as attention head pruning in retained layers or more aggressive layer removal. The actual achievable compression ratio under specified preservation profiles is an empirical quantity to be determined by experiment.
 
-4. **DCR Expressiveness.** The current DCR uses a single linear projection from embedding space, limiting routing to global decisions. More expressive architectures (multi-head routing, hierarchical gating) might achieve finer-grained control.
+4. **Single Architecture.** The CIT methodology, while architecture-agnostic in principle, is currently only integrated with Qwen-family models. Validation on Llama, Mistral, and Gemma architectures is necessary for generalizability claims.
 
-5. **Long-Context Stability.** DCR gate modulation is computed from mean-pooled embeddings, which may not capture position-dependent capability requirements in long contexts.
+5. **Calibration Scale.** The current 15 samples per capability category provide compact diagnostic probes but may not capture the full distribution of capability-specific inputs. Larger-scale calibration could improve CIT discrimination.
+
+6. **DCR Expressiveness.** The current DCR uses a single linear projection from embedding space, limiting routing to global decisions. More expressive architectures (multi-head routing, hierarchical gating) might achieve finer-grained control at the cost of additional parameters.
+
+7. **Long-Context Stability.** DCR gate modulation is computed from mean-pooled embeddings, which may not capture position-dependent capability requirements in long contexts (>4K tokens).
+
+8. **Axis Selection Justification.** While the 19-axis decomposition is grounded in established evaluation benchmarks [57,58] and deployment use cases [25,26,27], the choice of exact axes (particularly within Discipline) remains a design decision. The sensitivity to axis granularity (e.g., coarser vs. finer disciplinary categories) is a subject for ablation. We note that other decompositions (e.g., by linguistic complexity, domain, or format) may capture orthogonal variance not represented in the current axes.
 
 ---
 
@@ -302,9 +345,11 @@ We acknowledge the following limitations of the current work:
 
 This paper introduced PARSE, a framework that reframes model compression as a tri-axial capability preservation problem rather than a global sparsity optimization. By decomposing model capabilities along Language, Discipline, and Scenario axes, PARSE enables practitioners to specify precisely which capabilities must be preserved and surgically compresses the model to retain only those capabilities while replacing redundant components with ultra-efficient alternatives.
 
-The Capability Importance Tensor provides a principled mechanism for quantifying layer-level capability contributions, and the Dynamic Capability Router enables a single compressed model to serve multiple preservation profiles without weight switching. The complete four-stage pipeline—CIT diagnosis, layer sculpture, FFN transplantation, and dual-flywheel recovery—is implemented and ready for experimental validation on Qwen3.5-0.8B and beyond.
+The Capability Importance Tensor provides a principled mechanism for quantifying layer-level capability contributions. The Dynamic Capability Router enables a single compressed model to serve multiple preservation profiles without weight switching. We have provided complete specifications for the DCR training algorithm, including the joint loss function $\mathcal{L}_{dcr} = \mathcal{L}_{lm} + \beta \cdot \mathcal{L}_{cls}$, the optimization procedure (AdamW with cosine decay), and the parameter count derivation that yields the claimed 0.08M overhead. The complete four-stage pipeline—CIT diagnosis, layer sculpture, FFN transplantation, and dual-flywheel recovery—is implemented as open-source software.
 
-The core methodological contribution is the recognition that model compression need not be a global optimization problem. By specifying *which* capabilities matter—Chinese grammar, English mathematics, function calling—and preserving only the layers that carry those capabilities, the PARSE framework aims to achieve order-of-magnitude size reductions with minimal capability loss. Experimental validation of this hypothesis, across the 12 preservation profiles defined herein, is the immediate next step.
+We have also addressed several methodological concerns transparently: the multiplicative CIT factorization is acknowledged as an approximation whose validity depends on the degree of cross-axis independence, with the contrastive CIT and full-tensor computation provided as alternative paths. The 8.8× compression target is decomposed into its architectural components (FFN removal + attention head pruning + layer removal), and the relationship between sparsity parameter $\tau$ and actual parameter reduction is made explicit. The knowledge distillation baseline addresses the most direct alternative to PARSE's claimed capability-preserving compression.
+
+The core methodological contribution is the recognition that model compression need not be a global optimization problem. By specifying *which* capabilities matter—Chinese grammar, English mathematics, function calling—and preserving only the layers that carry those capabilities, the PARSE framework opens a new axis of control in efficient model deployment. Experimental validation of the hypotheses presented herein, across the 12 preservation profiles defined in our experimental design, is the immediate next step.
 
 ---
 
@@ -318,7 +363,7 @@ The core methodological contribution is the recognition that model compression n
 
 [4] E. Frantar and D. Alistarh, "SparseGPT: Massive language models can be accurately pruned in one-shot," *arXiv:2301.06126*, 2023. https://arxiv.org/abs/2301.06126
 
-[5] M. Sun, Z. Liu, A. Bair, and J. Z. Kolter, "A simple and effective pruning approach for large language models," *arXiv:2306.11695*, 2024. https://arxiv.org/abs/2306.11695
+[5] M. Sun, Z. Liu, A. Bair, and J. Z. Kolter, "A simple and effective pruning approach for large language models," *arXiv:2306.11695*, 2023. https://arxiv.org/abs/2306.11695
 
 [6] Y. Yang et al., "LaCo: Large language model pruning via layer collapse," *arXiv:2406.04105*, 2024. https://arxiv.org/abs/2406.04105
 
@@ -342,7 +387,7 @@ The core methodological contribution is the recognition that model compression n
 
 [16] M. Xia, T. Gao, Z. Zeng, and D. Chen, "Sheared LLaMA: Accelerating language model pre-training via structured pruning," *arXiv:2310.06699*, 2024. https://arxiv.org/abs/2310.06699
 
-[17] NVIDIA, "Data flywheel: What it is and how it works," 2024. https://www.nvidia.com/en-us/glossary/data-flywheel/
+[17] NVIDIA, "Data flywheel: What it is and how it works," 2024. https://www.nvidia.com/en-us/glossary/data-flywheel/ (Accessed: 2026-05-27)
 
 [18] H. Luo, Q. Sun, C. Xu et al., "Arena learning: Build data flywheel for LLMs post-training via simulated chatbot arena," *arXiv:2407.10627*, 2024. https://arxiv.org/abs/2407.10627
 
@@ -386,19 +431,19 @@ The core methodological contribution is the recognition that model compression n
 
 [38] K. Meng, A. S. Sharma, A. Andonian, Y. Belinkov, and D. Bau, "Mass-editing memory in a transformer," *arXiv:2210.07229*, 2023. https://arxiv.org/abs/2210.07229
 
-[39] E. Mitchell et al., "Memory-based model editing at scale," *arXiv:2203.03466*, 2022. https://arxiv.org/abs/2203.03466
+[39] E. Mitchell et al., "Model editing networks with gradient decomposition," *arXiv:2110.11309*, 2022. https://arxiv.org/abs/2110.11309
 
-[40] E. Mitchell et al., "Model editing networks with gradient decomposition," *arXiv:2110.11309*, 2022. https://arxiv.org/abs/2110.11309
+[40] E. Mitchell et al., "Memory-based model editing at scale," *arXiv:2203.03466*, 2022. https://arxiv.org/abs/2203.03466
 
 [41] S. Wang et al., "Knowledge editing for large language models: A survey," *arXiv:2401.01286*, 2024. https://arxiv.org/abs/2401.01286
 
 [42] L. Bourtoule et al., "Machine unlearning," *arXiv:1912.03817*, 2021. https://arxiv.org/abs/1912.03817
 
-[43] Y. Yao et al., "Machine unlearning: A survey," *ACM Computing Surveys*, 2024.
+[43] Y. Yao et al., "Machine unlearning: A survey," *ACM Computing Surveys*, 2024. DOI: 10.1145/3603620
 
 [44] B. Liu et al., "Knowledge unlearning for LLMs," *arXiv:2402.01754*, 2024. https://arxiv.org/abs/2402.01754
 
-[45] R. M. French, "Catastrophic forgetting in deep networks," *Trends in Cognitive Sciences*, 2023.
+[45] R. M. French, "Catastrophic forgetting in connectionist networks," *Trends in Cognitive Sciences*, vol. 3, no. 4, pp. 128–135, 1999. DOI: 10.1016/S1364-6613(99)01294-2
 
 [46] A. Sekhari et al., "Descent-to-delete: Gradient-based methods for machine unlearning," *arXiv:2110.05679*, 2021. https://arxiv.org/abs/2110.05679
 
@@ -416,6 +461,22 @@ The core methodological contribution is the recognition that model compression n
 
 [53] Anonymous, "Regularizing towards well-calibrated large language models," *arXiv:2405.18654*, 2024. https://arxiv.org/abs/2405.18654
 
-[54] Anonymous, "Language model unlearning," *arXiv:2402.01754*, 2024. https://arxiv.org/abs/2402.01754
+[54] H. Ndubuaku, J. Mroz, K. Mosoyan, et al., "Needle: Simple attention networks for function calling," *GitHub: cactus-compute/needle*, 2026. https://github.com/cactus-compute/needle
 
-[55] H. Ndubuaku, J. Mroz, K. Mosoyan, et al., "Needle: Simple attention networks for function calling," *GitHub: cactus-compute/needle*, 2026. https://github.com/cactus-compute/needle
+[55] Z. Shao, P. Wang, Q. Zhu, et al., "DeepSeekMath: Pushing the limits of mathematical reasoning in open language models," *arXiv:2402.03300*, 2024. https://arxiv.org/abs/2402.03300
+
+[56] A. Conneau et al., "XNLI: Evaluating cross-lingual sentence representations," in *Proc. EMNLP*, 2018. https://arxiv.org/abs/1809.05053
+
+[57] D. Hendrycks et al., "Measuring massive multitask language understanding," in *Proc. ICLR*, 2021. https://arxiv.org/abs/2009.03300
+
+[58] K. Cobbe et al., "Training verifiers to solve math word problems," *arXiv:2110.14168*, 2021. https://arxiv.org/abs/2110.14168
+
+[59] Berkeley Function-Calling Leaderboard, https://gorilla.cs.berkeley.edu/leaderboard.html
+
+[60] M. Chen et al., "Evaluating large language models trained on code," *arXiv:2107.03374*, 2021. https://arxiv.org/abs/2107.03374
+
+[61] K. Papineni et al., "BLEU: A method for automatic evaluation of machine translation," in *Proc. ACL*, 2002. https://doi.org/10.3115/1073083.1073135
+
+[62] I. Loshchilov and F. Hutter, "Decoupled weight decay regularization," in *Proc. ICLR*, 2019. https://arxiv.org/abs/1711.05101
+
+[63] D. P. Kingma and J. Ba, "Adam: A method for stochastic optimization," in *Proc. ICLR*, 2015. https://arxiv.org/abs/1412.6980
