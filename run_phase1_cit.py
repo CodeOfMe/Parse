@@ -304,12 +304,34 @@ for pname in ["P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "P11"
         "total_params": n_total,
         "compressed_params": compressed,
         "PRR": round(prr, 4),
-        "S_preserve": S.tolist(),
+        "S_preserve": [float(x) for x in S.tolist()],
     }
     print(f"  {pname}: {len(retained)} retained, {len(pruned)} pruned, PRR={prr:.1%} | {prof.description}")
 
 # ---- Save Results ----
 print(f"\n[Save] Writing results to {OUTPUT_DIR}/")
+
+def to_json_safe(obj):
+    """Convert numpy/torch types to JSON-safe Python types."""
+    import numpy as np
+    if isinstance(obj, dict):
+        return {k: to_json_safe(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [to_json_safe(v) for v in obj]
+    if isinstance(obj, (np.integer,)):
+        return int(obj)
+    if isinstance(obj, (np.floating,)):
+        return float(obj)
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if hasattr(obj, 'item') and hasattr(obj, 'tolist'):
+        try:
+            v = obj.item()
+            return to_json_safe(v)
+        except:
+            return obj.tolist()
+    return obj
+
 results = {
     "metadata": {
         "model": "Qwen3.5-0.8B",
@@ -355,7 +377,7 @@ results = {
 }
 
 with open(os.path.join(OUTPUT_DIR, "cit_results.json"), "w") as f:
-    json.dump(results, f, indent=2, ensure_ascii=False)
+    json.dump(to_json_safe(results), f, indent=2, ensure_ascii=False)
 
 # Save CSV files for paper tables
 import csv

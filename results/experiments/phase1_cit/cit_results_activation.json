@@ -1,0 +1,21 @@
+{
+  "method": "activation_only",
+  "correlations": {
+    "within_axis": {
+      "lang_lang": 0.9950919894030086,
+      "disc_disc": 0.9987028775037863,
+      "scen_scen": 0.9961626333515076
+    },
+    "cross_axis": {
+      "lang_disc": 0.9936654610776164,
+      "lang_scen": 0.9920452640845493,
+      "disc_scen": 0.9978004243092188,
+      "mean": 0.9945037164904615
+    }
+  },
+  "capability_cliff": {
+    "lang_mean": 3.8122335191016083,
+    "disc_mean": 4.023050500670283,
+    "scen_mean": 4.028556831452631
+  }
+}
