@@ -13,7 +13,7 @@
 \usepackage{natbib}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 
-\bibliographystyle{spbasic}
+\bibliographystyle{plainnat}
 
 \title{PARSE: Principled Architecture Retention through Scenario-Embedded Pruning for Fine-Grained Capability-Preserving Language Model Compression}
 
@@ -302,7 +302,7 @@ The base model is Qwen3.5-0.8B, comprising 752M parameters across 24 layers.
 All 24 layers employ this mechanism; 6 layers at positions $\{3, 7, 11, 15, 19, 23\}$ additionally incorporate standard softmax attention components for cross-referencing.
 The CIT diagnostic probing (Section~3.2) is architecture-agnostic, operating on hidden state activations.
 The FFN-removal transplantation methodology (Stage~3, Section~3.5) is designed for standard Transformer architectures (e.g., LLaMA, Qwen2.5, Mistral) where FFN modules constitute the majority of parameters.
-The hidden dimension is $d_{\text{model}} = 2048$.
+The hidden dimension is $d_{\text{model}} = 2048$. Calibration prompts and the CIT computation code are available in the project repository.
 
 \subsection{Capability Dimensions and Calibration Data}
 
@@ -454,7 +454,7 @@ Full pipeline validation requires selecting a standard Transformer target model.
 
 \textbf{(4) Parameter Budget and Compression Ratio Claims.}
 The frequently cited 8.8$\times$ compression target (752M to 85M) requires clarification: FFN constitutes $\sim$65\% of parameters, so removing all FFNs would leave $\sim$263M (35\% $\times$ 752M), yielding only 2.86$\times$ compression.
-Achieving the target 8.8$\times$ requires additional measures such as attention head pruning in retained layers or more aggressive layer removal.
+Achieving the target 8.8$\times$ requires combining layer removal with additional techniques such as reduced attention dimension or more aggressive layer pruning.
 
 \textbf{(5) Single Architecture.}
 CIT methodology targets Qwen-family models.
@@ -484,7 +484,7 @@ The Capability Importance Tensor provides a principled mechanism for quantifying
 The Dynamic Capability Router enables a single compressed model to serve multiple preservation profiles without weight switching.
 We have provided complete specifications for the DCR training algorithm, including the joint loss function $\mathcal{L}_{dcr} = \mathcal{L}_{lm} + \beta \cdot \mathcal{L}_{cls}$ (with negative-sample strategy), the low-rank parameter decomposition ($W_r = U V^T$), and the optimization procedure (AdamW with cosine decay).
 
-We have addressed several methodological concerns transparently: the multiplicative CIT factorization is acknowledged as an approximation empirically validated to collapse under r=0.9945 cross-axis correlation; the 8.8$\times$ compression target is decomposed into its architectural components ($\tau/2$ layer selection, FFN removal, attention head pruning); the Qwen3.5 architecture (Mamba-style, no standard FFN) is noted as a mismatch with the transplantation methodology; and the knowledge distillation baseline addresses the most direct alternative to PARSE's claimed capability-preserving compression.
+We have addressed several methodological concerns transparently: the multiplicative CIT factorization is acknowledged as an approximation empirically validated to collapse under $\bar{r}=0.9945$ cross-axis correlation, with the contrastive CIT and full-tensor computation provided as alternative paths; the relationship between sparsity parameter $\tau$ and actual parameter reduction is made explicit---FFN-only removal yields at most $\sim$2.86$\times$ compression and deeper compression requires combining layer removal with additional techniques; the Qwen3.5 architecture (Mamba-style, no standard FFN) is noted as a mismatch with the transplantation methodology; and the knowledge distillation baseline addresses the most direct alternative to PARSE's claimed capability-preserving compression.
 
 Activation-based CIT diagnostic measurement on Qwen3.5-0.8B yielded $\bar{r} = 0.9945$ (minimum Korean--Math: $r = 0.980$) and a capability cliff ratio of 3.8--4.0$\times$, with all 12 preservation profiles converging to identical layer selection. These results empirically confirm the depth-wise concentration of LLM capabilities and the collapse of the tri-axial factorization under high inter-axis correlation.
 

@@ -143,7 +143,7 @@ DCR 设计目标为 0.08M 参数（约占目标 ~85M 压缩模型的 0.09%）。
 
 - **诊断探测硬件**：Apple M4（16 GB 统一内存），PyTorch 2.5.1，用于激活基 CIT 诊断测量
 - **完整管线硬件**：NVIDIA RTX 4060（8 GB VRAM），CUDA 12.1，用于移植和评估
-- **基座模型**：Qwen3.5-0.8B（752M 参数，24 层）。**架构说明**：Qwen3.5-0.8B 使用 Mamba 风格选择性状态空间（linear attention）架构，每层主计算为 `linear_attn` 模块而非标准 Self-Attention + FFN。全部 24 层使用该机制；{3,7,11,15,19,23} 这 6 层额外包含标准 softmax 注意力组件用于交叉引用。CIT 诊断探测（激活捕获）是架构无关的。FFN 切除移植方法（Stage 3）设计用于标准 Transformer 架构（LLaMA、Qwen2.5、Mistral 等）。保留 Qwen3.5-0.8B 作为 CIT 测量目标（因其可用性），完整管线执行需有显式 FFN 子模块的模型。隐藏维度 $d_{model} = 2048$
+- **基座模型**：Qwen3.5-0.8B（752M 参数，24 层）。**架构说明**：Qwen3.5-0.8B 使用 Mamba 风格选择性状态空间（linear attention）架构，每层主计算为 `linear_attn` 模块而非标准 Self-Attention + FFN。全部 24 层使用该机制；{3,7,11,15,19,23} 这 6 层额外包含标准 softmax 注意力组件用于交叉引用。CIT 诊断探测（激活捕获）是架构无关的。FFN 切除移植方法（Stage 3）设计用于标准 Transformer 架构（LLaMA、Qwen2.5、Mistral 等）。保留 Qwen3.5-0.8B 作为 CIT 测量目标（因其可用性），完整管线执行需有显式 FFN 子模块的模型。隐藏维度 $d_{model} = 2048$。标定提示词和 CIT 计算代码位于项目仓库 `code/parse/data/calibration.py` 和 `run_phase1_cit.py`。
 - **能力空间**：语种 8 类 × 学科 6 类 × 场景 5 类 = 240 种能力组合
 - **标定数据**：每类 10 条用于初步 CIT（共 190 条）；设计目标每类 15 条用于完整梯度 CIT
 - **部署验证**：支持通过 MoXing（开源 GGUF 模型推理框架，https://github.com/cycleuser/MoXing）进行 GGUF (GPT-Generated Unified Format) 量化部署验证

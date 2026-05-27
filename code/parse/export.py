@@ -26,14 +26,18 @@ from typing import Optional, Dict
 
 
 # ── Paths ────────────────────────────────────────────────────────────
+# Searched in order; first match wins. Set LLAMA_CPP_PATH and MOXING_PATH
+# environment variables to override.
 
 LLAMA_CPP_DIRS = [
-    Path("/Users/fred/Documents/GitHub/cycleuser/MoXing/llama.cpp"),
-    Path.home() / "llama.cpp",
-    Path("/usr/local/share/llama.cpp"),
+    Path(p) for p in [
+        os.environ.get("LLAMA_CPP_PATH", ""),
+        (Path.home() / "llama.cpp").as_posix(),
+        "/usr/local/share/llama.cpp",
+    ] if p
 ]
 
-MOXING_DIR = Path("/Users/fred/Documents/GitHub/cycleuser/MoXing")
+MOXING_DIR = Path(os.environ.get("MOXING_PATH", Path.home() / "MoXing"))
 MOXING_MODELS = MOXING_DIR / "models"
 
 

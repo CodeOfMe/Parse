@@ -20,6 +20,7 @@ def build_parse_model(
     device: str = "cuda",
     torch_dtype: torch.dtype = torch.float16,
     enable_dcr: bool = True,
+    cit_alpha: float = 0.6,
 ) -> Dict[str, Any]:
     """
     Load a Qwen model from HuggingFace and prepare it for PARSE experimentation.
@@ -74,7 +75,7 @@ def build_parse_model(
     cit_computer = ComputeCIT(
         model, tokenizer,
         device=device,
-        alpha=0.6,
+        alpha=cit_alpha,
         n_layers=n_layers,
     )
 

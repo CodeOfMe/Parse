@@ -1,0 +1,642 @@
+{
+  "metadata": {
+    "model": "Qwen3.5-0.8B",
+    "device": "cpu",
+    "device_info": {
+      "device": "cpu",
+      "platform": "macOS-26.5-arm64-arm-64bit"
+    },
+    "n_layers": 24,
+    "cit_method": "activation-only",
+    "samples_per_category": 10,
+    "standard_attn_layers": [
+      3,
+      7,
+      11,
+      15,
+      19,
+      23
+    ]
+  },
+  "correlations": {
+    "within_axis": {
+      "lang_lang": 0.9954,
+      "disc_disc": 0.9987,
+      "scen_scen": 0.996
+    },
+    "cross_axis": {
+      "lang_disc": 0.994,
+      "lang_scen": 0.9924,
+      "disc_scen": 0.9977,
+      "mean": 0.9947
+    },
+    "min_pair": {
+      "pair": "ko-math",
+      "r": 0.9811
+    }
+  },
+  "capability_cliff": {
+    "lang_mean": 3.83,
+    "disc_mean": 4.02,
+    "scen_mean": 4.04
+  },
+  "profiles": {
+    "P1": {
+      "description": "Chinese + English STEM + Agent",
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "disciplines": [
+        "math",
+        "logic"
+      ],
+      "scenarios": [
+        "fc",
+        "math_reasoning"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P2": {
+      "description": "East Asian + STEM",
+      "languages": [
+        "zh",
+        "en",
+        "ja"
+      ],
+      "disciplines": [
+        "math",
+        "physics"
+      ],
+      "scenarios": [
+        "fc",
+        "code",
+        "math_reasoning",
+        "translation",
+        "chat"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P3": {
+      "description": "English math specialist",
+      "languages": [
+        "en"
+      ],
+      "disciplines": [
+        "math"
+      ],
+      "scenarios": [
+        "fc",
+        "code",
+        "math_reasoning",
+        "translation",
+        "chat"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P4": {
+      "description": "Chinese full-capability",
+      "languages": [
+        "zh"
+      ],
+      "disciplines": [
+        "math",
+        "physics",
+        "logic",
+        "history",
+        "geography",
+        "literature"
+      ],
+      "scenarios": [
+        "fc",
+        "code",
+        "math_reasoning",
+        "translation",
+        "chat"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P5": {
+      "description": "Multilingual STEM agent",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "fr",
+        "de",
+        "ru",
+        "es",
+        "ko"
+      ],
+      "disciplines": [
+        "math",
+        "logic",
+        "physics"
+      ],
+      "scenarios": [
+        "fc"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P6": {
+      "description": "Bilingual developer agent",
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "disciplines": [
+        "math",
+        "physics",
+        "logic",
+        "history",
+        "geography",
+        "literature"
+      ],
+      "scenarios": [
+        "fc",
+        "code"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P7": {
+      "description": "Multilingual math solver",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "fr",
+        "de",
+        "ru",
+        "es",
+        "ko"
+      ],
+      "disciplines": [
+        "math"
+      ],
+      "scenarios": [
+        "math_reasoning"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P8": {
+      "description": "Quad-lingual translator",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "fr"
+      ],
+      "disciplines": [
+        "math",
+        "physics",
+        "logic",
+        "history",
+        "geography",
+        "literature"
+      ],
+      "scenarios": [
+        "translation"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P9": {
+      "description": "Universal function caller",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "fr",
+        "de",
+        "ru",
+        "es",
+        "ko"
+      ],
+      "disciplines": [
+        "math",
+        "physics",
+        "logic",
+        "history",
+        "geography",
+        "literature"
+      ],
+      "scenarios": [
+        "fc"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P10": {
+      "description": "Bilingual full-capability",
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "disciplines": [
+        "math",
+        "physics",
+        "logic",
+        "history",
+        "geography",
+        "literature"
+      ],
+      "scenarios": [
+        "fc",
+        "code",
+        "math_reasoning",
+        "translation",
+        "chat"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P11": {
+      "description": "Universal STEM preservation",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "fr",
+        "de",
+        "ru",
+        "es",
+        "ko"
+      ],
+      "disciplines": [
+        "math",
+        "logic"
+      ],
+      "scenarios": [
+        "fc",
+        "code",
+        "math_reasoning",
+        "translation",
+        "chat"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    },
+    "P12": {
+      "description": "Full targeted preservation",
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "disciplines": [
+        "math",
+        "logic",
+        "physics"
+      ],
+      "scenarios": [
+        "fc",
+        "code",
+        "math_reasoning"
+      ],
+      "retained": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "pruned": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "n_retained": 18,
+      "n_pruned": 6
+    }
+  }
+}

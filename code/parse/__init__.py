@@ -16,7 +16,7 @@ Usage:
 
 from .config import PARSEConfig, PreservationProfile, get_profile
 from .core.cit import ComputeCIT
-from .core.transplant import TransplantFFN
+from .core.transplant import TransplantFFN, CapabilityRouter
 from .core.model import build_parse_model
 from .trainer.flywheel import DualFlywheelTrainer
 from .eval.metrics import evaluate_capabilities
